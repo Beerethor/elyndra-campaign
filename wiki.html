@@ -8,35 +8,32 @@
         :root {
             --gold: #c9a24d;
             --dark-bg: #05070a;
-            --card-bg: #11141b;
+            --card-bg: rgba(17, 20, 27, 0.9);
             --text-dim: #a0a0a0;
-            --danger: #8b0000;
-            --life: #00ff88;
         }
 
         body {
             margin: 0;
             font-family: 'Georgia', serif;
-            background-color: var(--dark-bg);
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('img/sfondo-index.jpg') center/cover fixed;
             color: #e0e0e0;
             line-height: 1.6;
             scroll-behavior: smooth;
         }
 
         header {
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('img/sfondo-index.jpg') center/cover;
-            padding: 120px 20px;
+            padding: 100px 20px;
             text-align: center;
             border-bottom: 2px solid var(--gold);
+            background: rgba(0,0,0,0.4);
         }
 
         header h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             color: var(--gold);
             text-transform: uppercase;
-            letter-spacing: 10px;
+            letter-spacing: 8px;
             margin: 0;
-            text-shadow: 0 0 25px rgba(201, 162, 77, 0.4);
         }
 
         nav {
@@ -53,117 +50,80 @@
             color: var(--gold);
             text-decoration: none;
             margin: 0 20px;
-            font-weight: bold;
             text-transform: uppercase;
             font-size: 0.8rem;
             letter-spacing: 2px;
         }
 
-        nav a:hover { color: #fff; }
-
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 40px auto;
             padding: 20px;
         }
 
         .info-section {
-            background: rgba(17, 20, 27, 0.6);
+            background: var(--card-bg);
             padding: 40px;
             border-radius: 4px;
             margin-bottom: 60px;
             border: 1px solid #1a1d24;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        h2 {
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 10px;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-        }
+        h2 { border-bottom: 1px solid var(--gold); padding-bottom: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; }
 
-        h3 { color: var(--gold); text-transform: uppercase; margin-top: 30px; }
-
-        /* MAPPE SECTION */
-        .map-grid {
+        /* MAPPE CLICCABILI */
+        .map-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 30px;
+            gap: 30px;
+            margin: 30px 0;
         }
 
-        .map-card {
-            background: #0a0c10;
-            border: 1px solid #222;
-            padding: 20px;
+        .map-box {
             text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        .map-img {
+        .map-box:hover { transform: scale(1.02); }
+
+        .map-box img {
             width: 100%;
-            height: 300px;
-            background-color: #111;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-            background-size: cover;
-            background-position: center;
+            border: 1px solid var(--gold);
+            border-radius: 4px;
         }
 
-        /* FAZIONI GRID */
+        .map-box p { font-size: 0.8rem; color: var(--gold); margin-top: 10px; text-transform: uppercase; }
+
+        /* CITTA */
+        .city-detail { margin-bottom: 30px; }
+        .city-detail h3 { color: var(--gold); margin-bottom: 5px; }
+        .city-status { font-style: italic; color: #8b0000; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+
+        /* FAZIONI */
         .factions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
         .faction-btn {
-            background: var(--card-bg);
+            background: #0a0c10;
             border: 1px solid #222;
             text-decoration: none;
             color: inherit;
-            transition: all 0.4s ease;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            transition: 0.3s;
         }
 
-        .faction-btn:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
+        .faction-btn:hover { border-color: var(--gold); }
 
-        .faction-banner { height: 160px; background-size: cover; background-position: center; filter: sepia(50%) contrast(1.2); transition: 0.4s; }
-        .faction-btn:hover .faction-banner { filter: sepia(0%) contrast(1); }
+        .faction-banner { height: 120px; background-size: cover; background-position: center; }
 
-        .faction-content { padding: 25px; }
-        .btn-label {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 5px 15px;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-        }
+        .faction-content { padding: 15px; }
 
-        /* TIMELINE */
-        .timeline { border-left: 2px solid var(--gold); padding-left: 30px; margin-left: 10px; }
-        .time-event { position: relative; margin-bottom: 30px; }
-        .time-event::before {
-            content: '';
-            position: absolute;
-            left: -37px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            background: var(--gold);
-            border-radius: 50%;
-        }
-
-        footer { text-align: center; padding: 100px; color: #333; border-top: 1px solid #111; letter-spacing: 3px; }
+        footer { text-align: center; padding: 60px; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -171,123 +131,109 @@
 <nav>
     <a href="index.html">Home</a>
     <a href="#geografia">Geografia</a>
+    <a href="#litostasi">La Litostasi</a>
     <a href="#fazioni">Fazioni</a>
-    <a href="#storia">Storia</a>
 </nav>
 
 <header>
-    <h1>Elyndra</h1>
-    <p style="color: var(--gold); letter-spacing: 4px; font-style: italic;">L'ultima luce prima del silenzio minerale</p>
+    <h1>Archivio di Elyndra</h1>
+    <p style="color: var(--gold); letter-spacing: 2px;">Compendio delle terre emerse e delle civiltà perdute</p>
 </header>
 
 <div class="container">
 
     <section id="geografia" class="info-section">
-        <h2>Geografia dei Continenti</h2>
-        <div class="map-grid">
-            <div class="map-card">
-                <div class="map-img" style="background-image: url('img/mappa-aetherys.png');"></div>
-                <h3>Aetherys: Il Continente Perduto</h3>
-                <p style="font-size: 0.9rem; color: var(--text-dim);">Terra originaria delle razze senzienti, ora quasi totalmente pietrificata. Le sue città sono monumenti funebri di cristallo e roccia.</p>
-                <ul style="text-align: left; font-size: 0.85rem;">
-                    <li><strong>Lumenia:</strong> Ex capitale della conoscenza, ora un deserto di specchi infranti.</li>
-                    <li><strong>Oakhaven:</strong> La città nelle foreste, dove ogni foglia è diventata giada immobile.</li>
-                    <li><strong>Porto Althamar:</strong> L'ultimo lembo di terra fertile e sede dell'Ultima Spedizione.</li>
-                </ul>
-            </div>
-            <div class="map-card">
-                <div class="map-img" style="background-image: url('img/mappa-nyxoria.png');"></div>
-                <h3 style="color: var(--life);">Nyxoria: La Terra Selvaggia</h3>
-                <p style="font-size: 0.9rem; color: var(--text-dim);">Un continente bioluminescente dove la vita pulsa con una ferocia magica. Qui la Litostasi non riesce a penetrare.</p>
-                <ul style="text-align: left; font-size: 0.85rem;">
-                    <li><strong>La Giungla di Vetro:</strong> Una foresta densa che emette una luce azzurra protettiva.</li>
-                    <li><strong>Il Tempio di Kha:</strong> Centro spirituale dei Khaari e cuore del Flusso Vitale.</li>
-                    <li><strong>L'Oceano di Nebbia:</strong> La barriera letale che separa i due mondi.</li>
-                </ul>
-            </div>
+        <h2>Geografia e Cartografia</h2>
+        <p>Documenti recuperati dall'Archivio delle Voci Immobili. Clicca sulle mappe per ingrandire i rilievi topografici.</p>
+        
+        <div class="map-container">
+            <a href="img/mappa-aetherys.png" target="_blank" class="map-box">
+                <img src="img/mappa-aetherys.png" alt="Mappa di Aetherys">
+                <p>Aetherys (Il Continente di Pietra)</p>
+            </a>
+            <a href="img/mappa-nyxoria.png" target="_blank" class="map-box">
+                <img src="img/mappa-nyxoria.png" alt="Mappa di Nyxoria">
+                <p>Nyxoria (Terre di Bioluminescenza)</p>
+            </a>
+        </div>
+
+        <h3>Le Metropoli del Vecchio Mondo (Aetherys)</h3>
+        
+        <div class="city-detail">
+            <h3>Lumenia, la Città degli Specchi</h3>
+            <span class="city-status">Stato: Pietrificazione Totale (99%)</span>
+            <p>Un tempo centro del sapere e dell'arte. Le sue strade erano lastricate di marmo bianco che rifletteva la luce solare, creando un'aurora perenne. Oggi è un ammasso silenzioso di cristalli dove il vento produce suoni simili a lamenti tra i palazzi vitrei.</p>
+        </div>
+
+        <div class="city-detail">
+            <h3>Oakhaven, la Capitale Verde</h3>
+            <span class="city-status">Stato: Pietrificazione Vegetale Completa</span>
+            <p>Costruita all'interno di alberi millenari grandi quanto colline. Prima della piaga, era il polmone del mondo. Ora gli alberi sono enormi pilastri di ossidiana grigia e le case sospese sono diventate nidi di pietra inaccessibili.</p>
+        </div>
+
+        <div class="city-detail">
+            <h3>Porto Althamar</h3>
+            <span class="city-status">Stato: Ultimo Baluardo (Resistente)</span>
+            <p>L'unica città dove il sangue scorre ancora. Grazie alla sua posizione costiera e all'uso massiccio di sieri alchemici, Althamar resiste, fungendo da cantiere per l'Ultima Spedizione verso Nyxoria.</p>
         </div>
     </section>
 
-    <section id="fazioni">
-        <h2>Le Grandi Fazioni di Althamar</h2>
+    <section id="litostasi" class="info-section">
+        <h2>Cos'è la Litostasi?</h2>
+        <p>Definita dai medici del Concordato come <em>"L'Eternità Minerale"</em>, la Litostasi non è una malattia comune, ma una trasformazione molecolare. Ecco ciò che è noto ai cittadini di Elyndra:</p>
+        <ul>
+            <li><strong>Sintomi:</strong> Inizia con un brivido persistente e la perdita di sensibilità alle estremità. La pelle assume un riflesso grigiastro e opaco.</li>
+            <li><strong>Trasmissione:</strong> Si diffonde per contatto prolungato con aree già colpite o respirando la polvere sottile prodotta dal disgregamento delle vecchie statue.</li>
+            <li><strong>Effetti:</strong> Non provoca la morte immediata. La coscienza rimane intrappolata all'interno del corpo pietrificato per un tempo indefinito, in uno stato di sonno senza sogni.</li>
+        </ul>
+        <h3 style="color: var(--gold);">Le Cronache</h3>
+        <p><strong>30 Anni fa:</strong> Primo caso confermato nelle Miniere del Nord.</p>
+        <p><strong>10 Anni fa:</strong> L'Oceano di Nebbia diventa invalicabile per le rotte commerciali standard.</p>
+        <p><strong>Oggi:</strong> La polvere grigia cade dal cielo come neve su Porto Althamar.</p>
+    </section>
+
+    <section id="factions">
+        <h2>Le Fazioni di Porto Althamar</h2>
         <div class="factions-grid">
             <a href="fazioni/concordato.html" class="faction-btn">
                 <div class="faction-banner" style="background-image: url('img/concordato-bg.png');"></div>
                 <div class="faction-content">
-                    <h3>Concordato della Scaglia Antica</h3>
-                    <p>Militari e difensori. Credono nella forza e nell'ordine per sopravvivere.</p>
-                    <span class="btn-label">Apri Registri</span>
+                    <h3>Concordato</h3>
+                    <p>Ordine e Difesa.</p>
+                    <span class="btn-label">Dettagli</span>
                 </div>
             </a>
             <a href="fazioni/circolo.html" class="faction-btn">
                 <div class="faction-banner" style="background-image: url('img/circolo-bg.png');"></div>
                 <div class="faction-content">
-                    <h3>Circolo della Radice Profonda</h3>
-                    <p>Studiosi della natura. Cercano la simbiosi con Nyxoria.</p>
-                    <span class="btn-label">Apri Registri</span>
+                    <h3>Circolo</h3>
+                    <p>Alchimia e Natura.</p>
+                    <span class="btn-label">Dettagli</span>
                 </div>
             </a>
             <a href="fazioni/archivio.html" class="faction-btn">
                 <div class="faction-banner" style="background-image: url('img/archivio-bg.png');"></div>
                 <div class="faction-content">
-                    <h3>Archivio delle Voci Immobili</h3>
-                    <p>Psicomanti e storici. Estraggono segreti dalla pietra.</p>
-                    <span class="btn-label">Apri Registri</span>
+                    <h3>Archivio</h3>
+                    <p>Memoria e Psicomanzia.</p>
+                    <span class="btn-label">Dettagli</span>
                 </div>
             </a>
             <a href="fazioni/patto.html" class="faction-btn">
                 <div class="faction-banner" style="background-image: url('img/patto-bg.png');"></div>
                 <div class="faction-content">
-                    <h3>Patto delle Ceneri Erranti</h3>
-                    <p>Navigatori e mercanti. I padroni dell'Oceano di Nebbia.</p>
-                    <span class="btn-label">Apri Registri</span>
+                    <h3>Patto</h3>
+                    <p>Rotte e Commercio.</p>
+                    <span class="btn-label">Dettagli</span>
                 </div>
             </a>
-            <a href="fazioni/velo.html" class="faction-btn">
-                <div class="faction-banner" style="background-image: url('img/velo-bg.png');"></div>
-                <div class="faction-content">
-                    <h3>Il Velo Cremisi</h3>
-                    <p>Cultisti fanatici. Vedono la Litostasi come una benedizione sacra.</p>
-                    <span class="btn-label">Apri Registri</span>
-                </div>
-            </a>
-            <a href="fazioni/khaari.html" class="faction-btn">
-                <div class="faction-banner" style="background-image: url('img/khaari-bg.png');"></div>
-                <div class="faction-content">
-                    <h3>Le Tribù Khaari</h3>
-                    <p>Nativi di Nyxoria. Difensori feroci della giungla ancestrale.</p>
-                    <span class="btn-label">Apri Registri</span>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="storia" class="info-section" style="margin-top: 60px;">
-        <h2>Cronaca della Litostasi</h2>
-        <div class="timeline">
-            <div class="time-event">
-                <h4 style="color: var(--gold);">L'Inizio del Silenzio (30 Anni fa)</h4>
-                <p>Nelle miniere del Nord, i primi operai diventano statue di quarzo mentre lavorano. La piaga si diffonde attraverso il contatto e l'aria.</p>
-            </div>
-            <div class="time-event">
-                <h4 style="color: var(--gold);">La Caduta di Lumenia (20 Anni fa)</h4>
-                <p>La città della luce viene invasa dalla stasi in una sola settimana. Migliaia di cittadini diventano parte integrante delle mura cittadine.</p>
-            </div>
-            <div class="time-event">
-                <h4 style="color: var(--gold);">La Scoperta dell'Oltre-Nebbia (10 Anni fa)</h4>
-                <p>Jax del Patto attraversa la nebbia e riporta prove di una terra vibrante. Nasce il progetto dell'Ultima Spedizione.</p>
-            </div>
-            <div class="time-event" style="margin-bottom: 0;">
-                <h4 style="color: var(--danger);">L'Ora Finale (Oggi)</h4>
-                <p>Le scogliere di Porto Althamar iniziano a pietrificarsi. Non c'è più tempo per attendere: la flotta deve salpare.</p>
-            </div>
         </div>
     </section>
 
 </div>
 
 <footer>
-    © 2026 ARCHIVIO DI ELYNDRA • TUTTI I DIRITTI RISERVATI AI CUSTODI
+    © 2026 ARCHIVIO DI ELYNDRA • DOCUMENTO RISERVATO AI CITTADINI DI ALTHAMAR
 </footer>
 
 </body>

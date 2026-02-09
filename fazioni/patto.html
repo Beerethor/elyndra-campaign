@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patto delle Ceneri Erranti – Elyndra Wiki</title>
+    <style>
+        body { margin: 0; font-family: 'Georgia', serif; background: #080a0c; color: #b4bfc9; line-height: 1.6; }
+        
+        .faction-hero {
+            height: 45vh;
+            background: linear-gradient(to bottom, rgba(8,10,12,0.3), rgba(8,10,12,1)), 
+                        url('../img/patto-bg.png') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            border-bottom: 3px solid #b26b21;
+        }
+
+        .faction-hero h1 { font-size: 3.5rem; color: #f5d5b5; text-transform: uppercase; letter-spacing: 6px; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.7); }
+        
+        nav { padding: 1rem; background: #0f1317; text-align: center; border-bottom: 1px solid #232b32; position: sticky; top: 0; z-index: 100; }
+        nav a { color: #b26b21; text-decoration: none; margin: 0 15px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        nav a:hover { color: #f5d5b5; }
+
+        main { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+
+        .info-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; margin-bottom: 40px; }
+        
+        .sidebar { background: rgba(15, 19, 23, 0.7); padding: 1.5rem; border: 1px solid #232b32; height: fit-content; }
+        .leader-portrait { width: 100%; border: 1px solid #b26b21; margin-bottom: 1rem; filter: sepia(10%) contrast(1.1); }
+        
+        .sidebar h3 { color: #b26b21; font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid #232b32; padding-bottom: 5px; margin-top: 1rem; }
+        .sidebar p { font-size: 0.9rem; margin: 5px 0; }
+
+        .content h2 { color: #b26b21; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #232b32; padding-bottom: 10px; margin-top: 0; }
+        
+        .detail-box { background: rgba(18, 23, 28, 0.8); border-left: 4px solid #b26b21; padding: 2rem; margin-bottom: 2rem; }
+        
+        .motto { font-style: italic; color: #d19a5e; font-size: 1.2rem; text-align: center; margin-bottom: 3rem; display: block; }
+
+        .sea-mist { color: #78909c; font-weight: bold; }
+
+        footer { text-align: center; padding: 4rem; color: #3b4754; font-size: 0.8rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki.html">Torna alla Wiki</a>
+</nav>
+
+<div class="faction-hero">
+    <h1>Patto delle Ceneri Erranti</h1>
+</div>
+
+<main>
+    <span class="motto">"L'oro non pietrifica, e il mare non ha padroni."</span>
+
+    <div class="info-grid">
+        <aside class="sidebar">
+            <img src="../img/jax.png" class="leader-portrait" alt="Capitano Jax">
+            <h3>Leader</h3>
+            <p>Capitano Jax "Il Timoniere"</p>
+            
+            <h3>Base Operativa</h3>
+            <p>Il Molo Nero (Porto Althamar)</p>
+            
+            <h3>Allineamento Pubblico</h3>
+            <p>Caotico Neutrale</p>
+            
+            <h3>Risorse Chiave</h3>
+            <p>Navi da Carico, Mercato Nero, Rotte Nautiche</p>
+        </aside>
+        
+        <section class="content">
+            <h2>Obiettivi Pubblici</h2>
+            <div class="detail-box">
+                <p>Il Patto è una libera associazione di mercanti, contrabbandieri e lupi di mare. I loro obiettivi sono strettamente legati alla logistica della sopravvivenza:</p>
+                <ul>
+                    <li><strong>Controllo dei Trasporti:</strong> Gestire l'unica flotta capace di sfidare l'Oceano di Nebbia verso Nyxoria.</li>
+                    <li><strong>Mercato della Sopravvivenza:</strong> Reperire materiali rari, cibo e pezzi di ricambio per le navi, spesso attraverso canali non ufficiali.</li>
+                    <li><strong>La Grande Traversata:</strong> Assicurarsi che ogni cittadino di Porto Althamar abbia (teoricamente) la possibilità di comprare un posto sulle navi, a patto di poterselo permettere.</li>
+                </ul>
+            </div>
+
+            <h2>Storia della Fazione</h2>
+            <p>
+                Quando Aetherys iniziò a indurirsi, i nobili rimasero bloccati nei loro castelli a discutere di leggi. I marinai del Patto, invece, capirono che l'unica speranza era l'acqua. Hanno trasformato Porto Althamar da un avamposto dimenticato nel centro del mondo conosciuto.
+            </p>
+            <p>
+                Jax, un tempo un semplice contrabbandiere di spezie, unificò le varie gilde di ladri e marinai sotto un unico "Patto". Oggi sono l'unica fazione a non rispondere direttamente al Concordato, poiché Thorne sa bene che senza i navigatori di Jax, nessuno lascerà mai le sponde di Aetherys.
+            </p>
+
+            <h2>I Navigatori della Nebbia</h2>
+            <p>
+                Il Patto possiede un segreto tecnico: bussole speciali infuse con polvere di Nyxoria che permettono di orientarsi nella <span class="sea-mist">Nebbia Grigia</span>. Sebbene siano visti come opportunisti e avidi, molti li considerano eroi popolari, gli unici disposti a rischiare la vita tra le onde per trasportare un frammento di speranza verso il nuovo continente.
+            </p>
+        </section>
+    </div>
+</main>
+
+<footer>
+    PATTO DELLE CENERI ERRANTI • 2026
+</footer>
+
+</body>
+</html>

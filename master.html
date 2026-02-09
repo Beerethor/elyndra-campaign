@@ -10,19 +10,13 @@
             background: #05070a; color: #e0e0e0; line-height: 1.5;
         }
 
-        /* ANIMAZIONE GLITCH MASTER */
         @keyframes master-glitch {
             0% { text-shadow: 1px 0 #ff4d4d; transform: translateX(0); }
             20% { text-shadow: -1px 0 #c9a24d; transform: translateX(1px); }
-            50% { opacity: 0.8; }
             100% { text-shadow: -1px 0 #c9a24d; transform: translateX(0); }
         }
 
-        .glitch-alert {
-            color: #ff4d4d;
-            animation: master-glitch 0.3s infinite;
-            font-weight: bold;
-        }
+        .glitch-alert { color: #ff4d4d; animation: master-glitch 0.3s infinite; font-weight: bold; }
 
         header {
             background: #11141b; padding: 1rem 2rem;
@@ -33,12 +27,9 @@
         nav a { color: #c9a24d; text-decoration: none; font-size: 0.9rem; border: 1px solid #c9a24d; padding: 5px 10px; transition: 0.3s; }
         nav a:hover { background: #c9a24d; color: #000; }
 
-        main { padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
+        main { padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem; }
 
-        .panel {
-            background: #1a1d24; border: 1px solid #333;
-            padding: 1.5rem; border-radius: 4px; position: relative;
-        }
+        .panel { background: #1a1d24; border: 1px solid #333; padding: 1.5rem; border-radius: 4px; }
 
         h2 { 
             color: #c9a24d; border-bottom: 1px solid #444; 
@@ -46,28 +37,22 @@
             text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem;
         }
 
-        /* Tabelle e Liste */
-        .mechanic-box {
-            background: rgba(0,0,0,0.4); padding: 15px;
-            border-left: 4px solid #c9a24d; margin-bottom: 15px;
+        .mechanic-box { background: rgba(0,0,0,0.4); padding: 15px; border-left: 4px solid #c9a24d; margin-bottom: 15px; }
+        .secret-box { 
+            background: rgba(255, 77, 77, 0.05); 
+            border-left: 4px solid #ff4d4d; 
+            padding: 15px; margin-bottom: 15px; 
+            font-size: 0.9rem;
         }
-
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        
+        strong { color: #c9a24d; }
+        .critical { color: #ff4d4d; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
         th, td { border: 1px solid #333; padding: 10px; text-align: left; }
-        th { background: #222; color: #c9a24d; }
+        th { background: #222; }
 
-        .level-badge {
-            display: inline-block; background: #c9a24d; color: #000;
-            padding: 2px 8px; font-weight: bold; border-radius: 3px; font-size: 0.7rem;
-        }
-
-        .img-placeholder {
-            width: 100%; height: 150px; background: #111; border: 1px dashed #444;
-            display: flex; align-items: center; justify-content: center; color: #444; margin: 10px 0;
-        }
+        .lore-note { font-style: italic; color: #9db4ff; margin-top: 10px; font-size: 0.85rem; }
 
         footer { text-align: center; padding: 2rem; color: #444; font-size: 0.8rem; border-top: 1px solid #222; }
     </style>
@@ -82,69 +67,76 @@
 <main>
     <section class="panel">
         <h2>Meccanica Base: <span class="glitch-alert">Litostasi</span></h2>
-        <p>Ogni ora trascorsa in zone contaminate richiede un <strong>TS su Costituzione</strong>.</p>
         <div class="mechanic-box">
-            <strong>Difficoltà (CD):</strong>
+            <strong>TS Costituzione (Ogni ora trascorsa):</strong>
             <ul>
                 <li>Zona Periferica: <strong>CD 12</strong></li>
                 <li>Zona Avanzata: <strong>CD 15</strong></li>
-                <li>Nucleo della Litostasi: <strong>CD 18+</strong></li>
+                <li>Nucleo / Aetherys Profonda: <strong>CD 18+</strong></li>
             </ul>
         </div>
-        <strong>Fallimenti Cumulativi:</strong>
+        <strong>Tabella Fallimenti Cumulativi:</strong>
         <table>
-            <tr><th>Fallimento</th><th>Effetto</th></tr>
+            <tr><th>Grado</th><th>Effetto Meccanico</th></tr>
             <tr><td>1°</td><td>Velocità ridotta di 3 m.</td></tr>
-            <tr><td>2°</td><td>Svantaggio prove Forza e Destrezza.</td></tr>
-            <tr><td>3°</td><td>Vulnerabilità ai danni contundenti.</td></tr>
-            <tr><td>4°</td><td>Pietrificazione incompleta (Restrained).</td></tr>
-            <tr><td>5°</td><td><span class="glitch-alert">PIETRIFICAZIONE TOTALE</span></td></tr>
+            <tr><td>2°</td><td>Svantaggio a tutte le prove di Forza e Destrezza.</td></tr>
+            <tr><td>3°</td><td>Vulnerabilità ai danni contundenti (la pelle si spacca).</td></tr>
+            <tr><td>4°</td><td>Pietrificazione Incompleta (Condizione: Restrained).</td></tr>
+            <tr><td>5°</td><td><span class="critical">PIETRIFICAZIONE TOTALE (Vita sospesa).</span></td></tr>
         </table>
     </section>
 
     <section class="panel">
-        <h2>Razze e Origini</h2>
-        <p>Tutte le razze ufficiali 5e sono permesse, con note narrative:</p>
-        <ul>
-            <li><strong>Elfi/Nani:</strong> Resistenza naturale alle Zone Statiche.</li>
-            <li><strong>Dragonborn:</strong> Estremamente sensibili alla Litostasi (TS con svantaggio?).</li>
-        </ul>
-        <div class="mechanic-box" style="border-left-color: #9db4ff;">
-            <h3>Razza Opzionale: <span style="color:#9db4ff">Khaari</span></h3>
-            <p><em>I mutanti senzienti di Nyxoria.</em></p>
-            <ul>
-                <li><strong>Bonus:</strong> +2 Saggezza, +1 Costituzione.</li>
-                <li><strong>Figli del Flusso:</strong> Vantaggio al primo TS contro immobilizzazione/rallentamento.</li>
-                <li><strong>Ritmo del Mondo:</strong> 1/giorno ignora <em>restrained</em> o <em>slowed</em> per 1 round.</li>
-            </ul>
+        <h2>Segreti Oscuri delle Fazioni</h2>
+        
+        <div class="secret-box">
+            <strong>Concordato (Valerius Thorne):</strong> Valerius non cerca i draghi per gloria. È affetto da una Litostasi degenerativa interna: i suoi organi stanno diventando piombo. Crede che solo il soffio di un Drago Antico possa "riforgiare" la sua carne prima che il suo cuore si fermi.
         </div>
-        <div class="img-placeholder">img/razza-khaari.png</div>
+
+        <div class="secret-box">
+            <strong>Circolo (Elara Veridiana):</strong> Elara ha scoperto che la linfa di Nyxoria è un parassita. Non cura la Litostasi, la sostituisce con un'infestazione vegetale. Chi viene "curato" da lei diventerà parte di una mente alveare comandata dal continente stesso.
+        </div>
+
+        <div class="secret-box">
+            <strong>Archivio (Mastro Kaelen):</strong> Kaelen non sta salvando la storia. Sta estraendo i ricordi dalle statue per alimentare un manufatto che permetterà solo a lui di viaggiare nel tempo e impedire il Primo Battito, a costo di cancellare l'esistenza di tutti i nati negli ultimi 50 anni.
+        </div>
+
+        <div class="secret-box">
+            <strong>Patto (Capitano Jax):</strong> Jax sa che Nyxoria non è una terra vergine. Ha trovato resti di navi umane di ere precedenti. Il "Secondo Battito" è un ciclo che si ripete: l'umanità scappa, muta in Khaari e poi viene dimenticata.
+        </div>
+
+        <div class="secret-box">
+            <strong>Velo Cremisi (Vesper):</strong> Vesper riceve ordini da un'entità chiamata "Il Silenzio". Non è un dio, ma una creatura della Litostasi primordiale che vuole trasformare l'intero piano materiale in un giardino di statue perenni.
+        </div>
+
+        <div class="secret-box">
+            <strong>Khaari (Matriarca Ka'Zul):</strong> Ka'Zul nasconde che i Khaari stanno morendo. La bioluminescenza che li nutre sta svanendo perché richiede "anime fresche". L'Ultima Spedizione non è un'invasione per loro, è un banchetto necessario.
+        </div>
     </section>
 
     <section class="panel">
-        <h2>Archi Narrativi</h2>
-        <ul>
-            <li><span class="level-badge">LIVELLI 1–5</span> <strong>L'Imbarco:</strong> Porto Althamar, la traversata e il primo contatto con la polvere grigia.</li>
-            <li><span class="level-badge">LIVELLI 6–10</span> <strong>Nyxoria:</strong> Esplorazione della giungla, scontro tra le fazioni e scoperta dei Khaari.</li>
-            <li><span class="level-badge">LIVELLI 11–15</span> <strong>Verità:</strong> La vera origine della Litostasi e i ricordi di Lyra.</li>
-            <li><span class="level-badge">LIVELLI 16–20</span> <strong>Il Secondo Battito:</strong> Apocalisse o Rinascita totale del mondo.</li>
-        </ul>
-        <div class="img-placeholder">img/mappa-progressione.png</div>
+        <h2>Note sulle Razze</h2>
+        <div class="mechanic-box">
+            <strong>Khaari (Giocabili):</strong> +2 Sag, +1 Cos. Scurovisione. 
+            <br><em>Figli del Flusso:</em> Vantaggio al primo TS contro immobilizzazione. 
+            <br><em>Ritmo del Mondo:</em> 1/giorno ignora 'restrained' o 'slowed' per 1 round.
+        </div>
+        <p class="lore-note">Narrativamente: Elfi e Nani resistono meglio (+2 al TS), i Dragonborn sono vulnerabili (Svantaggio al TS) a causa della loro connessione con l'energia vitale elementale.</p>
     </section>
 
     <section class="panel">
-        <h2>Segreti del Narratore</h2>
+        <h2>Progressione Livelli</h2>
         <ul>
-            <li><strong>Lyra:</strong> Non è al suo 3° ciclo, ma oltre il 1000°. La sua anima è legata al primo esperimento che creò la stasi.</li>
-            <li><strong>Il Concordato:</strong> Valerius Thorne ha un frammento di cuore di Drago che lo sta lentamente pietrificando.</li>
-            <li><strong>Il Circolo:</strong> Elara crede che la Litostasi sia una forma di protezione contro qualcosa di peggio che dorme nel sottosuolo.</li>
+            <li><strong>Liv. 1–5:</strong> Porto Althamar, la traversata, il primo impatto con la nebbia grigia.</li>
+            <li><strong>Liv. 6–10:</strong> Nyxoria, guerra tra fazioni, la scoperta della vera natura dei Khaari.</li>
+            <li><strong>Liv. 11–15:</strong> Ritorno ad Aetherys, ricerca della verità sulla Litostasi nel Nucleo.</li>
+            <li><strong>Liv. 16–20:</strong> Il Secondo Battito. Scontro finale con l'entità del Silenzio o il reset del mondo.</li>
         </ul>
-        <div class="img-placeholder">img/segreto-master.png</div>
     </section>
 </main>
 
 <footer>
-    SCHERMO DEL MASTER • ELYNDRA RPG • 2026
+    SCHERMO DEL MASTER • ELYNDRA RPG • 2026 • ACCESSO CRIPTATO
 </footer>
 
 </body>

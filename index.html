@@ -25,6 +25,7 @@
             100% { text-shadow: -2px 0 #777, 2px 0 #444; transform: skew(0deg); }
         }
 
+        /* Hero Section */
         .hero {
             position: relative;
             height: 100vh;
@@ -48,27 +49,26 @@
             font-size: 1.2rem; color: #c9a24d;
             max-width: 650px; margin: 25px auto;
             font-style: italic; letter-spacing: 2px;
+            line-height: 1.6;
         }
 
         /* GRIGLIA NAVIGAZIONE */
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px; max-width: 1000px;
-            width: 90%; margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px; max-width: 1100px;
+            width: 90%; margin-top: 40px;
         }
 
         .nav-card {
             background: rgba(20, 25, 35, 0.85);
             border: 1px solid rgba(201, 162, 77, 0.2);
-            padding: 35px; text-decoration: none;
+            padding: 30px; text-decoration: none;
             color: #fff; transition: 0.3s ease;
             text-align: center; backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
         }
 
-        /* Effetto glitch sui tasti al passaggio del mouse */
+        /* Effetto Hover */
         .nav-card:hover {
             border-color: #c9a24d;
             background: rgba(201, 162, 77, 0.1);
@@ -81,24 +81,28 @@
         }
 
         .nav-card h2 { 
-            margin: 0; 
-            font-size: 1.6rem; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            color: #c9a24d; 
-            transition: 0.3s;
+            margin: 0; font-size: 1.4rem; 
+            text-transform: uppercase; letter-spacing: 2px; 
+            color: #c9a24d; transition: 0.3s;
         }
 
         .nav-card p { 
-            font-size: 0.9rem; 
-            color: #aaa; 
-            margin-top: 12px; 
-            line-height: 1.5;
+            font-size: 0.85rem; color: #aaa; 
+            margin-top: 10px; line-height: 1.4;
         }
+
+        /* Tasto Master Speciale */
+        .master-card {
+            border-color: rgba(255, 77, 77, 0.3);
+        }
+        .master-card:hover {
+            border-color: #ff4d4d;
+            background: rgba(255, 77, 77, 0.1);
+        }
+        .master-card h2 { color: #ff4d4d; }
 
         footer { padding: 40px; text-align: center; font-size: 0.75rem; color: #444; letter-spacing: 2px; }
 
-        /* Media query per mobile */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; letter-spacing: 6px; }
             .nav-grid { grid-template-columns: 1fr; }
@@ -114,17 +118,22 @@
         <div class="nav-grid">
             <a href="wiki.html" class="nav-card">
                 <h2>L'Archivio</h2>
-                <p>Esplora le fazioni, i leader e i segreti della Litostasi.</p>
+                <p>Fazioni, leader e i segreti della Litostasi.</p>
             </a>
 
             <a href="diario.html" class="nav-card">
                 <h2>Diario di Lyra</h2>
-                <p>Frammenti di memorie e sussurri dai moli di Porto Althamar.</p>
+                <p>Memorie frammentate dai moli di Porto Althamar.</p>
+            </a>
+
+            <a href="master.html" class="nav-card master-card">
+                <h2>Schermo Master</h2>
+                <p>Meccaniche, TS e segreti del Narratore.</p>
             </a>
 
             <a href="#" class="nav-card" style="opacity: 0.3; cursor: not-allowed;">
                 <h2>Mappa</h2>
-                <p>Le rotte per Nyxoria sono ancora avvolte dal Silenzio.</p>
+                <p>Le rotte per Nyxoria sono avvolte nel Silenzio.</p>
             </a>
         </div>
     </section>

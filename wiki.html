@@ -9,27 +9,36 @@
         header {
             position: relative;
             background: linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
-            url('sfondo-elyndra.png') center/cover no-repeat;
+            url('img/sfondo-elyndra.png') center/cover no-repeat;
             padding: 4rem 2rem; text-align: center; border-bottom: 1px solid #c9a24d;
         }
         nav { padding: 1rem; text-align: center; background: #11141b; border-bottom: 1px solid #222; }
         nav a { color: #c9a24d; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
         main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
-        .search-container { margin-bottom: 3rem; text-align: center; }
-        .search-box {
-            background: #151821; border: 1px solid #333; padding: 1rem; width: 100%; max-width: 500px;
-            color: #fff; font-family: 'Georgia', serif; outline: none;
-        }
+        
         .wiki-section { margin-bottom: 4rem; }
         .wiki-section h2 { color: #c9a24d; border-bottom: 1px solid #333; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .card { background: rgba(21, 24, 33, 0.6); border: 1px solid #222; padding: 2rem; transition: 0.3s; }
+        
+        /* Stile Continenti */
+        .continent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; }
+        .continent-card { background: #11141b; border: 1px solid #333; overflow: hidden; }
+        .continent-img { width: 100%; height: 250px; object-fit: cover; opacity: 0.8; transition: 0.5s; }
+        .continent-card:hover .continent-img { opacity: 1; }
+        .continent-info { padding: 1.5rem; }
+
+        /* Stile Fazioni */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .card { background: rgba(21, 24, 33, 0.8); border: 1px solid #222; display: flex; flex-direction: column; transition: 0.3s; }
         .card:hover { border-color: #c9a24d; }
-        .card h3 { margin-top: 0; color: #fff; }
-        .tag { font-style: italic; color: #c9a24d; font-size: 0.85rem; display: block; margin-bottom: 1rem; }
-        .leader-info { background: rgba(201, 162, 77, 0.1); padding: 10px; border-radius: 4px; margin-top: 15px; font-size: 0.9rem; }
-        .litostasi-box { background: #1a1d24; border: 2px solid #555; padding: 2rem; border-radius: 8px; margin-bottom: 3rem; }
-        footer { text-align: center; padding: 4rem; color: #333; font-size: 0.8rem; }
+        .leader-image { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #c9a24d; }
+        .card-content { padding: 1.5rem; }
+        .faction-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .faction-logo { width: 45px; height: 45px; object-fit: contain; border-radius: 50%; background: #000; padding: 2px; border: 1px solid #c9a24d; }
+        
+        .tag { font-style: italic; color: #c9a24d; font-size: 0.8rem; display: block; margin-bottom: 1rem; text-transform: uppercase; }
+        .leader-info { background: rgba(201, 162, 77, 0.15); padding: 10px; border-radius: 4px; margin-top: auto; font-size: 0.9rem; border-left: 2px solid #c9a24d; }
+        
+        footer { text-align: center; padding: 4rem; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -38,25 +47,27 @@
 
 <header>
     <h1>Wiki di Elyndra</h1>
-    <p>Conoscenza Pubblica per i Sopravvissuti dell'Ultima Spedizione</p>
+    <p>Dalle Ceneri di Aetherys al Respiro di Nyxoria</p>
 </header>
 
 <main>
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-box" placeholder="Cerca termini, fazioni o capi..." onkeyup="filterWiki()">
-    </div>
-
     <section class="wiki-section">
-        <div class="litostasi-box">
-            <h2 style="border:none; color:#9db4ff;">Cos'è la Litostasi?</h2>
-            <p>
-                Per il popolo di Elyndra, la <strong>Litostasi</strong> (comunemente chiamata "Il Silenzio" o "Il Grande Fermo") è una piaga minerale inarrestabile. Non è una morte biologica comune: la carne degli esseri viventi, le piante e persino gli incantesimi vengono tramutati in pietra grigia, dura e indistruttibile. 
-            </p>
-            <ul>
-                <li><strong>Coscienza Residua:</strong> Gli studiosi ritengono che chi viene pietrificato rimanga "vigile" in un eterno sogno lucido, impossibilitato a muoversi ma consapevole dello scorrere del tempo.</li>
-                <li><strong>Il Contagio:</strong> Si propaga attraverso il contatto con zone già infette o per esposizione prolungata ai "Venti di Polvere" che spirano dal cuore di Aetherys.</li>
-                <li><strong>L'Unica Cura:</strong> Al momento non esiste cura conosciuta. Solo la fuga verso Nyxoria e l'attivazione del leggendario "Secondo Battito" sembrano offrire una speranza di salvezza.</li>
-            </ul>
+        <h2>I Due Mondi</h2>
+        <div class="continent-grid">
+            <div class="continent-card">
+                <img src="img/continente-aetherys.png" alt="Aetherys" class="continent-img">
+                <div class="continent-info">
+                    <h3>Aetherys (Il Passato)</h3>
+                    <p>Un tempo culla della civiltà e dei Draghi. Oggi è un guscio vuoto divorato dalla Litostasi. Le città sono foreste di statue e il cielo è perennemente grigio.</p>
+                </div>
+            </div>
+            <div class="continent-card">
+                <img src="img/continente-nyxoria.png" alt="Nyxoria" class="continent-img">
+                <div class="continent-info">
+                    <h3>Nyxoria (Il Futuro)</h3>
+                    <p>Un continente selvaggio, bioluminescente e vibrante. Qui la vita muta troppo velocemente per essere pietrificata. È la nostra unica speranza di salvezza.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -64,79 +75,87 @@
         <h2>Fazioni e Leader</h2>
         <div class="grid">
             <div class="card">
-                <h3>Concordato della Scaglia Antica</h3>
-                <span class="tag">Ordine, Tradizione, Potere Militare</span>
-                <p>La fazione che gestisce l'ordine gerarchico della spedizione. Mirano a restaurare la gloria dei Draghi Ancestrali.</p>
-                <div class="leader-info">
-                    <strong>Leader: Valerius Thorne</strong><br>
-                    Un austero ex generale di Oakhaven. Promette sicurezza e il ritorno al diritto divino sotto il segno dei Draghi.
+                <img src="img/valerius.png" alt="Valerius" class="leader-image">
+                <div class="card-content">
+                    <div class="faction-header">
+                        <img src="img/logo-concordato.png" class="faction-logo" alt="Logo">
+                        <h3>Concordato della Scaglia Antica</h3>
+                    </div>
+                    <span class="tag">Ordine e Tradizione</span>
+                    <p>Gestiscono la flotta e sognano il ritorno dei Draghi.</p>
+                    <div class="leader-info"><strong>Leader:</strong> Valerius Thorne</div>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Circolo della Radice Profonda</h3>
-                <span class="tag">Natura, Adattamento, Misticismo</span>
-                <p>Druidi e sciamani che vedono la Litostasi come un ciclo del mondo. Cercano l'armonia con il nuovo continente.</p>
-                <div class="leader-info">
-                    <strong>Leader: Elara Veridiana</strong><br>
-                    Una mistica che afferma di sentire il battito di Nyxoria. Predica l'accettazione del mutamento.
+                <img src="img/elara.png" alt="Elara" class="leader-image">
+                <div class="card-content">
+                    <div class="faction-header">
+                        <img src="img/logo-circolo.png" class="faction-logo" alt="Logo">
+                        <h3>Circolo della Radice Profonda</h3>
+                    </div>
+                    <span class="tag">Natura e Misticismo</span>
+                    <p>Cercano di parlare con lo spirito selvaggio di Nyxoria.</p>
+                    <div class="leader-info"><strong>Leader:</strong> Elara Veridiana</div>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Archivio delle Voci Immobili</h3>
-                <span class="tag">Conoscenza, Memoria, Storia</span>
-                <p>Studiosi dedicati a salvare il sapere di Elyndra. Raccolgono memorie dai pietrificati per non dimenticare il passato.</p>
-                <div class="leader-info">
-                    <strong>Leader: Mastro Kaelen</strong><br>
-                    Un uomo enciclopedico che supervisiona la conservazione dei tomi e la catalogazione delle anime silenti.
+                <img src="img/kaelen.png" alt="Kaelen" class="leader-image">
+                <div class="card-content">
+                    <div class="faction-header">
+                        <img src="img/logo-archivio.png" class="faction-logo" alt="Logo">
+                        <h3>Archivio delle Voci Immobili</h3>
+                    </div>
+                    <span class="tag">Memoria e Conoscenza</span>
+                    <p>Preservano ciò che resta di Elyndra nei tomi e nelle anime.</p>
+                    <div class="leader-info"><strong>Leader:</strong> Mastro Kaelen</div>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Patto delle Ceneri Erranti</h3>
-                <span class="tag">Sopravvivenza, Commercio, Logistica</span>
-                <p>Mercenari e lavoratori che fanno funzionare Porto Althamar. Sono il braccio pragmatico della spedizione.</p>
-                <div class="leader-info">
-                    <strong>Leader: Capitano Jax</strong><br>
-                    Una veterana dei moli. Pratica e cinica, è la donna da cui andare se serve qualcosa che "ufficialmente" non esiste.
+                <img src="img/jax.png" alt="Jax" class="leader-image">
+                <div class="card-content">
+                    <div class="faction-header">
+                        <img src="img/logo-patto.png" class="faction-logo" alt="Logo">
+                        <h3>Patto delle Ceneri Erranti</h3>
+                    </div>
+                    <span class="tag">Sopravvivenza e Commercio</span>
+                    <p>I lupi di mare e i mercanti che tengono viva la speranza.</p>
+                    <div class="leader-info"><strong>Leader:</strong> Capitano Jax</div>
                 </div>
             </div>
 
             <div class="card">
-                <h3>Confraternita del Velo Cremisi</h3>
-                <span class="tag">Fede, Rinascita, Radicalismo</span>
-                <p>Un gruppo di zeloti che vede la Litostasi come una purificazione necessaria prima di una nuova creazione.</p>
-                <div class="leader-info">
-                    <strong>Leader: L'Oratore Vesper</strong><br>
-                    Una figura mascherata dalla voce ipnotica. Promette che il Secondo Battito riscriverà l'esistenza stessa.
+                <img src="img/vesper.png" alt="Vesper" class="leader-image">
+                <div class="card-content">
+                    <div class="faction-header">
+                        <img src="img/logo-velo.png" class="faction-logo" alt="Logo">
+                        <h3>Confraternita del Velo Cremisi</h3>
+                    </div>
+                    <span class="tag">Fede e Purificazione</span>
+                    <p>Attendono il Secondo Battito con fanatismo religioso.</p>
+                    <div class="leader-info"><strong>Leader:</strong> L'Oratore Vesper</div>
                 </div>
             </div>
 
-            <div class="card" style="border: 1px dashed #9db4ff;">
-                <h3>La Samsaran (L'Araldo del Flusso)</h3>
-                <span class="tag">PNG - Memoria Vivente</span>
-                <p>Una misteriosa ragazza diciottenne che vive tra i moli di Porto Althamar. A differenza degli altri, lei ricorda le sue vite precedenti su Elyndra prima che il tempo si fermasse.</p>
-                <div class="leader-info">
-                    <strong>Stato:</strong> Considerata da alcuni una santa, da altri una portatrice di sventura. I suoi diari sono ricercati da tutte le fazioni.
+            <div class="card">
+                <img src="img/kazul.png" alt="Ka'Zul" class="leader-image">
+                <div class="card-content">
+                    <div class="faction-header">
+                        <img src="img/logo-khaari.png" class="faction-logo" alt="Logo">
+                        <h3>I Khaari</h3>
+                    </div>
+                    <span class="tag">Popolo di Nyxoria</span>
+                    <p>I guardiani della giungla mutante che ci osserva dall'ombra.</p>
+                    <div class="leader-info"><strong>Leader:</strong> Matriarca Ka'Zul</div>
                 </div>
             </div>
         </div>
     </section>
 </main>
 
-<footer>Proprietà dell'Archivio • Elyndra non dimentica.</footer>
-
-<script>
-    function filterWiki() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let cards = document.getElementsByClassName('card');
-        for (let i = 0; i < cards.length; i++) {
-            let text = cards[i].innerText.toLowerCase();
-            cards[i].style.display = text.includes(input) ? "" : "none";
-        }
-    }
-</script>
+<footer>ELYNDRA • 2026</footer>
 
 </body>
 </html>

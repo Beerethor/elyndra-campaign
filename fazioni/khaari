@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribù Khaari – Elyndra Wiki</title>
+    <style>
+        body { margin: 0; font-family: 'Georgia', serif; background: #080c06; color: #a8b8a8; line-height: 1.6; }
+        
+        .faction-hero {
+            height: 45vh;
+            background: linear-gradient(to bottom, rgba(8,12,6,0.3), rgba(8,12,6,1)), 
+                        url('../img/khaari-bg.png') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            border-bottom: 3px solid #5a8a5a;
+        }
+
+        .faction-hero h1 { font-size: 3.5rem; color: #c4fcd1; text-transform: uppercase; letter-spacing: 6px; margin: 0; text-shadow: 0 0 15px rgba(90,138,90,0.4); }
+        
+        nav { padding: 1rem; background: #10160f; text-align: center; border-bottom: 1px solid #1c2b1d; position: sticky; top: 0; z-index: 100; }
+        nav a { color: #5a8a5a; text-decoration: none; margin: 0 15px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        nav a:hover { color: #8cd98c; }
+
+        main { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+
+        .info-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; margin-bottom: 40px; }
+        
+        .sidebar { background: rgba(16, 22, 15, 0.7); padding: 1.5rem; border: 1px solid #1c2b1d; height: fit-content; }
+        .leader-portrait { width: 100%; border: 1px solid #5a8a5a; margin-bottom: 1rem; filter: saturate(1.2) hue-rotate(20deg); }
+        
+        .sidebar h3 { color: #5a8a5a; font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid #1c2b1d; padding-bottom: 5px; margin-top: 1rem; }
+        .sidebar p { font-size: 0.9rem; margin: 5px 0; }
+
+        .content h2 { color: #5a8a5a; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #1c2b1d; padding-bottom: 10px; margin-top: 0; }
+        
+        .detail-box { background: rgba(22, 28, 21, 0.8); border-left: 4px solid #5a8a5a; padding: 2rem; margin-bottom: 2rem; }
+        
+        .motto { font-style: italic; color: #7cb37c; font-size: 1.2rem; text-align: center; margin-bottom: 3rem; display: block; }
+
+        .life-flow { color: #00ff00; font-weight: bold; }
+
+        footer { text-align: center; padding: 4rem; color: #384d38; font-size: 0.8rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki.html">Torna alla Wiki</a>
+</nav>
+
+<div class="faction-hero">
+    <h1>Le Tribù Khaari</h1>
+</div>
+
+<main>
+    <span class="motto">"Noi siamo Nyxoria, e Nyxoria è vita."</span>
+
+    <div class="info-grid">
+        <aside class="sidebar">
+            <img src="../img/kazul.png" class="leader-portrait" alt="Matriarca Ka'Zul">
+            <h3>Leader</h3>
+            <p>Matriarca Ka'Zul</p>
+            
+            <h3>Territorio</h3>
+            <p>Cuore della Giungla Bioluminescente (Nyxoria)</p>
+            
+            <h3>Allineamento Pubblico</h3>
+            <p>Caotico Buono / Neutrale</p>
+            
+            <h3>Risorse Chiave</h3>
+            <p>Conoscenza della Giungla, Guerrieri Nativi, Rituali Ancestrali</p>
+        </aside>
+        
+        <section class="content">
+            <h2>Obiettivi Pubblici</h2>
+            <div class="detail-box">
+                <p>Le Tribù Khaari sono i custodi nativi di Nyxoria, la cui esistenza è intrecciata con la vita del continente stesso. I loro obiettivi sono:</p>
+                <ul>
+                    <li><strong>Protezione di Nyxoria:</strong> Difendere la giungla bioluminescente da qualsiasi invasore o minaccia esterna, inclusa l'Ultima Spedizione.</li>
+                    <li><strong>Mantenimento dell'Equilibrio:</strong> Assicurare che il flusso vitale del continente rimanga integro, preservando le fonti di energia e le creature native.</li>
+                    <li><strong>Vigilanza contro la Stasi:</strong> Impedire che la Litostasi, o qualsiasi forma di "pietrificazione", metta radici nelle loro terre.</li>
+                </ul>
+            </div>
+
+            <h2>Storia delle Tribù</h2>
+            <p>
+                Le leggende Khaari narrano di essere nati dal "Primo Germoglio", la pianta madre che si estese per tutto Nyxoria, respingendo le prime ondate della Litostasi. Per generazioni, hanno vissuto in armonia con la giungla, sviluppando una cultura basata sulla caccia, la raccolta e un profondo rispetto per il <span class="life-flow">Flusso Vitale</span> del loro mondo.
+            </p>
+            <p>
+                Hanno incontrato esploratori di Aetherys solo sporadicamente nel corso dei secoli, ma hanno sempre mantenuto le distanze, percependo la civiltà esterna come una minaccia per la loro esistenza. L'arrivo dell'Ultima Spedizione è visto come la più grande invasione nella loro storia, e sono pronti a combattere per la loro casa.
+            </p>
+
+            <h2>La Matriarca e i Riti</h2>
+            <p>
+                La Matriarca Ka'Zul è la leader spirituale e guerriera di tutte le tribù Khaari. È lei a interpretare i sussurri del "Cuore di Nyxoria" e a guidare i suoi guerrieri in battaglia. I Khaari sono noti per i loro riti di passaggio, che spesso includono prove di sopravvivenza nella giungla più profonda e la capacità di comunicare con la flora e la fauna di Nyxoria attraverso legami psionici.
+            </p>
+        </section>
+    </div>
+</main>
+
+<footer>
+    TRIBÙ KHAARI • ARCHIVIO ELYNDRA • 2026
+</footer>
+
+</body>
+</html>

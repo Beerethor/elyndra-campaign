@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Diario di Lyra – Elyndra</title>
+    <title>Frammenti di Vite – Il Diario di Lyra</title>
     <style>
         body {
             margin: 0;
@@ -14,81 +14,103 @@
             overflow-x: hidden;
         }
 
-        /* ANIMAZIONE LITOSTASI */
+        /* ANIMAZIONE LITOSTASI (Glitch) */
         @keyframes litostasi-vibration {
-            0% { text-shadow: 1px 0 #4a3b2b; transform: translateX(0); }
-            25% { text-shadow: -1px 0 #8e7341; transform: translateX(0.5px); }
-            50% { opacity: 0.8; transform: translateX(-0.5px); }
+            0% { text-shadow: 1px 0 #8e7341; transform: translateX(0); }
+            50% { text-shadow: -1px 0 #4a3b2b; transform: translateX(0.5px); opacity: 0.8; }
             100% { text-shadow: 1px 0 #8e7341; transform: translateX(0); }
         }
 
-        /* HEADER OTTIMIZZATO */
+        /* HEADER CON VISO DI LYRA IN ALTO */
         header {
-            height: 70vh;
-            background: linear-gradient(to bottom, rgba(13, 15, 20, 0) 0%, rgba(13, 15, 20, 0.8) 70%, rgba(13, 15, 20, 1) 100%),
-                        url('img/lyra.png') center/cover no-repeat;
+            height: 85vh; /* Più alto per mostrare bene il viso */
+            background: linear-gradient(to bottom, 
+                        rgba(13, 15, 20, 0) 0%, 
+                        rgba(13, 15, 20, 0.5) 50%, 
+                        rgba(13, 15, 20, 1) 100%),
+                        url('img/lyra.png') center 15% / cover no-repeat; /* Inquadra il viso (15% dall'alto) */
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             align-items: center;
             text-align: center;
-            padding-bottom: 3rem;
+            padding-bottom: 4rem;
             border-bottom: 1px solid #4a3b2b;
         }
 
         header h1 {
             font-family: 'Georgia', serif;
-            font-size: 3.5rem;
+            font-size: 4rem;
             color: #fff;
             margin: 0;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             animation: litostasi-vibration 5s infinite;
-            text-shadow: 0 0 20px rgba(0,0,0,0.9);
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
 
-        nav { padding: 1.5rem; text-align: center; background: #0a0c10; border-bottom: 1px solid #1a1d24; }
+        header p {
+            color: #8e7341;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        nav { padding: 1rem; text-align: center; background: #0a0c10; border-bottom: 1px solid #1a1d24; position: sticky; top: 0; z-index: 100; }
         nav a { color: #8e7341; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; }
-        nav a:hover { color: #c9a24d; text-shadow: 0 0 8px #c9a24d; }
+        nav a:hover { color: #c9a24d; text-shadow: 0 0 10px #c9a24d; }
 
-        main { max-width: 850px; margin: 0 auto; padding: 4rem 2rem; }
+        main { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
 
-        .entry {
-            background: rgba(20, 23, 28, 0.5);
-            border-left: 3px solid #4a3b2b;
+        .journal-entry {
+            background: rgba(20, 23, 28, 0.4);
+            border-left: 2px solid #4a3b2b;
             padding: 2.5rem;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
             position: relative;
             transition: 0.4s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .entry:hover { border-left-color: #c9a24d; background: rgba(25, 28, 35, 0.8); }
-        .entry:hover h2 { animation: litostasi-vibration 0.3s infinite; color: #fff; }
+        .journal-entry:hover { border-left-color: #c9a24d; background: rgba(25, 28, 35, 0.6); }
 
-        .date { font-family: 'Georgia', serif; color: #8e7341; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 1.5rem; }
-        .entry h2 { color: #e0e0e0; margin-top: 0; font-style: italic; font-size: 1.8rem; }
+        .date { 
+            font-family: 'Georgia', serif; 
+            color: #8e7341; 
+            font-size: 0.8rem; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            display: block; 
+            margin-bottom: 1rem; 
+        }
 
-        /* FRAMMENTI SAMSARAN */
+        h2 { color: #e0e0e0; margin-top: 0; font-size: 1.8rem; font-weight: normal; }
+
+        .highlight { color: #c9a24d; font-weight: bold; }
+
+        /* MEMORIA SAMSARAN */
         .memory-fragment {
             border: 1px dashed rgba(157, 180, 255, 0.3);
             padding: 1.5rem;
-            background: rgba(0, 15, 40, 0.3);
+            background: rgba(0, 15, 40, 0.2);
             font-size: 1.1rem;
             color: #9db4ff;
             font-style: italic;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             animation: litostasi-vibration 6s infinite;
-            position: relative;
         }
 
-        .memory-fragment::before { content: "◈ Memoria Residua"; display: block; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.6; }
-
-        .ink-stain {
-            position: absolute; bottom: 15px; right: 25px;
-            font-family: 'Brush Script MT', cursive;
-            color: rgba(201, 162, 77, 0.15); font-size: 1.8rem;
-            transform: rotate(-8deg);
+        /* NOTA DEL MASTER */
+        .mission-alert {
+            background: rgba(255, 77, 77, 0.05);
+            border: 1px solid rgba(255, 77, 77, 0.2);
+            padding: 2rem;
+            margin-top: 5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #ff9999;
         }
+
+        .mission-alert strong { color: #ff4d4d; text-transform: uppercase; }
 
         footer { text-align: center; padding: 5rem; color: #444; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
@@ -98,60 +120,66 @@
 <nav><a href="index.html">← Torna all'Ingresso dell'Archivio</a></nav>
 
 <header>
-    <h1>Frammenti di Vite</h1>
-    <p style="color: #8e7341; font-style: italic; letter-spacing: 1px;">Le cronache di Lyra, l'anima dalle mille fini</p>
+    <h1>FRAMMENTI DI VITE</h1>
+    <p>Le memorie di Lyra, l'anima dalle mille fini</p>
 </header>
 
 <main>
+    <article class="journal-entry">
+        <span class="date">Luna Calante, Era dell'Erosione</span>
+        <h2>Il Giorno in cui il Vento si Fermò</h2>
+        <p>È iniziato tutto come un sussurro tra i mercanti di Aetherys. Dicevano che a nord le foreste non stormivano più. Pensavamo a una maledizione locale... Non sapevamo che la <span class="highlight">Litostasi</span> aveva iniziato il suo banchetto. Ho visto città trasformarsi in musei di carne grigia. Il 92% del mondo è ormai un monumento all'immobilità.</p>
+    </article>
 
-    <div class="entry">
-        <span class="date">31 Gennaio 2026 - Porto Althamar</span>
-        <h2>L'odore della pioggia che non cade mai</h2>
+    <article class="journal-entry">
+        <span class="date">Solstizio d'Inverno, Porto Althamar</span>
+        <h2>L'Ultima Lanterna</h2>
+        <p>Siamo stipati a <span class="highlight">Porto Althamar</span> come bestiame spaventato. È l'ultima terra che respira ancora. Le navi dell'Ultima Spedizione dondolano nel porto. Dicono che oltre l'oceano esista <span class="highlight">Nyxoria</span>, dove la vita è troppo selvaggia per essere fermata. Ma per noi è solo un miraggio dipinto sulla nebbia.</p>
+    </article>
+
+    <article class="journal-entry">
+        <span class="date">Luna Nuova, 18° Inverno della mia carne</span>
+        <h2>Frammenti di Specchi Lontani</h2>
         <p>
-            Oggi ho guardato l'orizzonte verso Aetherys. Il cielo è di quel colore cenere che ormai chiamiamo "normale". 
-            Mentre i mercanti urlavano, io ho sentito il peso di una vita che non è la mia, o forse lo è stata troppo tempo fa.
+            Oggi ho compiuto diciotto anni. Per i miei compagni nati tra i profughi, questo è l'unico mondo possibile: cenere, polvere e navi. Ma io sento il peso di mille altri compleanni. 
         </p>
         <div class="memory-fragment">
-            "C'era una fontana di marmo bianco, prima del Silenzio. Non era pietra morta, era viva. L'acqua cantava. Ricordo una bambina che rideva... ero io? O era qualcun altro che indossava questa stessa anima?"
+            "Ricordo l'odore del grano dorato prima che diventasse ossidiana. Ricordo il calore di una mano che non era di pietra, e il modo in cui il fiume scorreva senza restare prigioniero del ghiaccio minerale."
         </div>
         <p>
-            Valerius Thorne sorveglia i moli. Cerca draghi nel cielo grigio, ma non capisce che il fuoco non può bruciare ciò che è già immobile.
+            Essere una <span class="highlight">Samsaran</span> qui è una maledizione. Chiudo gli occhi e vedo Elyndra quando il vento faceva davvero piegare l'erba. La mia mente corre a vite in cui correvo per chilometri, mentre ora i miei piedi temono che ogni passo possa essere l'ultimo prima di diventare parte del suolo.
         </p>
-        <div class="ink-stain">Lyra</div>
-    </div>
+    </article>
 
-    <div class="entry">
-        <span class="date">4 Febbraio 2026 - Verso Nyxoria</span>
-        <h2>Sussurri sotto la chiglia</h2>
+    <article class="journal-entry">
+        <span class="date">Tre giorni alla Levata delle Ancore</span>
+        <h2>Il Terrore del Sogno Lucido</h2>
         <p>
-            Il Velo Cremisi parla di purificazione. Dicono che Nyxoria ci guarirà. Ma io vedo come la giungla muta: non è guarigione, è una fame diversa. 
+            Ho visto un bambino ieri. Stava giocando finché la Litostasi non gli ha sfiorato la caviglia. È diventato una statua in pochi secondi. La madre non piangeva. Nessuno piange più. Credono tutti che lui stia solo "sognando".
         </p>
-        <div class="memory-fragment">
-            "La foresta non ha radici, ha vene. Ho visto una foglia battere come un cuore. Se Nyxoria ci accetta, smetteremo di essere umani?"
-        </div>
         <p>
-            I Khaari ci osservano. La Matriarca Ka'Zul non ha bisogno di parlare per farsi sentire. La sua mente è un alveare di ricordi che vibrano.
+            Ma io ricordo cosa significa morire davvero. La Litostasi non è morte, è una <span class="highlight">prigione di coscienza</span>. Sento sussurri nelle mie vecchie voci... dicono che il "Secondo Battito" non è una cura, ma un reset. Ho paura che Nyxoria sia solo un altro modo per ricominciare a soffrire.
         </p>
-        <div class="ink-stain">Sempre lo stesso sogno</div>
-    </div>
+    </article>
 
-    <div class="entry">
-        <span class="date">9 Febbraio 2026 - La Polvere</span>
-        <h2>La polvere tra le dita</h2>
+    <article class="journal-entry">
+        <span class="date">Stasera, tra le ombre di Porto Althamar</span>
+        <h2>L'Ultima Scelta</h2>
         <p>
-            Ho trovato un uccellino sulla banchina. Era perfetto, ali spiegate, becco aperto in un canto muto. Era diventato granito in un istante. 
-            Il Circolo dice di non toccarli, che la Litostasi è sacra.
+            Non mi hanno ancora dato il lasciapassare. Il Concordato diffida di quelli come me; dicono che portiamo il "caos del passato". Ma stasera, mentre guardo l'orizzonte, sento che la mia missione non è solo fuggire. 
         </p>
-        <div class="memory-fragment">
-            "Il Primo Battito fu di Fuoco. Il Secondo sarà di Sangue. Così disse il Bibliotecario prima di diventare statua. Aveva ragione allora, ha ragione ora."
-        </div>
-        <div class="ink-stain">L.</div>
-    </div>
+        <p>
+            Dobbiamo recuperare quel manufatto nel <span class="highlight">Distretto Vecchio</span> prima di partire. Sento che apparteneva a una mia vita di tre secoli fa. Se la stasi lo reclama, perderò l'unico legame che ho con la verità. Il fango sotto i miei stivali sta diventando duro. Non voglio essere un monumento.
+        </p>
+    </article>
 
+    <section class="mission-alert">
+        <p><strong>Nota del Master - Sessione 0:</strong> I venti soffiano verso Ovest, ma le catene non sono ancora state sciolte. La compagna Samsaran ha percepito un richiamo dal passato. Solo recuperando quell'antico frammento e risolvendo l'ultimo enigma di Porto Althamar potrete assicurarvi un posto sulla flotta.</p>
+    </section>
 </main>
 
 <footer>
-    DIARIO DI LYRA • PROPRIETÀ DELL'ARCHIVIO DELLE VOCI IMMOBILI • 2026
+    DIARIO DI LYRA • ELYNDRA 2026
 </footer>
 
 </body>

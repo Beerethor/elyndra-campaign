@@ -5,179 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wiki di Elyndra – Archivio delle Voci Immobili</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Georgia', serif;
-            background: #0a0c10;
-            color: #d1d1d1;
-            line-height: 1.6;
-        }
-
+        body { margin: 0; font-family: 'Georgia', serif; background: #0a0c10; color: #d1d1d1; line-height: 1.6; }
+        
         header {
             position: relative;
-            background: 
-                linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
-                url('sfondo-elyndra.png') center/cover no-repeat;
-            padding: 4rem 2rem;
-            text-align: center;
-            border-bottom: 1px solid #333;
+            background: linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
+            url('sfondo-elyndra.png') center/cover no-repeat;
+            padding: 4rem 2rem; text-align: center; border-bottom: 1px solid #c9a24d;
         }
 
-        .fog-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            opacity: 0.15;
-        }
+        .fog-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; opacity: 0.15; }
+        .fog-layer { position: absolute; width: 200%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: fogMove 35s linear infinite; }
+        @keyframes fogMove { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
+        
+        nav { padding: 1rem; text-align: center; background: #11141b; border-bottom: 1px solid #222; }
+        nav a { color: #c9a24d; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; }
+        nav a:hover { color: #fff; text-shadow: 0 0 10px #c9a24d; }
 
-        .fog-layer {
-            position: absolute;
-            width: 200%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            animation: fogMove 35s linear infinite;
-        }
-
-        @keyframes fogMove {
-            from { transform: translateX(-50%); }
-            to { transform: translateX(0%); }
-        }
-
-        nav {
-            padding: 1rem;
-            text-align: center;
-            background: #11141b;
-            border-bottom: 1px solid #222;
-        }
-
-        nav a {
-            color: #c9a24d;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px #c9a24d;
-        }
-
-        main {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            min-height: 60vh;
-        }
-
-        .search-container {
-            margin-bottom: 4rem;
-            text-align: center;
-        }
-
+        main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+        
+        .search-container { margin-bottom: 4rem; text-align: center; }
         .search-box {
-            background: #151821;
-            border: 1px solid #333;
-            padding: 1rem 1.5rem;
-            width: 80%;
-            max-width: 500px;
-            color: #fff;
-            font-family: 'Georgia', serif;
-            font-size: 1.1rem;
-            outline: none;
-            transition: border-color 0.4s;
+            background: #151821; border: 1px solid #333; padding: 1rem; width: 100%; max-width: 600px;
+            color: #fff; font-family: 'Georgia', serif; font-size: 1.1rem; outline: none; transition: 0.4s;
+        }
+        .search-box:focus { border-color: #c9a24d; box-shadow: 0 0 15px rgba(201, 162, 77, 0.2); }
+
+        .wiki-section { margin-bottom: 5rem; }
+        .wiki-section h2 { 
+            color: #c9a24d; border-bottom: 1px solid #333; padding-bottom: 10px; 
+            text-transform: uppercase; letter-spacing: 4px; font-weight: normal; margin-bottom: 2rem;
         }
 
-        .search-box:focus {
-            border-color: #c9a24d;
-            box-shadow: 0 0 15px rgba(201, 162, 77, 0.2);
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+
+        .card {
+            background: rgba(21, 24, 33, 0.7);
+            border: 1px solid #222;
+            padding: 2rem;
+            transition: 0.4s;
+            height: fit-content;
         }
+        .card:hover { border-color: #c9a24d; background: rgba(30, 35, 45, 0.9); transform: translateY(-5px); }
+        .card h3 { margin-top: 0; color: #fff; letter-spacing: 1px; border-bottom: 1px solid rgba(201, 162, 77, 0.2); padding-bottom: 10px; }
+        .card .tag { font-style: italic; color: #c9a24d; font-size: 0.8rem; display: block; margin-bottom: 1rem; text-transform: uppercase; }
+        .card p { font-size: 0.95rem; color: #bbb; text-align: justify; }
 
-        .wiki-placeholder {
-            text-align: center;
-            padding: 5rem 2rem;
-            border: 1px dashed #333;
-            color: #555;
+        .timeline {
+            background: rgba(201, 162, 77, 0.05);
+            padding: 2rem;
+            border-left: 2px solid #c9a24d;
+            margin-top: 2rem;
         }
+        .timeline-item { margin-bottom: 1.5rem; }
+        .timeline-item strong { color: #c9a24d; display: block; }
 
-        .wiki-placeholder i {
-            display: block;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 4rem;
-            color: #333;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Effetto Glitch sul titolo */
-        #wiki-title { cursor: default; }
-
+        footer { text-align: center; padding: 5rem 2rem; color: #444; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="index.html">← Torna all'Archivio Principale</a>
-</nav>
+<nav><a href="index.html">← Torna all'Archivio Principale</a></nav>
 
 <header>
     <div class="fog-container"><div class="fog-layer"></div></div>
     <h1 id="wiki-title">WIKI DI ELYNDRA</h1>
-    <p>Conoscenza frammentata dell'Ultima Spedizione</p>
+    <p>Frammenti di un mondo che si ferma • Conoscenza per l'Ultima Spedizione</p>
 </header>
 
 <main>
     <div class="search-container">
-        <input type="text" class="search-box" placeholder="Cerca tra i frammenti della memoria..." onkeyup="searchWiki()">
+        <input type="text" id="searchInput" class="search-box" placeholder="Cerca luoghi, fazioni, termini..." onkeyup="filterWiki()">
     </div>
 
-    <div id="wiki-content">
-        <div class="wiki-placeholder">
-            <p>L'archivio è attualmente silente.<br>Le informazioni verranno trascritte non appena i viaggiatori esploreranno le terre di Nyxoria.</p>
+    <section class="wiki-section">
+        <h2>Geografia Planetaria</h2>
+        <div class="grid">
+            <div class="card" style="border-left: 4px solid #888;">
+                <h3>Aetherys</h3>
+                <span class="tag">Il Vecchio Mondo • 92% Silente</span>
+                <p>Un tempo culla della civiltà di Elyndra, oggi è un continente spettrale. La Litostasi è nata nelle sue vette centrali e si è mossa come una marea, trasformando carne e terra in pietra viva. Chi è rimasto non è morto, ma prigioniero di un'eternità immobile.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid #4CAF50;">
+                <h3>Nyxoria</h3>
+                <span class="tag">Kha’Ruun • La Terra Mutante</span>
+                <p>L'antitesi della stasi situata oltre l'Oceano dei Sospiri. È una terra selvaggia dove la vita muta in forme imprevedibili. Qui la Litostasi non attecchisce, rendendola l'ultima meta per i superstiti di Elyndra.</p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="wiki-section">
+        <h2>Rovine e Memorie (Aetherys)</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Porto Althamar</h3>
+                <span class="tag">Ultimo Porto Sicuro</span>
+                <p>L'unica città di Aetherys che ancora respira. Protetta da difese arcaniche e geografiche, è il punto di raduno della Grande Flotta. Le sue strade sono colme di profughi pronti alla fuga verso Nyxoria.</p>
+            </div>
+            <div class="card">
+                <h3>Oakhaven</h3>
+                <span class="tag">L'Antica Capitale</span>
+                <p>Un tempo centro del potere regale, oggi è un immenso museo a cielo aperto. Intere piazze sono piene di persone pietrificate in un eterno istante di vita quotidiana. Si dice che la corte reale sia ancora "viva" all'interno dei loro simulacri petrosi.</p>
+            </div>
+            <div class="card">
+                <h3>Accademia di Solstizio</h3>
+                <span class="tag">Il Polo Arcano</span>
+                <p>Luogo dove i più grandi studiosi cercarono di comprendere la Litostasi. L'ondata li colse durante un rituale di massa; ora l'accademia è una torre dove la magia stessa è rimasta congelata in cristalli solidi.</p>
+            </div>
+            <div class="card">
+                <h3>Le Distese Grigie</h3>
+                <span class="tag">Campi della Stasi</span>
+                <p>Ex pianure agricole che nutrivano il mondo. Ora sono praterie di erba tagliente come ossidiana e animali immobili a metà di un balzo. È un luogo di silenzio assoluto, rotto solo dal vento.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="wiki-section">
+        <h2>Le Fazioni in Conflitto</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Concordato della Scaglia Antica</h3>
+                <span class="tag">Eredi del Trono</span>
+                <p>Nobili e militari che cercano di risvegliare i Draghi Ancestrali. Credono che solo il ritorno dell'antico ordine possa guarire Elyndra dalla pietrificazione.</p>
+            </div>
+            <div class="card">
+                <h3>Circolo della Radice Profonda</h3>
+                <span class="tag">Custodi del Flusso</span>
+                <p>Druidi che vedono la Litostasi come una reazione naturale del mondo. Cercano di adattarsi alla mutazione di Nyxoria piuttosto che combatterla con la forza.</p>
+            </div>
+            <div class="card">
+                <h3>Archivio delle Voci Immobili</h3>
+                <span class="tag">Cercatori di Memoria</span>
+                <p>Studiosi che estraggono ricordi dai pietrificati. Il loro scopo è preservare tutta la cultura di Elyndra affinché nulla vada perduto nel silenzio.</p>
+            </div>
+            <div class="card">
+                <h3>I Khaari</h3>
+                <span class="tag">Indigeni di Kha’Ruun</span>
+                <p>Popolo nomade di Nyxoria. Venerano il mutamento e chiamano il mondo "Il Respiro". Temono che i profughi portino con sé il Silenzio di Aetherys.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="wiki-section">
+        <h2>Cronaca della Litostasi</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Fase 1: L'Anomalia</strong>
+                <p>La stasi appare nelle Vette Centrali di Aetherys. Villaggi interi smettono di muoversi. Viene scambiata inizialmente per un virus minerale.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Fase 2: L'Espansione Inarrestabile</strong>
+                <p>In 50 anni, il 60% del continente è fermo. Le grandi città come Oakhaven cadono. La carne diventa pietra viva, ma la mente rimane prigioniera.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Fase 3: L'Ultima Spiaggia</strong>
+                <p>La Litostasi raggiunge le coste. Porto Althamar diventa l'unico rifugio. Inizia la costruzione della flotta per l'Ultima Spedizione verso Nyxoria.</p>
+            </div>
+        </div>
+    </section>
 </main>
 
-<footer>
-    Proprietà dell'Archivio delle Voci Immobili • Non divulgare ai non iniziati
-</footer>
+<footer>ELYNDRA © CAMPAGNA D&D 5E • PROPRIETÀ DELL'ARCHIVIO DELLE VOCI IMMOBILI</footer>
 
 <script>
-    // Funzione di ricerca (per ora solo estetica o per messaggi a scomparsa)
-    function searchWiki() {
-        let input = document.querySelector('.search-box').value;
-        let placeholder = document.querySelector('.wiki-placeholder p');
+    function filterWiki() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let cards = document.getElementsByClassName('card');
         
-        if(input.length > 0) {
-            placeholder.innerHTML = "Nessun frammento trovato per: <strong>" + input + "</strong>.<br>Forse questa conoscenza è andata perduta nella Litostasi.";
-        } else {
-            placeholder.innerHTML = "L'archivio è attualmente silente.<br>Le informazioni verranno trascritte non appena i viaggiatori esploreranno le terre di Nyxoria.";
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+            let desc = cards[i].innerText.toLowerCase();
+            if (title.includes(input) || desc.includes(input)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
         }
     }
 
-    // Effetto Glitch testuale
+    // Effetto Glitch sul titolo
     const title = document.getElementById('wiki-title');
     const originalText = title.innerText;
     let interval = null;
-
     title.addEventListener('mouseenter', () => {
-        let iteration = 0;
-        clearInterval(interval);
+        let iteration = 0; clearInterval(interval);
         interval = setInterval(() => {
             title.innerText = title.innerText.split("").map((l, i) => {
                 if(i < iteration) return originalText[i];
@@ -187,11 +198,7 @@
             iteration += 1/3;
         }, 30);
     });
-
-    title.addEventListener('mouseleave', () => {
-        clearInterval(interval);
-        title.innerText = originalText;
-    });
+    title.addEventListener('mouseleave', () => { clearInterval(interval); title.innerText = originalText; });
 </script>
 
 </body>

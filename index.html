@@ -8,60 +8,56 @@
         body {
             margin: 0;
             font-family: 'Georgia', serif;
-            background: #0f1115; /* Sfondo scuro di base */
+            background: #0f1115;
             color: #e6e6e6;
             line-height: 1.6;
             overflow-x: hidden;
+            transition: filter 0.8s ease;
         }
 
         header {
             position: relative;
-            /* Sfondo più visibile: gradiente meno coprente */
+            /* PUNTA ALLA TUA IMMAGINE LOCALE */
             background: 
-                linear-gradient(to bottom, rgba(15,17,21,0.4), rgba(15,17,21,1)),
+                linear-gradient(to bottom, rgba(15,17,21,0.2), rgba(15,17,21,1)),
                 url('sfondo-elyndra.jpg') center/cover no-repeat;
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
             text-align: center;
             overflow: hidden;
-            border-bottom: 2px solid #2a2d35;
+            border-bottom: 2px solid #333;
+            transition: all 1s ease;
         }
 
-        /* Effetto Nebbia ottimizzato */
-        header::after, header::before {
-            content: '';
+        /* Effetto nebbia procedurale (non servono file esterni) */
+        .fog-container {
             position: absolute;
-            inset: 0;
-            background: url('nebbia.png') repeat;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
             pointer-events: none;
+            opacity: 0.3;
         }
 
-        header::after {
-            opacity: 0.25;
-            animation: fogMoveSlow 160s linear infinite;
+        .fog-layer {
+            position: absolute;
+            width: 200%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: fogMove 25s linear infinite;
         }
 
-        header::before {
-            opacity: 0.15;
-            animation: fogMoveFast 90s linear infinite;
-        }
-
-        @keyframes fogMoveSlow {
-            from { background-position: 0 0; }
-            to { background-position: 2000px 0; }
-        }
-
-        @keyframes fogMoveFast {
-            from { background-position: 0 0; }
-            to { background-position: -1500px 0; }
+        @keyframes fogMove {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0%); }
         }
 
         header h1 { 
-            font-size: 4rem; 
+            font-size: 5rem; 
             margin-bottom: 0.5rem; 
             color: #fff;
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            text-shadow: 0 0 30px rgba(0,0,0,1);
             position: relative;
             z-index: 10;
+            letter-spacing: 8px;
+            text-transform: uppercase;
         }
 
         header p { 
@@ -70,12 +66,13 @@
             position: relative;
             z-index: 10;
             font-size: 1.2rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
         }
 
         main {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
         }
 
         h2 { 
@@ -83,119 +80,132 @@
             border-bottom: 1px solid #c9a24d;
             display: inline-block;
             padding-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: normal;
         }
 
         .hub {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
             margin-top: 3rem;
         }
 
-        /* EFFETTO PIETRIFICAZIONE PROGRESSIVA SULLE CARD */
+        /* CARD CON PIETRIFICAZIONE PROGRESSIVA */
         .card {
-            background: #151821;
+            background: rgba(21, 24, 33, 0.9);
             padding: 2.5rem;
-            border: 1px solid #333;
+            border: 1px solid #2a2d35;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            cursor: pointer;
+            backdrop-filter: blur(5px);
         }
 
         .card:hover {
-            border-color: #888; /* Il bordo diventa grigio pietra */
-            background: #1a1d26;
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            /* Effetto visivo di "irrigidimento" */
-            filter: grayscale(0.6) contrast(1.1);
+            border-color: #999;
+            background: #1e212a;
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            /* La card sembra diventare di pietra */
+            filter: grayscale(1) contrast(1.2);
         }
 
         .card h3 { 
             color: #9db4ff; 
             margin-top: 0; 
+            font-size: 1.4rem;
             transition: color 0.4s;
         }
 
         .card:hover h3 {
-            color: #a0a0a0 !important; /* Il titolo diventa cenere/pietra */
+            color: #ffffff !important;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
 
-        .card p { color: #ccc; }
+        .card p { color: #bbb; transition: color 0.4s; }
+        .card:hover p { color: #888; }
 
         .card a {
             display: inline-block;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             color: #c9a24d;
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            border: 1px solid #c9a24d;
+            padding: 8px 20px;
+            transition: all 0.3s;
         }
 
-        .card a:hover { text-decoration: underline; }
+        .card a:hover {
+            background: #c9a24d;
+            color: #000;
+        }
+
+        /* Se una card è attiva, tutto il body si "pietrifica" leggermente */
+        body:has(.card:hover) header {
+            filter: grayscale(0.5) sepia(0.2);
+            opacity: 0.8;
+        }
 
         footer {
             text-align: center;
-            padding: 4rem 2rem;
-            font-size: 0.9rem;
-            color: #555;
+            padding: 5rem 2rem;
+            font-size: 0.8rem;
+            color: #444;
             background: #0a0c10;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 id="main-title">Elyndra</h1>
-    <p>Archivio del Mondo • Diario di Campagna • Wiki Viva</p>
+    <div class="fog-container">
+        <div class="fog-layer"></div>
+    </div>
+    <h1 id="main-title">ELYNDRA</h1>
+    <p>Dall'ombra di Aetherys verso l'ignoto di Nyxoria</p>
 </header>
 
 <main>
-    <h2>Benvenuti in Elyndra</h2>
+    <h2>L'Ultima Spedizione</h2>
     <p>
-        Elyndra è un mondo sospeso tra immobilità e cambiamento. 
-        Un tempo chiamato <strong>Thyrael</strong>, oggi sopravvive mentre la Litostasi avanza, 
-        trasformando la vita in silente pietra viva. Solo Nyxoria resiste, nel suo caos mutante.
+        Il mondo di <strong>Thyrael</strong> sta morendo sotto il peso della Litostasi. 
+        Mentre il 90% delle terre è ormai ridotto a un giardino di statue silenti, 
+        l'ultima speranza risiede oltre l'oceano, tra le foreste mutanti di Nyxoria.
     </p>
 
     <div class="hub">
         <div class="card">
             <h3>📖 Diario di Campagna</h3>
-            <p>
-                Una cronaca narrativa degli eventi, scritta da una voce interna al mondo. 
-                Qui la storia prende forma sessione dopo sessione.
-            </p>
-            <a href="diario.html">Apri il Diario</a>
+            <p>Le memorie dei superstiti e il resoconto delle sessioni. Ogni passo verso Kha'Ruun viene scritto qui.</p>
+            <a href="diario.html">Leggi Memorie</a>
         </div>
 
         <div class="card">
             <h3>📚 Wiki di Elyndra</h3>
-            <p>
-                Una raccolta viva di luoghi, fazioni, popoli e concetti. 
-                Si espande solo con ciò che i personaggi scoprono.
-            </p>
-            <a href="wiki.html">Consulta la Wiki</a>
+            <p>Conoscenza frammentata su Fazioni, Khaari e la natura della Pietrificazione Silente.</p>
+            <a href="wiki.html">Consulta Tomi</a>
         </div>
 
         <div class="card">
             <h3>🜏 Archivio del Master</h3>
-            <p>
-                Verità nascoste, piani segreti e struttura profonda del mondo. 
-                Le meccaniche della Litostasi e il destino di Aetherys.
-            </p>
-            <a href="master.html">Accesso Riservato</a>
+            <p>I segreti del Secondo Battito e le verità che il Concordato della Scaglia Antica tiene nascoste.</p>
+            <a href="master.html">Oltre il Velo</a>
         </div>
     </div>
 </main>
 
 <footer>
-    Elyndra © Campagna D&D 5e – L'Era della Pietra Silente
+    ELYNDRA © CAMPAGNA D&D 5E – "IL SILENZIO NON È LA FINE"
 </footer>
 
 <script>
-    // SCRIPT GLITCH / LITOSTASI
+    // EFFETTO TESTO LITOSTASI (GLITCH)
     const elements = document.querySelectorAll('.card h3, header h1');
 
     elements.forEach(el => {
@@ -213,8 +223,7 @@
                         if(index < iteration) {
                             return originalText[index];
                         }
-                        // Caratteri di "stasi" e glifi antichi
-                        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789█▓▒░🜏🜓";
+                        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░🜏🜓";
                         return chars[Math.floor(Math.random() * chars.length)];
                     })
                     .join("");
@@ -224,7 +233,7 @@
                 }
                 
                 iteration += 1 / 3;
-            }, 35);
+            }, 30);
         });
 
         el.addEventListener('mouseleave', () => {

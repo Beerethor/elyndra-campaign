@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velo Cremisi – Elyndra Wiki</title>
+    <style>
+        body { margin: 0; font-family: 'Georgia', serif; background: #0d0505; color: #d1b1b1; line-height: 1.6; }
+        
+        .faction-hero {
+            height: 45vh;
+            background: linear-gradient(to bottom, rgba(13,5,5,0.3), rgba(13,5,5,1)), 
+                        url('../img/velo-bg.png') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            border-bottom: 3px solid #8b0000;
+        }
+
+        .faction-hero h1 { font-size: 3.5rem; color: #ff4d4d; text-transform: uppercase; letter-spacing: 6px; margin: 0; text-shadow: 0 0 20px rgba(139,0,0,0.6); }
+        
+        nav { padding: 1rem; background: #1a0a0a; text-align: center; border-bottom: 1px solid #331111; position: sticky; top: 0; z-index: 100; }
+        nav a { color: #ff4d4d; text-decoration: none; margin: 0 15px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        nav a:hover { color: #fff; text-shadow: 0 0 10px #ff4d4d; }
+
+        main { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+
+        .info-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; margin-bottom: 40px; }
+        
+        .sidebar { background: rgba(26, 10, 10, 0.7); padding: 1.5rem; border: 1px solid #331111; height: fit-content; }
+        .leader-portrait { width: 100%; border: 1px solid #8b0000; margin-bottom: 1rem; filter: grayscale(30%) sepia(20%) hue-rotate(-50deg); }
+        
+        .sidebar h3 { color: #ff4d4d; font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid #331111; padding-bottom: 5px; margin-top: 1rem; }
+        .sidebar p { font-size: 0.9rem; margin: 5px 0; }
+
+        .content h2 { color: #ff4d4d; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #331111; padding-bottom: 10px; margin-top: 0; }
+        
+        .detail-box { background: rgba(35, 15, 15, 0.8); border-left: 4px solid #8b0000; padding: 2rem; margin-bottom: 2rem; }
+        
+        .motto { font-style: italic; color: #ff6666; font-size: 1.2rem; text-align: center; margin-bottom: 3rem; display: block; }
+
+        .ascension { color: #ff0000; font-weight: bold; text-transform: uppercase; }
+
+        footer { text-align: center; padding: 4rem; color: #4d1a1a; font-size: 0.8rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki.html">Torna alla Wiki</a>
+</nav>
+
+<div class="faction-hero">
+    <h1>Il Velo Cremisi</h1>
+</div>
+
+<main>
+    <span class="motto">"Perché temere l'eternità della pietra?"</span>
+
+    <div class="info-grid">
+        <aside class="sidebar">
+            <img src="../img/vesper.png" class="leader-portrait" alt="Oratore Vesper">
+            <h3>Leader</h3>
+            <p>Oratore Vesper</p>
+            
+            <h3>Tempio</h3>
+            <p>Cattedrale del Sangue Freddo (Quartieri Bassi)</p>
+            
+            <h3>Allineamento Pubblico</h3>
+            <p>Legale Malvagio / Neutrale</p>
+            
+            <h3>Risorse Chiave</h3>
+            <p>Incenso Paralizzante, Reliquie Pietrificate, Fedeli Fanatici</p>
+        </aside>
+        
+        <section class="content">
+            <h2>Duttrina Pubblica</h2>
+            <div class="detail-box">
+                <p>Il Velo Cremisi predica che la Litostasi non sia una fine, ma un dono divino atto a purificare Elyndra dal caos della carne:</p>
+                <ul>
+                    <li><strong>Accettazione del Destino:</strong> Insegnano che resistere alla pietra è un atto di superbia che prolunga solo l'agonia.</li>
+                    <li><strong>Comunione Silente:</strong> Organizzano cerimonie dove i fedeli pregano circondati dalle statue dei loro cari, convinti di poter udire i loro sussurri divini.</li>
+                    <li><strong>Preparazione all'Ascesa:</strong> Forniscono "conforto" a chi è ormai prossimo alla trasformazione totale, trattandoli come santi viventi.</li>
+                </ul>
+            </div>
+
+            <h2>Storia della Fazione</h2>
+            <p>
+                Il culto nacque nei distretti più poveri di Oakhaven, tra coloro che non avevano i mezzi per comprare sieri o posti sulle navi. Invece di cedere alla disperazione, l'Oratore Vesper — un ex sacerdote della vita — proclamò che la "Grande Immobilità" era la risposta finale al dolore, alla fame e alla guerra.
+            </p>
+            <p>
+                A Porto Althamar, il Velo Cremisi è tollerato a fatica dal Concordato. Thorne li detesta, ma sa che tengono buona la popolazione più povera e disperata, offrendo una speranza spirituale dove la politica e la scienza hanno fallito. I loro seguaci indossano veli rosso sangue per simboleggiare l'ultimo calore della vita che fluisce prima della pace del minerale.
+            </p>
+
+            <h2>Il Rituale dell'Ultimo Velo</h2>
+            <p>
+                Si dice che i sacerdoti del Velo possiedano oli capaci di rendere la trasformazione indolore, trasformandola in una <span class="ascension">Estasi Minerale</span>. Molti cittadini, stanchi di scappare, bussano alle porte della loro cattedrale per "abbracciare la Scultura" e diventare parte eterna dell'architettura del mondo.
+            </p>
+        </section>
+    </div>
+</main>
+
+<footer>
+    IL VELO CREMISI • 2026
+</footer>
+
+</body>
+</html>

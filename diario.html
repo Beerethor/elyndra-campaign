@@ -9,7 +9,7 @@
         header {
             position: relative;
             background: linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
-            url('sfondo-elyndra.png') center/cover no-repeat; /* AGGIORNATO A .PNG */
+            url('sfondo-elyndra.png') center/cover no-repeat;
             padding: 5rem 2rem; text-align: center; border-bottom: 1px solid #333;
         }
         .fog-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; opacity: 0.2; }
@@ -19,12 +19,26 @@
         nav { padding: 1rem; text-align: center; background: #11141b; }
         nav a { color: #c9a24d; text-decoration: none; margin: 0 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
         
-        main { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
-        .journal-entry { margin-bottom: 5rem; padding-left: 2rem; border-left: 1px solid #c9a24d; }
-        .date { font-family: 'Courier New', monospace; color: #c9a24d; font-size: 0.9rem; display: block; margin-bottom: 1rem; text-transform: uppercase; }
-        h2 { color: #fff; font-weight: normal; font-size: 2.2rem; margin-top: 0; }
-        .highlight { color: #9db4ff; }
-        .mission-alert { background: rgba(201, 162, 77, 0.05); border: 1px solid #c9a24d; padding: 2rem; margin-top: 4rem; font-style: italic; }
+        main { max-width: 850px; margin: 0 auto; padding: 4rem 2rem; }
+        .journal-entry { margin-bottom: 5rem; padding-left: 2rem; border-left: 1px solid #c9a24d; position: relative; }
+        .date { font-family: 'Courier New', monospace; color: #c9a24d; font-size: 0.9rem; display: block; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        h2 { color: #fff; font-weight: normal; font-size: 2.2rem; margin-top: 0; letter-spacing: 1px; }
+        .highlight { color: #9db4ff; font-weight: bold; }
+        
+        /* Stile per i ricordi Samsaran */
+        .memory-fragment {
+            font-style: italic;
+            color: #a3a3a3;
+            background: rgba(157, 180, 255, 0.05);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-right: 2px solid rgba(157, 180, 255, 0.3);
+        }
+
+        .mission-alert { background: rgba(201, 162, 77, 0.05); border: 1px solid #c9a24d; padding: 2.5rem; margin-top: 4rem; position: relative; }
+        .mission-alert::before { content: "!"; position: absolute; top: -15px; left: 20px; background: #c9a24d; color: #000; width: 30px; height: 30px; text-align: center; line-height: 30px; font-weight: bold; border-radius: 50%; }
+
         footer { text-align: center; padding: 3rem; color: #444; font-size: 0.8rem; }
     </style>
 </head>
@@ -35,14 +49,14 @@
 <header>
     <div class="fog-container"><div class="fog-layer"></div></div>
     <h1 id="diary-title">Cronache del Silenzio</h1>
-    <p>Il Diario di un'era che si irrigidisce</p>
+    <p>Le memorie di una Samsaran tra le macerie di Elyndra</p>
 </header>
 
 <main>
     <article class="journal-entry">
         <span class="date">Luna Calante, Era dell'Erosione</span>
         <h2>Il Giorno in cui il Vento si Fermò</h2>
-        <p>È iniziato tutto come un sussurro tra i mercanti di Aetherys. Dicevano che a nord le foreste non stormivano più. Pensavamo a una maledizione locale... Non sapevamo che la <span class="highlight">Litostasi</span> aveva iniziato il suo banchetto. Ho visto città trasformarsi in musei di carne grigia. Il 90% del mondo è ormai un monumento all'immobilità.</p>
+        <p>È iniziato tutto come un sussurro tra i mercanti di Aetherys. Dicevano che a nord le foreste non stormivano più. Pensavamo a una maledizione locale... Non sapevamo che la <span class="highlight">Litostasi</span> aveva iniziato il suo banchetto. Ho visto città trasformarsi in musei di carne grigia. Il 92% del mondo è ormai un monumento all'immobilità.</p>
     </article>
 
     <article class="journal-entry">
@@ -52,26 +66,54 @@
     </article>
 
     <article class="journal-entry">
-        <span class="date">Oggi, Prima della Partenza</span>
-        <h2>L'Ultimo Incarico</h2>
-        <p>La flotta è quasi pronta. Ma un gruppo di noi non ha ancora il permesso di imbarcarsi. C'è <span class="highlight">un'ultima missione</span> da compiere tra i vicoli nebbiosi di Porto Althamar. Non possiamo lasciare che la corruzione ci segua. Se falliamo qui, non ci sarà nessun "Nuovo Mondo".</p>
+        <span class="date">Luna Nuova, 18° Inverno della mia carne</span>
+        <h2>Frammenti di Specchi Lontani</h2>
+        <p>
+            Oggi ho compiuto diciotto anni. Per i miei compagni nati tra i profughi, questo è l'unico mondo possibile: cenere, polvere e navi. Ma io sento il peso di mille altri compleanni. 
+        </p>
+        <div class="memory-fragment">
+            "Ricordo l'odore del grano dorato prima che diventasse ossidiana. Ricordo il calore di una mano che non era di pietra, e il modo in cui il fiume scorreva senza restare prigioniero del ghiaccio minerale."
+        </div>
+        <p>
+            Essere una <span class="highlight">Samsaran</span> qui è una maledizione. Chiudo gli occhi e vedo Elyndra quando il vento faceva davvero piegare l'erba. La mia mente corre a vite in cui correvo per chilometri, mentre ora i miei piedi temono che ogni passo possa essere l'ultimo prima di diventare parte del suolo.
+        </p>
+    </article>
+
+    <article class="journal-entry">
+        <span class="date">Tre giorni alla Levata delle Ancore</span>
+        <h2>Il Terrore del Sogno Lucido</h2>
+        <p>
+            Ho visto un bambino ieri. Stava giocando finché la Litostasi non gli ha sfiorato la caviglia. È diventato una statua in pochi secondi. La madre non piangeva. Nessuno piange più. Credono tutti che lui stia solo "sognando".
+        </p>
+        <p>
+            Ma io ricordo cosa significa morire davvero. La Litostasi non è morte, è una <span class="highlight">prigione di coscienza</span>. Sento sussurri nelle mie vecchie voci... dicono che il "Secondo Battito" non è una cura, ma un reset. Ho paura che Nyxoria sia solo un altro modo per ricominciare a soffrire.
+        </p>
+    </article>
+
+    <article class="journal-entry">
+        <span class="date">Stasera, tra le ombre di Porto Althamar</span>
+        <h2>L'Ultima Scelta</h2>
+        <p>
+            Non mi hanno ancora dato il lasciapassare. Il Concordato diffida di quelli come me; dicono che portiamo il "caos del passato". Ma stasera, mentre guardo l'orizzonte, sento che la mia missione non è solo fuggire. 
+        </p>
+        <p>
+            Dobbiamo recuperare quel manufatto nel <span class="highlight">Distretto Vecchio</span> prima di partire. Sento che apparteneva a una mia vita di tre secoli fa. Se la stasi lo reclama, perderò l'unico legame che ho con la verità. Il fango sotto i miei stivali sta diventando duro. Non voglio essere un monumento.
+        </p>
     </article>
 
     <section class="mission-alert">
-        <p><strong>Nota del Master:</strong> I venti soffiano verso Ovest, ma le catene non sono ancora state sciolte. Solo risolvendo questo ultimo enigma potrete guadagnarvi il posto sull'ammiraglia.</p>
+        <p><strong>Nota del Master - Sessione 0:</strong> I venti soffiano verso Ovest, ma le catene non sono ancora state sciolte. La compagna Samsaran ha percepito un richiamo dal passato. Solo recuperando quell'antico frammento e risolvendo l'ultimo enigma di Porto Althamar potrete assicurarvi un posto sulla flotta.</p>
     </section>
 </main>
 
-<footer>Proprietà dell'Archivio delle Voci Immobili.</footer>
+<footer>Proprietà dell'Archivio delle Voci Immobili • Non bruciare i ricordi.</footer>
 
 <script>
-    // Applichiamo il glitch anche qui per coerenza
     const title = document.getElementById('diary-title');
     const originalText = title.innerText;
     let interval = null;
     title.addEventListener('mouseenter', () => {
-        let iteration = 0;
-        clearInterval(interval);
+        let iteration = 0; clearInterval(interval);
         interval = setInterval(() => {
             title.innerText = title.innerText.split("").map((l, i) => {
                 if(i < iteration) return originalText[i];

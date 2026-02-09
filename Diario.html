@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diario del Viaggiatore – Elyndra</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: #0a0c10;
+            color: #d1d1d1;
+            line-height: 1.8;
+        }
+
+        header {
+            position: relative;
+            background: 
+                linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
+                url('sfondo-elyndra.jpg') center/cover no-repeat;
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .fog-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+
+        .fog-layer {
+            position: absolute;
+            width: 200%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: fogMove 30s linear infinite;
+        }
+
+        @keyframes fogMove {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0%); }
+        }
+
+        nav {
+            padding: 1rem;
+            text-align: center;
+            background: #11141b;
+        }
+
+        nav a {
+            color: #c9a24d;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .journal-entry {
+            margin-bottom: 5rem;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 1px solid #c9a24d;
+        }
+
+        .date {
+            font-family: 'Courier New', Courier, monospace;
+            color: #c9a24d;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            color: #fff;
+            font-weight: normal;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: #9db4ff;
+        }
+
+        .mission-alert {
+            background: rgba(201, 162, 77, 0.1);
+            border: 1px solid #c9a24d;
+            padding: 2rem;
+            margin-top: 4rem;
+            font-style: italic;
+        }
+
+        .mission-alert h3 {
+            margin-top: 0;
+            color: #c9a24d;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #444;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">← Torna all'Archivio</a>
+</nav>
+
+<header>
+    <div class="fog-container">
+        <div class="fog-layer"></div>
+    </div>
+    <h1>Cronache del Silenzio</h1>
+    <p>Il Diario di un'era che si irrigidisce</p>
+</header>
+
+<main>
+
+    <article class="journal-entry">
+        <span class="date">Luna Calante, Era dell'Erosione</span>
+        <h2>Il Giorno in cui il Vento si Fermò</h2>
+        <p>
+            È iniziato tutto come un sussurro tra i mercanti di Aetherys. Dicevano che a nord le foreste non stormivano più. Pensavamo a una maledizione locale, a un capriccio degli spiriti. Non sapevamo che la <span class="highlight">Litostasi</span> aveva iniziato il suo banchetto. 
+        </p>
+        <p>
+            Ho visto città come Oakhaven trasformarsi in musei di carne grigia in una sola notte. Madri che cullavano figli di pietra, cavalieri immobili sulle loro cavalcature di granito vivo. Non c'è sangue, non c'è odore di morte. Solo un silenzio che ti mangia le ossa. Il 90% del mondo è ora un monumento all'immobilità.
+        </p>
+    </article>
+
+    <article class="journal-entry">
+        <span class="date">Solstizio d'Inverno, Rifugio di Porto Althamar</span>
+        <h2>L'Ultima Lanterna</h2>
+        <p>
+            Siamo stipati a <span class="highlight">Porto Althamar</span> come bestiame spaventato. È l'ultima terra che respira ancora, protetta da non so quale antico incantesimo o capriccio del destino. L'aria qui puzza di salsedine, sudore e disperazione. 
+        </p>
+        <p>
+            Le navi dell'Ultima Spedizione sono pronte, dondolano nel porto come gusci di noce pronti a sfidare l'abisso. Dicono che oltre l'oceano esista <span class="highlight">Nyxoria</span>, una terra dove la vita è così selvaggia da non poter essere fermata. I Khaari la chiamano <em>Kha'Ruun</em>. Ma per noi è solo un miraggio dipinto sulla nebbia.
+        </p>
+    </article>
+
+    <article class="journal-entry">
+        <span class="date">Oggi, Prima della Partenza</span>
+        <h2>L'Ultimo Incarico</h2>
+        <p>
+            La flotta è quasi pronta al salpare. Le fazioni discutono, il Concordato della Scaglia Antica reclama il comando, mentre l'Archivio cerca di salvare quanti più tomi possibile. Ma c'è tensione tra i ranghi. 
+        </p>
+        <p>
+            Un gruppo di noi — anime legate dal caso o dal debito — non ha ancora il permesso di imbarcarsi. C'è un'ultima ombra da dissipare tra i vicoli di Porto Althamar, <span class="highlight">un'ultima missione</span> da compiere prima che le ancore vengano levate. Non possiamo lasciare che la corruzione della stasi ci segua sulla nave. Se falliamo qui, non ci sarà nessun "Nuovo Mondo" da scoprire. Solo un'altra tomba di pietra in mezzo al mare.
+        </p>
+    </article>
+
+    <section class="mission-alert">
+        <h3>Nota del Master - Sessione 0</h3>
+        <p>
+            I venti soffiano verso Ovest, ma le catene non sono ancora state sciolte. Avete i vostri bagagli, i vostri segreti e un compito che vi è stato affidato tra i moli nebbiosi. Solo risolvendo questo ultimo enigma potrete guadagnarvi il posto sull'ammiraglia dell'Ultima Spedizione.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    Proprietà dell'Archivio delle Voci Immobili. Non bruciare. Non dimenticare.
+</footer>
+
+</body>
+</html>

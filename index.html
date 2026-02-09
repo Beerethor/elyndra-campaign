@@ -12,12 +12,11 @@
             color: #e6e6e6;
             line-height: 1.6;
             overflow-x: hidden;
-            transition: filter 0.8s ease;
         }
 
         header {
             position: relative;
-            /* PUNTA ALLA TUA IMMAGINE LOCALE */
+            /* AGGIORNATO A .PNG */
             background: 
                 linear-gradient(to bottom, rgba(15,17,21,0.2), rgba(15,17,21,1)),
                 url('sfondo-elyndra.png') center/cover no-repeat;
@@ -25,10 +24,8 @@
             text-align: center;
             overflow: hidden;
             border-bottom: 2px solid #333;
-            transition: all 1s ease;
         }
 
-        /* Effetto nebbia procedurale (non servono file esterni) */
         .fog-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -61,38 +58,15 @@
         }
 
         header p { 
-            font-style: italic; 
-            color: #d1d1d1; 
-            position: relative;
-            z-index: 10;
-            font-size: 1.2rem;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+            font-style: italic; color: #d1d1d1; position: relative; z-index: 10; font-size: 1.2rem;
         }
 
-        main {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
+        main { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
 
-        h2 { 
-            color: #c9a24d; 
-            border-bottom: 1px solid #c9a24d;
-            display: inline-block;
-            padding-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: normal;
-        }
+        h2 { color: #c9a24d; border-bottom: 1px solid #c9a24d; display: inline-block; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; font-weight: normal; }
 
-        .hub {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
+        .hub { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
 
-        /* CARD CON PIETRIFICAZIONE PROGRESSIVA */
         .card {
             background: rgba(21, 24, 33, 0.9);
             padding: 2.5rem;
@@ -106,25 +80,11 @@
             border-color: #999;
             background: #1e212a;
             transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
-            /* La card sembra diventare di pietra */
             filter: grayscale(1) contrast(1.2);
         }
 
-        .card h3 { 
-            color: #9db4ff; 
-            margin-top: 0; 
-            font-size: 1.4rem;
-            transition: color 0.4s;
-        }
-
-        .card:hover h3 {
-            color: #ffffff !important;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        .card p { color: #bbb; transition: color 0.4s; }
-        .card:hover p { color: #888; }
+        .card h3 { color: #9db4ff; margin-top: 0; font-size: 1.4rem; transition: color 0.4s; }
+        .card:hover h3 { color: #ffffff !important; }
 
         .card a {
             display: inline-block;
@@ -140,51 +100,28 @@
             transition: all 0.3s;
         }
 
-        .card a:hover {
-            background: #c9a24d;
-            color: #000;
-        }
+        .card a:hover { background: #c9a24d; color: #000; }
 
-        /* Se una card è attiva, tutto il body si "pietrifica" leggermente */
-        body:has(.card:hover) header {
-            filter: grayscale(0.5) sepia(0.2);
-            opacity: 0.8;
-        }
-
-        footer {
-            text-align: center;
-            padding: 5rem 2rem;
-            font-size: 0.8rem;
-            color: #444;
-            background: #0a0c10;
-            letter-spacing: 2px;
-        }
+        footer { text-align: center; padding: 5rem 2rem; font-size: 0.8rem; color: #444; background: #0a0c10; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="fog-container">
-        <div class="fog-layer"></div>
-    </div>
+    <div class="fog-container"><div class="fog-layer"></div></div>
     <h1 id="main-title">ELYNDRA</h1>
     <p>Dall'ombra di Aetherys verso l'ignoto di Nyxoria</p>
 </header>
 
 <main>
     <h2>L'Ultima Spedizione</h2>
-    <p>
-        Il mondo di <strong>Thyrael</strong> sta morendo sotto il peso della Litostasi. 
-        Mentre il 90% delle terre è ormai ridotto a un giardino di statue silenti, 
-        l'ultima speranza risiede oltre l'oceano, tra le foreste mutanti di Nyxoria.
-    </p>
+    <p>Il mondo di <strong>Thyrael</strong> sta morendo sotto il peso della Litostasi. L'ultima speranza risiede oltre l'oceano.</p>
 
     <div class="hub">
         <div class="card">
             <h3>📖 Diario di Campagna</h3>
             <p>Le memorie dei superstiti e il resoconto delle sessioni. Ogni passo verso Kha'Ruun viene scritto qui.</p>
-            <a href="diario.html">Leggi Memorie</a>
-        </div>
+            <a href="diario.html">Leggi Memorie</a> </div>
 
         <div class="card">
             <h3>📚 Wiki di Elyndra</h3>
@@ -200,49 +137,27 @@
     </div>
 </main>
 
-<footer>
-    ELYNDRA © CAMPAGNA D&D 5E – "IL SILENZIO NON È LA FINE"
-</footer>
+<footer>ELYNDRA © CAMPAGNA D&D 5E</footer>
 
 <script>
-    // EFFETTO TESTO LITOSTASI (GLITCH)
     const elements = document.querySelectorAll('.card h3, header h1');
-
     elements.forEach(el => {
         const originalText = el.innerText;
         let interval = null;
-
         el.addEventListener('mouseenter', event => {
             let iteration = 0;
             clearInterval(interval);
-
             interval = setInterval(() => {
-                event.target.innerText = event.target.innerText
-                    .split("")
-                    .map((letter, index) => {
-                        if(index < iteration) {
-                            return originalText[index];
-                        }
-                        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░🜏🜓";
-                        return chars[Math.floor(Math.random() * chars.length)];
-                    })
-                    .join("");
-
-                if(iteration >= originalText.length) { 
-                    clearInterval(interval);
-                }
-                
-                iteration += 1 / 3;
+                event.target.innerText = event.target.innerText.split("").map((l, i) => {
+                    if(i < iteration) return originalText[i];
+                    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░🜏🜓"[Math.floor(Math.random() * 32)];
+                }).join("");
+                if(iteration >= originalText.length) clearInterval(interval);
+                iteration += 1/3;
             }, 30);
         });
-
-        el.addEventListener('mouseleave', () => {
-            clearInterval(interval);
-            el.innerText = originalText;
-        });
+        el.addEventListener('mouseleave', () => { clearInterval(interval); el.innerText = originalText; });
     });
 </script>
-
 </body>
 </html>
-

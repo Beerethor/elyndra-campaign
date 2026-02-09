@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wiki di Elyndra – Archivio delle Voci Immobili</title>
+    <title>Wiki di Elyndra – Archivio Completo</title>
     <style>
         body { margin: 0; font-family: 'Georgia', serif; background: #0a0c10; color: #d1d1d1; line-height: 1.6; overflow-x: hidden; }
         
-        /* ANIMAZIONE GLITCH (Litostasi) */
         @keyframes litostasi-vibration {
             0% { text-shadow: 1px 0 #c9a24d; transform: translateX(0); }
             50% { text-shadow: -1px 0 #444; transform: translateX(0.5px); opacity: 0.9; }
@@ -15,177 +14,138 @@
         }
 
         header {
-            position: relative;
             background: linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
             url('img/sfondo-elyndra.png') center/cover no-repeat;
-            padding: 4rem 2rem; text-align: center; border-bottom: 1px solid #c9a24d;
+            padding: 6rem 2rem; text-align: center; border-bottom: 2px solid #c9a24d;
         }
 
-        header h1 { 
-            font-size: 3.5rem; color: #fff; letter-spacing: 5px; text-transform: uppercase;
-            animation: litostasi-vibration 5s infinite;
-        }
+        header h1 { font-size: 3.5rem; color: #fff; letter-spacing: 5px; text-transform: uppercase; animation: litostasi-vibration 5s infinite; }
 
-        nav { padding: 1rem; text-align: center; background: #11141b; border-bottom: 1px solid #222; }
-        nav a { color: #c9a24d; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
-        nav a:hover { text-shadow: 0 0 10px #c9a24d; }
+        nav { padding: 1rem; text-align: center; background: #11141b; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; }
+        nav a { color: #c9a24d; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin: 0 15px; }
 
-        main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+        main { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
         
-        .wiki-section { margin-bottom: 4rem; }
-        .wiki-section h2 { 
-            color: #c9a24d; border-bottom: 1px solid #333; padding-bottom: 10px; 
-            text-transform: uppercase; letter-spacing: 3px; 
-        }
+        .wiki-section { margin-bottom: 6rem; scroll-margin-top: 80px; }
+        .wiki-section h2 { color: #c9a24d; border-bottom: 1px solid #333; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; font-size: 2rem; }
 
-        /* CONTINENTI */
-        .continent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
-        .continent-card { background: #11141b; border: 1px solid #333; overflow: hidden; transition: 0.3s; }
-        .continent-card:hover { border-color: #c9a24d; }
-        .continent-img { width: 100%; height: 200px; object-fit: cover; filter: grayscale(50%); transition: 0.5s; }
-        .continent-card:hover .continent-img { filter: grayscale(0%); transform: scale(1.05); }
-        .continent-info { padding: 1.5rem; }
+        .content-box { background: rgba(20, 25, 35, 0.7); padding: 2rem; border-left: 3px solid #c9a24d; margin-top: 20px; }
+        
+        /* Geografia e Storia */
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .info-card { background: #11141b; border: 1px solid #222; padding: 1.5rem; }
+        .info-card h3 { color: #fff; border-bottom: 1px solid #c9a24d; padding-bottom: 5px; }
 
-        /* FAZIONI */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .card { background: rgba(21, 24, 33, 0.8); border: 1px solid #222; display: flex; flex-direction: column; transition: 0.3s; }
-        .card:hover { border-color: #c9a24d; transform: translateY(-5px); }
-
-        .leader-image { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid #c9a24d; }
+        /* Fazioni Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; margin-top: 2rem; }
+        .card { background: rgba(21, 24, 33, 0.9); border: 1px solid #222; display: flex; flex-direction: column; }
+        .leader-image { width: 100%; height: 200px; object-fit: cover; filter: sepia(40%); }
         .card-content { padding: 1.5rem; }
 
-        .faction-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .faction-logo { 
-            width: 50px; height: 50px; object-fit: contain; 
-            border-radius: 50%; background: #000; border: 1px solid #c9a24d;
-            transition: 0.3s;
-        }
-        .card:hover .faction-logo { animation: litostasi-vibration 0.3s infinite; }
-
-        .card h3 { margin: 0; color: #fff; font-size: 1.2rem; }
-        .tag { font-style: italic; color: #c9a24d; font-size: 0.8rem; display: block; margin-bottom: 1rem; text-transform: uppercase; }
-        .leader-info { background: rgba(201, 162, 77, 0.1); padding: 10px; border-radius: 4px; margin-top: auto; font-size: 0.9rem; border-left: 2px solid #c9a24d; }
+        .litostasi-table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #05070a; }
+        .litostasi-table th, .litostasi-table td { border: 1px solid #333; padding: 12px; text-align: left; }
+        .litostasi-table th { color: #c9a24d; }
 
         footer { text-align: center; padding: 4rem; color: #444; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-<nav><a href="index.html">← Torna all'Ingresso</a></nav>
-
 <header>
     <h1>Wiki di Elyndra</h1>
-    <p>Dalle ceneri di Aetherys al respiro di Nyxoria</p>
+    <p>L'Archivio delle Voci Immobili</p>
 </header>
 
+<nav>
+    <a href="index.html">← Home</a>
+    <a href="#storia">Storia</a>
+    <a href="#geografia">Geografia</a>
+    <a href="#litostasi">Litostasi</a>
+    <a href="#fazioni">Fazioni</a>
+</nav>
+
 <main>
-    <section class="wiki-section">
-        <h2>I Continenti</h2>
-        <div class="continent-grid">
-            <div class="continent-card">
-                <img src="img/continente-aetherys.png" alt="Aetherys" class="continent-img">
-                <div class="continent-info">
-                    <h3>Aetherys</h3>
-                    <p>Il vecchio mondo. Un guscio di ricordi consumato dalla Litostasi. Qui il tempo si è fermato.</p>
-                </div>
+
+    <section id="storia" class="wiki-section">
+        <h2>Storia del Vecchio Mondo</h2>
+        <div class="content-box">
+            <p>Un tempo, <strong>Aetherys</strong> era il cuore pulsante della civiltà. Governata dalle Grandi Casate dei Draghi, era un mondo di magia, commercio e arte. Tutto finì con il <strong>Primo Battito</strong>, un evento cataclismatico di origine ignota che sprigionò la polvere grigia.</p>
+            <p>In soli cinquant'anni, le città più floride come <strong>Oakhaven</strong> e <strong>Lumenia</strong> si sono trasformate in cimiteri di statue. Ciò che resta dell'umanità si è rifugiato sui moli di Porto Althamar, l'ultimo lembo di terra prima dell'Oceano di Nebbia, sognando una via di fuga verso il continente promesso: Nyxoria.</p>
+        </div>
+    </section>
+
+    <section id="geografia" class="wiki-section">
+        <h2>Geografia e Luoghi</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Aetherys (Il Continente di Pietra)</h3>
+                <p>Una distesa silenziosa. Le foreste sono immobili, gli animali sono statue di granito. La <strong>Polvere Grigia</strong> cade costantemente come neve, rendendo l'aria irrespirabile per lunghi periodi.</p>
             </div>
-            <div class="continent-card">
-                <img src="img/continente-nyxoria.png" alt="Nyxoria" class="continent-img">
-                <div class="continent-info">
-                    <h3>Nyxoria</h3>
-                    <p>La terra del mutamento. Una giungla bioluminescente dove la vita è troppo veloce per restare immobile.</p>
-                </div>
+            <div class="info-card">
+                <h3>Nyxoria (Il Continente Pulsante)</h3>
+                <p>L'opposto di Aetherys. Una terra primordiale dove la vita evolve a ritmi innaturali. Piante bioluminescenti, fiumi di linfa azzurra e creature mutanti chiamate <strong>Khaari</strong>. Qui, nulla rimane fermo abbastanza a lungo da essere pietrificato.</p>
+            </div>
+            <div class="info-card">
+                <h3>Porto Althamar</h3>
+                <p>L'ultima città libera. Costruita su palafitte e navi incatenate, è un groviglio di mercati neri e basi militari. È il punto di partenza dell'Ultima Spedizione.</p>
+            </div>
+            <div class="info-card">
+                <h3>L'Oceano di Nebbia</h3>
+                <p>Il varco che separa i due mondi. Una distesa d'acqua perennemente coperta da una coltre grigia che nasconde creature antiche e correnti magiche instabili.</p>
             </div>
         </div>
     </section>
 
-    <section class="wiki-section">
-        <h2>Le Grandi Casate</h2>
+    <section id="litostasi" class="wiki-section">
+        <h2>Dossier: La Litostasi</h2>
+        <div class="content-box">
+            <p>La Litostasi non è una malattia, ma una transizione molecolare. La carne diventa pietra, ma l'anima rimane intrappolata all'interno in uno stato di coscienza sospesa.</p>
+            <table class="litostasi-table">
+                <tr><th>Stadio</th><th>Sintomi</th></tr>
+                <tr><td>1. Brivido</td><td>Velocità ridotta, estremità fredde.</td></tr>
+                <tr><td>2. Rigidità</td><td>Difficoltà nei movimenti, svantaggio nei test fisici.</td></tr>
+                <tr><td>3. Crepatura</td><td>La pelle diventa grigia e fragile (Vulnerabilità Contundente).</td></tr>
+                <tr><td>4. Stasi Parziale</td><td>Restrained. Gli organi interni iniziano a indurirsi.</td></tr>
+                <tr><td>5. Pietrificazione</td><td>Stato di "Morte Viva". Coscienza presente ma corpo immobile.</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="fazioni" class="wiki-section">
+        <h2>Le Grandi Fazioni</h2>
         <div class="grid">
-            
             <div class="card">
-                <img src="img/valerius.png" alt="Valerius Thorne" class="leader-image">
+                <img src="img/valerius.png" alt="Valerius" class="leader-image">
                 <div class="card-content">
-                    <div class="faction-header">
-                        <img src="img/logo-concordato.png" class="faction-logo" alt="Logo">
-                        <h3>Concordato della Scaglia Antica</h3>
-                    </div>
-                    <span class="tag">Ordine, Tradizione, Potere</span>
-                    <p>I signori della flotta e custodi dell'antico sangue dei draghi.</p>
-                    <div class="leader-info"><strong>Leader:</strong> Valerius Thorne</div>
+                    <h3>Concordato della Scaglia Antica</h3>
+                    <span class="tag">Militari • Ordine • Valerius Thorne</span>
+                    <p>Custodi dell'antica legge dei draghi. Cercano di conquistare Nyxoria per ricostruire l'impero.</p>
                 </div>
             </div>
-
             <div class="card">
-                <img src="img/elara.png" alt="Elara Veridiana" class="leader-image">
+                <img src="img/elara.png" alt="Elara" class="leader-image">
                 <div class="card-content">
-                    <div class="faction-header">
-                        <img src="img/logo-circolo.png" class="faction-logo" alt="Logo">
-                        <h3>Circolo della Radice Profonda</h3>
-                    </div>
-                    <span class="tag">Natura, Equilibrio, Adattamento</span>
-                    <p>Studiano il legame tra la stasi di Aetherys e la vita di Nyxoria.</p>
-                    <div class="leader-info"><strong>Leader:</strong> Elara Veridiana</div>
+                    <h3>Circolo della Radice Profonda</h3>
+                    <span class="tag">Druidi • Alchimia • Elara Veridiana</span>
+                    <p>Studiano la simbiosi tra pietra e linfa. Credono che la mutazione sia l'unico modo per sopravvivere.</p>
                 </div>
             </div>
-
             <div class="card">
-                <img src="img/kaelen.png" alt="Mastro Kaelen" class="leader-image">
+                <img src="img/kazul.png" alt="Kazul" class="leader-image">
                 <div class="card-content">
-                    <div class="faction-header">
-                        <img src="img/logo-archivio.png" class="faction-logo" alt="Logo">
-                        <h3>Archivio delle Voci Immobili</h3>
-                    </div>
-                    <span class="tag">Conoscenza, Memoria, Storia</span>
-                    <p>Estrare segreti dalle menti pietrificate per non perdere il passato.</p>
-                    <div class="leader-info"><strong>Leader:</strong> Mastro Kaelen</div>
+                    <h3>Tribù Khaari</h3>
+                    <span class="tag">Nativi • Istinto • Matriarca Ka'Zul</span>
+                    <p>Gli abitanti di Nyxoria. Difendono il cuore pulsante della giungla dagli invasori di Aetherys.</p>
                 </div>
             </div>
-
-            <div class="card">
-                <img src="img/jax.png" alt="Capitano Jax" class="leader-image">
-                <div class="card-content">
-                    <div class="faction-header">
-                        <img src="img/logo-patto.png" class="faction-logo" alt="Logo">
-                        <h3>Patto delle Ceneri Erranti</h3>
-                    </div>
-                    <span class="tag">Sopravvivenza, Commercio, Mare</span>
-                    <p>I lupi di mare che mantengono le rotte tra i moli di Porto Althamar.</p>
-                    <div class="leader-info"><strong>Leader:</strong> Capitano Jax</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/vesper.png" alt="L'Oratore Vesper" class="leader-image">
-                <div class="card-content">
-                    <div class="faction-header">
-                        <img src="img/logo-velo.png" class="faction-logo" alt="Logo">
-                        <h3>Velo Cremisi</h3>
-                    </div>
-                    <span class="tag">Fede, Fuoco, Purificazione</span>
-                    <p>Credono che la Litostasi sia una punizione divina necessaria.</p>
-                    <div class="leader-info"><strong>Leader:</strong> L'Oratore Vesper</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/kazul.png" alt="Matriarca Ka'Zul" class="leader-image">
-                <div class="card-content">
-                    <div class="faction-header">
-                        <img src="img/logo-khaari.png" class="faction-logo" alt="Logo">
-                        <h3>Tribù Khaari</h3>
-                    </div>
-                    <span class="tag">Nyxoria, Istinto, Mutazione</span>
-                    <p>Gli abitanti nativi delle giungle mutanti di Nyxoria.</p>
-                    <div class="leader-info"><strong>Leader:</strong> Matriarca Ka'Zul</div>
-                </div>
-            </div>
-
         </div>
     </section>
+
 </main>
 
-<footer>ELYNDRA • ARCHIVIO DELLE VOCI IMMOBILI • 2026</footer>
+<footer>
+    ARCHIVIO DELLE VOCI IMMOBILI • 2026 • ELYNDRA
+</footer>
 
 </body>
 </html>

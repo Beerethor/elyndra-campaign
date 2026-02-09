@@ -1,214 +1,247 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wiki di Elyndra – Archivio delle Voci Immobili</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elyndra - Enciclopedia del Mondo</title>
     <style>
-        body { margin: 0; font-family: 'Georgia', serif; background: #0a0c10; color: #d1d1d1; line-height: 1.6; overflow-x: hidden; }
-        
-        @keyframes litostasi-vibration {
-            0% { text-shadow: 1px 0 #c9a24d; transform: translateX(0); }
-            50% { text-shadow: -1px 0 #444; transform: translateX(0.5px); opacity: 0.9; }
-            100% { text-shadow: 1px 0 #c9a24d; transform: translateX(0); }
+        :root {
+            --gold: #c9a24d;
+            --dark-bg: #05070a;
+            --card-bg: #11141b;
+            --text-dim: #a0a0a0;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: #e0e0e0;
+            line-height: 1.6;
         }
 
         header {
-            background: linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
-            url('img/sfondo-elyndra.png') center/cover no-repeat;
-            padding: 6rem 2rem; text-align: center; border-bottom: 2px solid #c9a24d;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/header-wiki.jpg') center/cover;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
         }
 
-        header h1 { font-size: 3.5rem; color: #fff; letter-spacing: 5px; text-transform: uppercase; animation: litostasi-vibration 5s infinite; }
+        header h1 {
+            font-size: 3rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+        }
 
-        nav { padding: 1rem; text-align: center; background: #11141b; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #222; }
-        nav a { color: #c9a24d; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin: 0 15px; }
+        nav {
+            background: #000;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-        main { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
-        
-        .wiki-section { margin-bottom: 6rem; scroll-margin-top: 80px; }
-        .wiki-section h2 { color: #c9a24d; border-bottom: 1px solid #333; padding-bottom: 10px; text-transform: uppercase; letter-spacing: 3px; font-size: 2rem; }
+        nav a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
 
-        /* Geografia */
-        .continent-display { margin-top: 30px; border: 1px solid #333; background: #11141b; }
-        .continent-header { width: 100%; height: 350px; object-fit: cover; cursor: zoom-in; border-bottom: 2px solid #c9a24d; transition: 0.3s; }
-        .continent-header:hover { opacity: 0.8; }
-        .continent-body { padding: 2rem; }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
 
-        /* Città */
-        .city-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
-        .city-card { background: #05070a; padding: 1.5rem; border: 1px solid #222; border-top: 3px solid #c9a24d; }
-        .city-card h4 { color: #fff; margin: 0 0 10px 0; text-transform: uppercase; }
-        .stasis-status { font-size: 0.75rem; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 10px; }
-        .status-critical { color: #ff4d4d; }
-        .status-warning { color: #ffa500; }
-        .status-safe { color: #00ff00; }
+        h2 {
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 10px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
 
-        /* Fazioni Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; margin-top: 2rem; }
-        .card { background: rgba(21, 24, 33, 0.9); border: 1px solid #222; display: flex; flex-direction: column; overflow: hidden; }
-        .leader-image { width: 100%; height: 230px; object-fit: cover; filter: sepia(30%); border-bottom: 1px solid #c9a24d; }
-        .card-content { padding: 1.5rem; }
-        .faction-meta { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .faction-logo { width: 50px; height: 50px; object-fit: contain; border: 1px solid #c9a24d; border-radius: 50%; padding: 3px; background: #000; }
+        /* GRIGLIA FAZIONI */
+        .factions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
 
-        /* MODALE */
-        .modal { display: none; position: fixed; z-index: 1000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-        .modal-content { margin: auto; display: block; width: 85%; max-width: 1100px; border: 1px solid #c9a24d; }
-        .close { position: absolute; top: 15px; right: 35px; color: #fff; font-size: 40px; cursor: pointer; }
+        .faction-btn {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
 
-        footer { text-align: center; padding: 4rem; color: #444; font-size: 0.8rem; border-top: 1px solid #1a1d24; }
+        .faction-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(201, 162, 77, 0.1);
+        }
+
+        .faction-banner {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .faction-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .faction-content h3 {
+            margin: 0 0 10px 0;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .faction-content p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        .btn-label {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .info-section {
+            background: #0a0c10;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid #1a1a1a;
+            color: #444;
+        }
     </style>
 </head>
 <body>
 
-<div id="imageModal" class="modal" onclick="this.style.display='none'">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="imgFull">
-</div>
+<header>
+    <h1>Archivio di Elyndra</h1>
+    <p>Conoscenza e segreti del Nuovo Mondo</p>
+</header>
 
 <nav>
-    <a href="index.html">← Home</a>
-    <a href="#litostasi">Litostasi</a>
-    <a href="#aetherys">Aetherys</a>
-    <a href="#nyxoria">Nyxoria</a>
+    <a href="index.html">Torna al Portale</a>
+    <a href="#mondo">Il Mondo</a>
     <a href="#fazioni">Fazioni</a>
+    <a href="#manuale">Regole PokeRole</a>
 </nav>
 
-<main>
-
-    <section id="litostasi" class="wiki-section">
-        <h2>La Litostasi</h2>
-        <div style="background: rgba(20, 25, 35, 0.7); padding: 2rem; border-left: 3px solid #c9a24d;">
-            <p>La Litostasi è il processo di pietrificazione molecolare che sta consumando il mondo di Elyndra. Non è una semplice morte: è una sospensione della coscienza. Chi ne viene colpito percepisce il tempo rallentare mentre la pelle assume la durezza del granito e il calore vitale svanisce. Negli stadi finali, il soggetto diventa una "Voce Immobile", intrappolata nel proprio corpo pietrificato.</p>
-        </div>
+<div class="container">
+    
+    <section id="mondo" class="info-section">
+        <h2>Il Mondo: Aetherys e Nyxoria</h2>
+        <p>Il mondo di Elyndra è diviso tra il tragico passato di <strong>Aetherys</strong>, un continente morente vittima della <em>Litostasi</em>, e la promessa selvaggia di <strong>Nyxoria</strong>, una terra dove la vita è così densa e pulsante da risultare quasi aliena.</p>
+        <p>Al centro di tutto sorge <strong>Porto Althamar</strong>, l'ultima città libera, un crocevia di disperazione e speranza dove le grandi fazioni si preparano per l'Ultima Spedizione.</p>
     </section>
 
-    <section id="aetherys" class="wiki-section">
-        <h2>Aetherys: Il Continente Silente</h2>
-        <div class="continent-display">
-            <img src="img/continente-aetherys.png" class="continent-header" onclick="openModal(this.src)" alt="Mappa Aetherys">
-            <div class="continent-body">
-                <p>Il vecchio mondo. Un tempo rigoglioso, oggi è un deserto di polvere grigia e statue. La propagazione della Litostasi qui è quasi totale.</p>
-                <h3>Anagrafe delle Città Perdute</h3>
-                <div class="city-grid">
-                    <div class="city-card">
-                        <span class="stasis-status status-critical">Stasi: 99%</span>
-                        <h4>Oakhaven</h4>
-                        <p>L'ex capitale. Un labirinto di giardini ora cristallizzati nel tempo. È il fulcro del "Primo Battito".</p>
-                    </div>
-                    <div class="city-card">
-                        <span class="stasis-status status-critical">Stasi: 92%</span>
-                        <h4>Lumenia</h4>
-                        <p>Città della sapienza. Le sue grandi biblioteche sono ora pilastri di roccia inaccessibili.</p>
-                    </div>
-                    <div class="city-card">
-                        <span class="stasis-status status-warning">Stasi: 65%</span>
-                        <h4>Ironfist Hold</h4>
-                        <p>La roccaforte dei nani. Le miniere sono diventate tombe profonde, ma alcuni livelli inferiori resistono.</p>
-                    </div>
-                    <div class="city-card">
-                        <span class="stasis-status status-safe">Stasi: 12%</span>
-                        <h4>Porto Althamar</h4>
-                        <p>L'ultima scintilla. L'unico porto ancora attivo e base dell'Ultima Spedizione verso Nyxoria.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="nyxoria" class="wiki-section">
-        <h2>Nyxoria: Il Cuore Pulsante</h2>
-        <div class="continent-display">
-            <img src="img/continente-nyxoria.png" class="continent-header" onclick="openModal(this.src)" alt="Mappa Nyxoria">
-            <div class="continent-body">
-                <p>Il nuovo mondo. Una terra dove la vita pulsa con una violenza tale da respingere la pietrificazione. Foreste bioluminescenti e creature mutanti dominano questo territorio selvaggio.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="fazioni" class="wiki-section">
+    <section id="fazioni">
         <h2>Le Grandi Fazioni</h2>
-        <div class="grid">
+        <p>Clicca su una fazione per consultare i dati archiviati, gli obiettivi pubblici e la storia del leader.</p>
+
+        <div class="factions-grid">
             
-            <div class="card">
-                <img src="img/valerius.png" class="leader-image" alt="Valerius">
-                <div class="card-content">
-                    <div class="faction-meta">
-                        <img src="img/logo-concordato.png" class="faction-logo">
-                        <h3>Concordato della Scaglia Antica</h3>
-                    </div>
-                    <p><strong>Leader:</strong> Generale Valerius Thorne. Ordine militare che mira alla conquista di Nyxoria per ricostruire l'antico impero.</p>
+            <a href="fazioni/concordato.html" class="faction-btn">
+                <div class="faction-banner" style="background-image: url('img/concordato-bg.png');"></div>
+                <div class="faction-content">
+                    <h3>Concordato della Scaglia Antica</h3>
+                    <p>L'ordine militare imperiale che presiede la difesa di Porto Althamar.</p>
+                    <span class="btn-label">Apri Archivio</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="card">
-                <img src="img/elara.png" class="leader-image" alt="Elara">
-                <div class="card-content">
-                    <div class="faction-meta">
-                        <img src="img/logo-circolo.png" class="faction-logo">
-                        <h3>Circolo della Radice Profonda</h3>
-                    </div>
-                    <p><strong>Leader:</strong> Elara Veridiana. Alchimisti e druidi che studiano la simbiosi con la flora bioluminescente.</p>
+            <a href="fazioni/circolo.html" class="faction-btn">
+                <div class="faction-banner" style="background-image: url('img/circolo-bg.png');"></div>
+                <div class="faction-content">
+                    <h3>Circolo della Radice Profonda</h3>
+                    <p>Druidi e alchimisti che studiano la simbiosi con la flora di Nyxoria.</p>
+                    <span class="btn-label">Apri Archivio</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="card">
-                <img src="img/kaelen.png" class="leader-image" alt="Kaelen">
-                <div class="card-content">
-                    <div class="faction-meta">
-                        <img src="img/logo-archivio.png" class="faction-logo">
-                        <h3>Archivio delle Voci Immobili</h3>
-                    </div>
-                    <p><strong>Leader:</strong> Mastro Kaelen. Studiosi dedicati al recupero delle memorie dalle statue di Aetherys.</p>
+            <a href="fazioni/archivio.html" class="faction-btn">
+                <div class="faction-banner" style="background-image: url('img/archivio-bg.png');"></div>
+                <div class="faction-content">
+                    <h3>Archivio delle Voci Immobili</h3>
+                    <p>Custodi della memoria che estraggono segreti dalle statue di pietra.</p>
+                    <span class="btn-label">Apri Archivio</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="card">
-                <img src="img/jax.png" class="leader-image" alt="Jax">
-                <div class="card-content">
-                    <div class="faction-meta">
-                        <img src="img/logo-patto.png" class="faction-logo">
-                        <h3>Patto delle Ceneri Erranti</h3>
-                    </div>
-                    <p><strong>Leader:</strong> Capitano Jax. La coalizione di mercanti e marinai che controlla Porto Althamar.</p>
+            <a href="fazioni/patto.html" class="faction-btn">
+                <div class="faction-banner" style="background-image: url('img/patto-bg.png');"></div>
+                <div class="faction-content">
+                    <h3>Patto delle Ceneri Erranti</h3>
+                    <p>Mercanti e lupi di mare che controllano le rotte nella nebbia.</p>
+                    <span class="btn-label">Apri Archivio</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="card">
-                <img src="img/vesper.png" class="leader-image" alt="Vesper">
-                <div class="card-content">
-                    <div class="faction-meta">
-                        <img src="img/logo-velo.png" class="faction-logo">
-                        <h3>Velo Cremisi</h3>
-                    </div>
-                    <p><strong>Leader:</strong> Oratore Vesper. Un culto religioso fanatico che accetta la Litostasi come ascesa divina.</p>
+            <a href="fazioni/velo.html" class="faction-btn">
+                <div class="faction-banner" style="background-image: url('img/velo-bg.png');"></div>
+                <div class="faction-content">
+                    <h3>Il Velo Cremisi</h3>
+                    <p>Un culto fanatico che adora la Litostasi come ascesa spirituale.</p>
+                    <span class="btn-label">Apri Archivio</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="card">
-                <img src="img/kazul.png" class="leader-image" alt="Kazul">
-                <div class="card-content">
-                    <div class="faction-meta">
-                        <img src="img/logo-khaari.png" class="faction-logo">
-                        <h3>Le Tribù Khaari</h3>
-                    </div>
-                    <p><strong>Leader:</strong> Matriarca Ka'Zul. I nativi di Nyxoria, protettori feroci del continente pulsante.</p>
+            <a href="fazioni/khaari.html" class="faction-btn">
+                <div class="faction-banner" style="background-image: url('img/khaari-bg.png');"></div>
+                <div class="faction-content">
+                    <h3>Tribù Khaari</h3>
+                    <p>I nativi di Nyxoria, protettori feroci del cuore della giungla.</p>
+                    <span class="btn-label">Apri Archivio</span>
                 </div>
-            </div>
+            </a>
 
         </div>
     </section>
-</main>
 
-<footer>ELYNDRA • ARCHIVIO DELLE VOCI IMMOBILI • 2026</footer>
+    <section id="manuale" class="info-section" style="margin-top: 60px;">
+        <h2>Note di Gioco (PokeRole)</h2>
+        <p>In questo mondo, i Pokémon sono creature nate dal <em>Flusso Vitale</em>. Alcuni sono stati colpiti dalla Litostasi (Pokémon di tipo Roccia/Acciaio modificati), altri si sono adattati alla giungla di Nyxoria (Varianti Regionali).</p>
+        <ul>
+            <li><strong>Cattura:</strong> Non esistono Pokéball tecnologiche, ma cristalli mnemonici dell'Archivio.</li>
+            <li><strong>Combattimento:</strong> Basato sul sistema PokeRole 2.0.</li>
+        </ul>
+    </section>
 
-<script>
-    function openModal(src) {
-        document.getElementById("imageModal").style.display = "block";
-        document.getElementById("imgFull").src = src;
-    }
-</script>
+</div>
+
+<footer>
+    &copy; 2026 ELYNDRA PROJECT - Sistema PokeRole applicato al Dark Fantasy
+</footer>
 
 </body>
 </html>

@@ -10,20 +10,18 @@
             background: #05070a; color: #e0e0e0; line-height: 1.5;
         }
 
-        /* ANIMAZIONE GLITCH MASTER (Più aggressiva) */
+        /* ANIMAZIONE GLITCH MASTER */
         @keyframes master-glitch {
-            0% { text-shadow: 1px 0 #ff0000; transform: translateX(0); }
+            0% { text-shadow: 1px 0 #ff4d4d; transform: translateX(0); }
             20% { text-shadow: -1px 0 #c9a24d; transform: translateX(1px); }
-            40% { opacity: 0.8; transform: skewX(10deg); }
-            60% { text-shadow: 1px 0 #ff0000; transform: translateX(-1px); }
+            50% { opacity: 0.8; }
             100% { text-shadow: -1px 0 #c9a24d; transform: translateX(0); }
         }
 
         .glitch-alert {
             color: #ff4d4d;
-            animation: master-glitch 0.2s infinite;
+            animation: master-glitch 0.3s infinite;
             font-weight: bold;
-            text-transform: uppercase;
         }
 
         header {
@@ -32,107 +30,122 @@
             display: flex; justify-content: space-between; align-items: center;
         }
 
-        nav a { color: #c9a24d; text-decoration: none; font-size: 0.9rem; }
+        nav a { color: #c9a24d; text-decoration: none; font-size: 0.9rem; border: 1px solid #c9a24d; padding: 5px 10px; transition: 0.3s; }
+        nav a:hover { background: #c9a24d; color: #000; }
 
-        main { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        main { padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
 
         .panel {
             background: #1a1d24; border: 1px solid #333;
-            padding: 1.5rem; border-radius: 4px;
+            padding: 1.5rem; border-radius: 4px; position: relative;
         }
 
         h2 { 
-            color: #c9a24d; border-bottom: 1px solid #c9a24d; 
-            padding-bottom: 5px; margin-top: 0;
-            text-transform: uppercase; letter-spacing: 2px;
+            color: #c9a24d; border-bottom: 1px solid #444; 
+            padding-bottom: 10px; margin-top: 0;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem;
         }
 
-        /* Tabelle Master */
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #333; padding: 8px; text-align: left; font-size: 0.9rem; }
+        /* Tabelle e Liste */
+        .mechanic-box {
+            background: rgba(0,0,0,0.4); padding: 15px;
+            border-left: 4px solid #c9a24d; margin-bottom: 15px;
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
         th { background: #222; color: #c9a24d; }
 
-        .monster-row:hover td { 
-            background: rgba(201, 162, 77, 0.1); 
-            animation: master-glitch 0.5s infinite;
+        .level-badge {
+            display: inline-block; background: #c9a24d; color: #000;
+            padding: 2px 8px; font-weight: bold; border-radius: 3px; font-size: 0.7rem;
         }
 
-        .mechanic-box {
-            background: rgba(0,0,0,0.3); padding: 10px;
-            border-left: 3px solid #ff4d4d; margin-top: 10px;
+        .img-placeholder {
+            width: 100%; height: 150px; background: #111; border: 1px dashed #444;
+            display: flex; align-items: center; justify-content: center; color: #444; margin: 10px 0;
         }
 
-        footer { text-align: center; padding: 2rem; color: #444; font-size: 0.8rem; }
+        footer { text-align: center; padding: 2rem; color: #444; font-size: 0.8rem; border-top: 1px solid #222; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Console del Master</h1>
-    <nav><a href="index.html">← Esci dalla Sessione</a></nav>
+    <h1>Console del Narratore</h1>
+    <nav><a href="index.html">TORNA ALL'ARCHIVIO</a></nav>
 </header>
 
 <main>
     <section class="panel">
-        <h2>Meccanica: <span class="glitch-alert">Litostasi</span></h2>
+        <h2>Meccanica Base: <span class="glitch-alert">Litostasi</span></h2>
+        <p>Ogni ora trascorsa in zone contaminate richiede un <strong>TS su Costituzione</strong>.</p>
         <div class="mechanic-box">
-            <strong>Effetto Accumulo:</strong> Ogni volta che un giocatore tocca un oggetto "Pietrificato" senza protezione:
+            <strong>Difficoltà (CD):</strong>
             <ul>
-                <li><strong>1-2 Accumuli:</strong> Brividi, velocità ridotta del 10%.</li>
-                <li><strong>3-4 Accumuli:</strong> Gli arti iniziano a indurirsi. Svantaggio alle prove di Destrezza.</li>
-                <li><strong>5+ Accumuli:</strong> <span class="glitch-alert">PIETRIFICAZIONE TOTALE</span> (Morte del PG).</li>
+                <li>Zona Periferica: <strong>CD 12</strong></li>
+                <li>Zona Avanzata: <strong>CD 15</strong></li>
+                <li>Nucleo della Litostasi: <strong>CD 18+</strong></li>
             </ul>
         </div>
-        <p><em>Nota: Solo la linfa di Nyxoria può rallentare il processo.</em></p>
-    </section>
-
-    <section class="panel">
-        <h2>Bestiario di Sessione</h2>
+        <strong>Fallimenti Cumulativi:</strong>
         <table>
-            <thead>
-                <tr>
-                    <th>Creatura</th>
-                    <th>Pericolo</th>
-                    <th>Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="monster-row">
-                    <td>Ombra di Pietra</td>
-                    <td>Medio</td>
-                    <td>Invisibile tra le statue di Aetherys.</td>
-                </tr>
-                <tr class="monster-row">
-                    <td>Vipera Bioluminescente</td>
-                    <td>Basso</td>
-                    <td>Il veleno causa allucinazioni.</td>
-                </tr>
-                <tr class="monster-row">
-                    <td><span class="glitch-alert">IL GUARDIANO</span></td>
-                    <td>ESTREMO</td>
-                    <td>Non può essere ucciso, solo rallentato.</td>
-                </tr>
-            </tbody>
+            <tr><th>Fallimento</th><th>Effetto</th></tr>
+            <tr><td>1°</td><td>Velocità ridotta di 3 m.</td></tr>
+            <tr><td>2°</td><td>Svantaggio prove Forza e Destrezza.</td></tr>
+            <tr><td>3°</td><td>Vulnerabilità ai danni contundenti.</td></tr>
+            <tr><td>4°</td><td>Pietrificazione incompleta (Restrained).</td></tr>
+            <tr><td>5°</td><td><span class="glitch-alert">PIETRIFICAZIONE TOTALE</span></td></tr>
         </table>
     </section>
 
     <section class="panel">
-        <h2>Verità Nascoste (Spoiler)</h2>
-        <p><strong>L'Anima di Lyra:</strong> Non è al suo terzo ciclo, ma al <span class="glitch-text">millesimo</span>. Ricorda la creazione della Litostasi.</p>
-        <p><strong>Il Concordato:</strong> Valerius Thorne sa che Nyxoria è senziente e sta cercando di "mangiare" la flotta.</p>
+        <h2>Razze e Origini</h2>
+        <p>Tutte le razze ufficiali 5e sono permesse, con note narrative:</p>
+        <ul>
+            <li><strong>Elfi/Nani:</strong> Resistenza naturale alle Zone Statiche.</li>
+            <li><strong>Dragonborn:</strong> Estremamente sensibili alla Litostasi (TS con svantaggio?).</li>
+        </ul>
+        <div class="mechanic-box" style="border-left-color: #9db4ff;">
+            <h3>Razza Opzionale: <span style="color:#9db4ff">Khaari</span></h3>
+            <p><em>I mutanti senzienti di Nyxoria.</em></p>
+            <ul>
+                <li><strong>Bonus:</strong> +2 Saggezza, +1 Costituzione.</li>
+                <li><strong>Figli del Flusso:</strong> Vantaggio al primo TS contro immobilizzazione/rallentamento.</li>
+                <li><strong>Ritmo del Mondo:</strong> 1/giorno ignora <em>restrained</em> o <em>slowed</em> per 1 round.</li>
+            </ul>
+        </div>
+        <div class="img-placeholder">img/razza-khaari.png</div>
     </section>
 
     <section class="panel">
-        <h2>Incontri Casuali</h2>
+        <h2>Archi Narrativi</h2>
         <ul>
-            <li>Un gruppo di statue che sembra essersi mosso di 1 metro.</li>
-            <li>Pioggia di polvere grigia che soffoca il respiro.</li>
-            <li>Un segnale luminoso da una nave del Patto data per dispersa.</li>
+            <li><span class="level-badge">LIVELLI 1–5</span> <strong>L'Imbarco:</strong> Porto Althamar, la traversata e il primo contatto con la polvere grigia.</li>
+            <li><span class="level-badge">LIVELLI 6–10</span> <strong>Nyxoria:</strong> Esplorazione della giungla, scontro tra le fazioni e scoperta dei Khaari.</li>
+            <li><span class="level-badge">LIVELLI 11–15</span> <strong>Verità:</strong> La vera origine della Litostasi e i ricordi di Lyra.</li>
+            <li><span class="level-badge">LIVELLI 16–20</span> <strong>Il Secondo Battito:</strong> Apocalisse o Rinascita totale del mondo.</li>
         </ul>
+        <div class="img-placeholder">img/mappa-progressione.png</div>
+    </section>
+
+    <section class="panel">
+        <h2>Segreti del Narratore</h2>
+        <ul>
+            <li><strong>Lyra:</strong> Non è al suo 3° ciclo, ma oltre il 1000°. La sua anima è legata al primo esperimento che creò la stasi.</li>
+            <li><strong>Il Concordato:</strong> Valerius Thorne ha un frammento di cuore di Drago che lo sta lentamente pietrificando.</li>
+            <li><strong>Il Circolo:</strong> Elara crede che la Litostasi sia una forma di protezione contro qualcosa di peggio che dorme nel sottosuolo.</li>
+        </ul>
+        <div class="img-placeholder">img/segreto-master.png</div>
     </section>
 </main>
 
-<footer>ACCESSO RISERVATO AL NARRATORE • ELYNDRA 2026</footer>
+<footer>
+    SCHERMO DEL MASTER • ELYNDRA RPG • 2026
+</footer>
 
 </body>
 </html>

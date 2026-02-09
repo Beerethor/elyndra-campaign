@@ -127,10 +127,10 @@
                 <p>Memorie frammentate dai moli di Porto Althamar.</p>
             </a>
 
-            <div class="nav-card master-card" onclick="checkMasterPassword()">
+            <a class="nav-card master-card" onclick="checkMasterPassword()">
                 <h2>Schermo Master</h2>
                 <p>Accesso riservato al Narratore. Segreti e Meccaniche.</p>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -138,16 +138,8 @@
         ARCHIVIO DELLE VOCI IMMOBILI &copy; 2026 • ELYNDRA NON DIMENTICA
     </footer>
 
-    <script>
-        function checkMasterPassword() {
-            const password = prompt("Inserisci la chiave dell'Archivista:");
-            if (password === "Litostasi") {
-                window.location.href = "master.html";
-            } else if (password !== null) {
-                alert("Accesso negato. La Litostasi consuma i tuoi tentativi.");
-            }
-        }
-    </script>
+   
 
 </body>
 </html>
+

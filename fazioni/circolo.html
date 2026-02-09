@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circolo della Radice Profonda – Elyndra Wiki</title>
+    <style>
+        body { margin: 0; font-family: 'Georgia', serif; background: #050805; color: #cbd5cb; line-height: 1.6; }
+        
+        .faction-hero {
+            height: 45vh;
+            background: linear-gradient(to bottom, rgba(5,8,5,0.3), rgba(5,8,5,1)), 
+                        url('../img/circolo-bg.png') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            border-bottom: 3px solid #4d8e4d;
+        }
+
+        .faction-hero h1 { font-size: 3.5rem; color: #eefbee; text-transform: uppercase; letter-spacing: 6px; margin: 0; text-shadow: 0 0 15px rgba(0,255,0,0.2); }
+        
+        nav { padding: 1rem; background: #0a110a; text-align: center; border-bottom: 1px solid #1a2e1a; position: sticky; top: 0; z-index: 100; }
+        nav a { color: #4d8e4d; text-decoration: none; margin: 0 15px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        nav a:hover { color: #a4ffa4; }
+
+        main { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+
+        .info-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; margin-bottom: 40px; }
+        
+        .sidebar { background: rgba(10, 20, 10, 0.6); padding: 1.5rem; border: 1px solid #1a2e1a; height: fit-content; }
+        .leader-portrait { width: 100%; border: 1px solid #4d8e4d; margin-bottom: 1rem; filter: saturate(0.8) sepia(10%); }
+        
+        .sidebar h3 { color: #4d8e4d; font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid #1a2e1a; padding-bottom: 5px; margin-top: 1rem; }
+        .sidebar p { font-size: 0.9rem; margin: 5px 0; }
+
+        .content h2 { color: #4d8e4d; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #1a2e1a; padding-bottom: 10px; margin-top: 0; }
+        
+        .detail-box { background: rgba(15, 30, 15, 0.8); border-left: 4px solid #4d8e4d; padding: 2rem; margin-bottom: 2rem; }
+        
+        .motto { font-style: italic; color: #6fb06f; font-size: 1.2rem; text-align: center; margin-bottom: 3rem; display: block; }
+
+        .bioluminescence { color: #a4ffa4; text-shadow: 0 0 5px #4d8e4d; }
+
+        footer { text-align: center; padding: 4rem; color: #2d452d; font-size: 0.8rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../wiki.html">Torna alla Wiki</a>
+</nav>
+
+<div class="faction-hero">
+    <h1>Circolo della Radice Profonda</h1>
+</div>
+
+<main>
+    <span class="motto">"La pietra si sgretola, la linfa scorre eterna."</span>
+
+    <div class="info-grid">
+        <aside class="sidebar">
+            <img src="../img/elara.png" class="leader-portrait" alt="Elara Veridiana">
+            <h3>Leader</h3>
+            <p>Arcidruida Elara Veridiana</p>
+            
+            <h3>Santuario principale</h3>
+            <p>Il Giardino di Vetro (Sotto-livelli di Porto Althamar)</p>
+            
+            <h3>Allineamento Pubblico</h3>
+            <p>Neutrale</p>
+            
+            <h3>Risorse Chiave</h3>
+            <p>Sementi Bioluminescenti, Alchimia Organica, Conoscenza della Flora di Nyxoria</p>
+        </aside>
+        
+        <section class="content">
+            <h2>Obiettivi Pubblici</h2>
+            <div class="detail-box">
+                <p>Il Circolo vede la Litostasi come una malattia del mondo che può essere curata solo attraverso l'adattamento biologico:</p>
+                <ul>
+                    <li><strong>Simbiosi vitale:</strong> Sviluppare innesti vegetali e sieri alchemici estratti da Nyxoria per rallentare o invertire la pietrificazione.</li>
+                    <li><strong>Conservazione delle Specie:</strong> Trasportare semi e embrioni della fauna di Aetherys verso le terre fertili di Nyxoria prima che scompaiano.</li>
+                    <li><strong>Sintonizzazione:</strong> Insegnare ai coloni come interagire con l'ecosistema aggressivo del nuovo continente senza distruggerlo.</li>
+                </ul>
+            </div>
+
+            <h2>Storia della Fazione</h2>
+            <p>
+                Originariamente un gruppo di erboristi e custodi delle selve imperiali, il Circolo si separò dalle istituzioni ufficiali poco dopo il Primo Battito. Mentre il Concordato cercava risposte nell'acciaio, loro si rifugiarono nelle profondità delle ultime foreste, scoprendo che alcune piante rare continuavano a fiorire nutrendosi della stessa polvere grigia che uccideva gli uomini.
+            </p>
+            <p>
+                Elara Veridiana, una giovane studiosa di botanica sacra, divenne il volto del movimento quando riuscì a far germogliare un seme di Nyxoria nel suolo pietrificato di Aetherys. Da quel momento, il Circolo è diventato indispensabile per la spedizione: sono loro a produrre l'ossigeno purificato e i nutrienti necessari per il lungo viaggio attraverso l'Oceano di Nebbia.
+            </p>
+
+            <h2>Alchimia e Mutazione</h2>
+            <p>
+                Il Circolo è noto per i suoi rituali di <span class="bioluminescence">fioritura forzata</span>. Molti dei loro membri presentano mutazioni minori, come vene che brillano di una luce azzurrina o pelle che assume una consistenza simile alla corteccia. Sostengono che questo sia il prezzo necessario per non soccombere alla stasi e per essere "accettati" dal cuore pulsante di Nyxoria al loro arrivo.
+            </p>
+        </section>
+    </div>
+</main>
+
+<footer>
+    CIRCOLO DELLA RADICE PROFONDA • ARCHIVIO ELYNDRA • 2026
+</footer>
+
+</body>
+</html>

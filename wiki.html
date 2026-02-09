@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wiki di Elyndra – Archivio delle Voci Immobili</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: #0a0c10;
+            color: #d1d1d1;
+            line-height: 1.6;
+        }
+
+        header {
+            position: relative;
+            background: 
+                linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
+                url('sfondo-elyndra.png') center/cover no-repeat;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .fog-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .fog-layer {
+            position: absolute;
+            width: 200%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: fogMove 35s linear infinite;
+        }
+
+        @keyframes fogMove {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0%); }
+        }
+
+        nav {
+            padding: 1rem;
+            text-align: center;
+            background: #11141b;
+            border-bottom: 1px solid #222;
+        }
+
+        nav a {
+            color: #c9a24d;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #c9a24d;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            min-height: 60vh;
+        }
+
+        .search-container {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .search-box {
+            background: #151821;
+            border: 1px solid #333;
+            padding: 1rem 1.5rem;
+            width: 80%;
+            max-width: 500px;
+            color: #fff;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.4s;
+        }
+
+        .search-box:focus {
+            border-color: #c9a24d;
+            box-shadow: 0 0 15px rgba(201, 162, 77, 0.2);
+        }
+
+        .wiki-placeholder {
+            text-align: center;
+            padding: 5rem 2rem;
+            border: 1px dashed #333;
+            color: #555;
+        }
+
+        .wiki-placeholder i {
+            display: block;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem;
+            color: #333;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Effetto Glitch sul titolo */
+        #wiki-title { cursor: default; }
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">← Torna all'Archivio Principale</a>
+</nav>
+
+<header>
+    <div class="fog-container"><div class="fog-layer"></div></div>
+    <h1 id="wiki-title">WIKI DI ELYNDRA</h1>
+    <p>Conoscenza frammentata dell'Ultima Spedizione</p>
+</header>
+
+<main>
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Cerca tra i frammenti della memoria..." onkeyup="searchWiki()">
+    </div>
+
+    <div id="wiki-content">
+        <div class="wiki-placeholder">
+            <p>L'archivio è attualmente silente.<br>Le informazioni verranno trascritte non appena i viaggiatori esploreranno le terre di Nyxoria.</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    Proprietà dell'Archivio delle Voci Immobili • Non divulgare ai non iniziati
+</footer>
+
+<script>
+    // Funzione di ricerca (per ora solo estetica o per messaggi a scomparsa)
+    function searchWiki() {
+        let input = document.querySelector('.search-box').value;
+        let placeholder = document.querySelector('.wiki-placeholder p');
+        
+        if(input.length > 0) {
+            placeholder.innerHTML = "Nessun frammento trovato per: <strong>" + input + "</strong>.<br>Forse questa conoscenza è andata perduta nella Litostasi.";
+        } else {
+            placeholder.innerHTML = "L'archivio è attualmente silente.<br>Le informazioni verranno trascritte non appena i viaggiatori esploreranno le terre di Nyxoria.";
+        }
+    }
+
+    // Effetto Glitch testuale
+    const title = document.getElementById('wiki-title');
+    const originalText = title.innerText;
+    let interval = null;
+
+    title.addEventListener('mouseenter', () => {
+        let iteration = 0;
+        clearInterval(interval);
+        interval = setInterval(() => {
+            title.innerText = title.innerText.split("").map((l, i) => {
+                if(i < iteration) return originalText[i];
+                return "ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░🜏🜓"[Math.floor(Math.random() * 32)];
+            }).join("");
+            if(iteration >= originalText.length) clearInterval(interval);
+            iteration += 1/3;
+        }, 30);
+    });
+
+    title.addEventListener('mouseleave', () => {
+        clearInterval(interval);
+        title.innerText = originalText;
+    });
+</script>
+
+</body>
+</html>

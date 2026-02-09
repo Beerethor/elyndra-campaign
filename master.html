@@ -1,162 +1,138 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accesso Riservato – Archivio del Master</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schermo del Master – Elyndra</title>
     <style>
-        body { margin: 0; font-family: 'Georgia', serif; background: #05070a; color: #d1d1d1; }
-        
-        /* Schermata di Login */
-        #login-overlay {
-            position: fixed; inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)), url('sfondo-elyndra.png') center/cover;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999;
+        body {
+            margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #05070a; color: #e0e0e0; line-height: 1.5;
         }
-        .login-box { background: #11141b; padding: 3rem; border: 1px solid #c9a24d; text-align: center; }
-        input[type="password"] { background: #000; border: 1px solid #444; color: #c9a24d; padding: 10px; font-size: 1.2rem; text-align: center; margin-bottom: 1rem; outline: none; }
-        .btn-unlock { background: transparent; color: #c9a24d; border: 1px solid #c9a24d; padding: 10px 25px; cursor: pointer; text-transform: uppercase; }
-        .btn-unlock:hover { background: #c9a24d; color: #000; }
 
-        /* Contenuto Segreto */
-        #master-content { display: none; opacity: 0; transition: opacity 1s; }
-        header { padding: 4rem 2rem; text-align: center; border-bottom: 2px solid #ff4d4d; background: #0a0c10; }
-        h1 { color: #ff4d4d; letter-spacing: 5px; text-transform: uppercase; }
-        
-        main { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem; }
-        
-        .admin-section { background: #11141b; border-left: 4px solid #ff4d4d; padding: 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .admin-section h2 { color: #ff4d4d; text-transform: uppercase; letter-spacing: 2px; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        
-        .mechanic-box { background: #07090e; border: 1px solid #2a2d35; padding: 1.5rem; margin: 1rem 0; border-radius: 4px; }
-        .mechanic-box strong { color: #c9a24d; }
+        /* ANIMAZIONE GLITCH MASTER (Più aggressiva) */
+        @keyframes master-glitch {
+            0% { text-shadow: 1px 0 #ff0000; transform: translateX(0); }
+            20% { text-shadow: -1px 0 #c9a24d; transform: translateX(1px); }
+            40% { opacity: 0.8; transform: skewX(10deg); }
+            60% { text-shadow: 1px 0 #ff0000; transform: translateX(-1px); }
+            100% { text-shadow: -1px 0 #c9a24d; transform: translateX(0); }
+        }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #222; font-size: 0.9rem; }
-        th { color: #ff4d4d; text-transform: uppercase; font-size: 0.8rem; }
-        .secret-label { color: #ff4d4d; font-weight: bold; font-style: italic; }
+        .glitch-alert {
+            color: #ff4d4d;
+            animation: master-glitch 0.2s infinite;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
 
-        .warning-text { color: #ff4d4d; font-style: italic; border: 1px solid #ff4d4d; padding: 1rem; margin-top: 2rem; text-align: center; }
-        nav { padding: 1rem; background: #000; }
-        nav a { color: #c9a24d; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; }
+        header {
+            background: #11141b; padding: 1rem 2rem;
+            border-bottom: 2px solid #c9a24d;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        nav a { color: #c9a24d; text-decoration: none; font-size: 0.9rem; }
+
+        main { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+        .panel {
+            background: #1a1d24; border: 1px solid #333;
+            padding: 1.5rem; border-radius: 4px;
+        }
+
+        h2 { 
+            color: #c9a24d; border-bottom: 1px solid #c9a24d; 
+            padding-bottom: 5px; margin-top: 0;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        /* Tabelle Master */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: left; font-size: 0.9rem; }
+        th { background: #222; color: #c9a24d; }
+
+        .monster-row:hover td { 
+            background: rgba(201, 162, 77, 0.1); 
+            animation: master-glitch 0.5s infinite;
+        }
+
+        .mechanic-box {
+            background: rgba(0,0,0,0.3); padding: 10px;
+            border-left: 3px solid #ff4d4d; margin-top: 10px;
+        }
+
+        footer { text-align: center; padding: 2rem; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<div id="login-overlay">
-    <div class="login-box">
-        <h2 style="color: #c9a24d;">IDENTIFICARSI</h2>
-        <p>Inserire la Chiave Arcanica (Litostasi)</p>
-        <input type="password" id="pass-input" placeholder="...">
-        <br>
-        <button class="btn-unlock" onclick="checkPass()">Sblocca Sigillo</button>
-    </div>
-</div>
+<header>
+    <h1>Console del Master</h1>
+    <nav><a href="index.html">← Esci dalla Sessione</a></nav>
+</header>
 
-<div id="master-content">
-    <nav><a href="index.html">← Esci dall'Archivio Riservato</a></nav>
-    <header>
-        <h1>Archivio del Master</h1>
-        <p>Verità Proibite su Elyndra e il Destino di Nyxoria</p>
-    </header>
-
-    <main>
-        <section class="admin-section">
-            <h2>⚙️ Meccaniche della Litostasi (D&D 5e)</h2>
-            <p>La Litostasi non è una malattia, ma un'accelerazione dell'ordine minerale. Ecco come gestirla:</p>
-            
-            <div class="mechanic-box">
-                <strong>TS su Costituzione (CD 13 + Grado di Zona):</strong> Da effettuare ogni volta che si entra in una "Zona Statica" o si viene colpiti da creature petrose.
-            </div>
-
-            <div class="mechanic-box">
-                <strong>Stadi della Corruzione:</strong>
-                <ol>
-                    <li><strong>Rigidità:</strong> Velocità dimezzata. Svantaggio alle prove di Destrezza.</li>
-                    <li><strong>Intorpidimento:</strong> Il personaggio è *Incapacitato*. La pelle diventa grigia e fredda.</li>
-                    <li><strong>Pietrificazione Silente:</strong> Condizione *Pietrificato*. Il corpo è indistruttibile ma l'anima è vigile (Sogno Lucido). Solo un incantesimo *Ristorare Superiore* o l'essenza di Nyxoria può invertire il processo.</li>
-                </ol>
-            </div>
-            
-            <div class="mechanic-box">
-                <strong>Il Debito di Nyxoria:</strong> Chi viene curato dalla Litostasi usando il Flusso di Nyxoria riceve un **Tratto Mutante**. (Esempio: Visione cieca 10ft ma la pelle diventa scagliosa).
-            </div>
-        </section>
-
-        <section class="admin-section">
-            <h2>🜏 Verità Nascoste: I Leader</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Obiettivo Pubblico</th>
-                        <th>Verità Nascosta</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Valerius Thorne</strong></td>
-                        <td>Trovare i Draghi</td>
-                        <td><span class="secret-label">Il Carico Proibito:</span> Trasporta segretamente il corpo pietrificato di suo figlio nella stiva. È disposto a sacrificare la flotta pur di trovare un modo per risvegliarlo.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Elara Veridiana</strong></td>
-                        <td>Equilibrio Naturale</td>
-                        <td><span class="secret-label">L'Infezione:</span> È già pietrificata al 40%. Usa parassiti di Nyxoria per muoversi. La sua mente è parzialmente controllata dall'intelligenza collettiva del nuovo continente.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kaelen</strong></td>
-                        <td>Preservare Memoria</td>
-                        <td><span class="secret-label">La Colpa:</span> Ha scoperto che l'Archivio causò la Litostasi secoli fa tentando di fermare il tempo. Sta eliminando ogni testimone o documento che lo provi.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Capitano Jax</strong></td>
-                        <td>Sicurezza Flotta</td>
-                        <td><span class="secret-label">Il Tradimento:</span> Ha una rotta per un'isola privata. Sta dirottando risorse per creare una comunità di mercenari, abbandonando i civili al loro destino.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Vesper</strong></td>
-                        <td>Nuovo Inizio</td>
-                        <td><span class="secret-label">Il Nichilista:</span> Crede che Elyndra debba morire. Vuole usare il Secondo Battito per "ripulire" la realtà, eliminando sia la pietra che la carne.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="admin-section">
-            <h2>🔍 Verità sulle Fazioni</h2>
-            <div class="mechanic-box">
-                <strong>Il Concordato:</strong> Non cercano i Draghi per saggezza, ma per usare il loro sangue come combustibile arcanico per alimentare una nuova città volante.
-            </div>
-            <div class="mechanic-box">
-                <strong>I Khaari:</strong> Sanno che la ragazza Samsaran è la chiave. Nel "Respiro" di Nyxoria, lei è vista come l'Araldo che ha portato la stasi nel ciclo precedente. Alcuni vogliono venerarla, altri sacrificarla.
-            </div>
-            <div class="mechanic-box">
-                <strong>L'Oceano dei Sospiri:</strong> Non è acqua, è il sudore di un'immensa creatura dormiente che separa i due continenti. Il rumore dei sospiri è il suo respiro.
-            </div>
-        </section>
-
-        <div class="warning-text">
-            RICORDA: La Samsaran ricorda frammenti. Non rivelare tutto subito. Lascia che il dubbio corroda la loro fiducia nei leader.
+<main>
+    <section class="panel">
+        <h2>Meccanica: <span class="glitch-alert">Litostasi</span></h2>
+        <div class="mechanic-box">
+            <strong>Effetto Accumulo:</strong> Ogni volta che un giocatore tocca un oggetto "Pietrificato" senza protezione:
+            <ul>
+                <li><strong>1-2 Accumuli:</strong> Brividi, velocità ridotta del 10%.</li>
+                <li><strong>3-4 Accumuli:</strong> Gli arti iniziano a indurirsi. Svantaggio alle prove di Destrezza.</li>
+                <li><strong>5+ Accumuli:</strong> <span class="glitch-alert">PIETRIFICAZIONE TOTALE</span> (Morte del PG).</li>
+            </ul>
         </div>
-    </main>
-</div>
+        <p><em>Nota: Solo la linfa di Nyxoria può rallentare il processo.</em></p>
+    </section>
 
-<script>
-    function checkPass() {
-        const pass = document.getElementById('pass-input').value;
-        const overlay = document.getElementById('login-overlay');
-        const content = document.getElementById('master-content');
+    <section class="panel">
+        <h2>Bestiario di Sessione</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Creatura</th>
+                    <th>Pericolo</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="monster-row">
+                    <td>Ombra di Pietra</td>
+                    <td>Medio</td>
+                    <td>Invisibile tra le statue di Aetherys.</td>
+                </tr>
+                <tr class="monster-row">
+                    <td>Vipera Bioluminescente</td>
+                    <td>Basso</td>
+                    <td>Il veleno causa allucinazioni.</td>
+                </tr>
+                <tr class="monster-row">
+                    <td><span class="glitch-alert">IL GUARDIANO</span></td>
+                    <td>ESTREMO</td>
+                    <td>Non può essere ucciso, solo rallentato.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
-        if (pass === "Litostasi") {
-            overlay.style.display = 'none';
-            content.style.display = 'block';
-            setTimeout(() => content.style.opacity = '1', 10);
-        } else {
-            alert("Chiave Errata. Il Silenzio ti reclama.");
-        }
-    }
-</script>
+    <section class="panel">
+        <h2>Verità Nascoste (Spoiler)</h2>
+        <p><strong>L'Anima di Lyra:</strong> Non è al suo terzo ciclo, ma al <span class="glitch-text">millesimo</span>. Ricorda la creazione della Litostasi.</p>
+        <p><strong>Il Concordato:</strong> Valerius Thorne sa che Nyxoria è senziente e sta cercando di "mangiare" la flotta.</p>
+    </section>
+
+    <section class="panel">
+        <h2>Incontri Casuali</h2>
+        <ul>
+            <li>Un gruppo di statue che sembra essersi mosso di 1 metro.</li>
+            <li>Pioggia di polvere grigia che soffoca il respiro.</li>
+            <li>Un segnale luminoso da una nave del Patto data per dispersa.</li>
+        </ul>
+    </section>
+</main>
+
+<footer>ACCESSO RISERVATO AL NARRATORE • ELYNDRA 2026</footer>
 
 </body>
 </html>

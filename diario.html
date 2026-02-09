@@ -1,131 +1,119 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diario del Viaggiatore – Elyndra</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Diario di Lyra – Frammenti di Memoria</title>
     <style>
-        body { margin: 0; font-family: 'Georgia', serif; background: #0a0c10; color: #d1d1d1; line-height: 1.8; }
+        body {
+            margin: 0;
+            font-family: 'Crimson Text', serif;
+            background: #0d0f14;
+            color: #c4c4c4;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ANIMAZIONE GLITCH (Litostasi) */
+        @keyframes litostasi-vibration {
+            0% { text-shadow: 1px 0 #4a3b2b; transform: translateX(0); }
+            25% { text-shadow: -1px 0 #8e7341; transform: translateX(0.5px); }
+            50% { text-shadow: 1px 0 #222; transform: translateX(-0.5px); opacity: 0.9; }
+            75% { text-shadow: -1px 0 #4a3b2b; transform: translateX(0); }
+            100% { text-shadow: 1px 0 #8e7341; transform: translateX(0); }
+        }
+
         header {
-            position: relative;
-            background: linear-gradient(to bottom, rgba(10,12,16,0.3), rgba(10,12,16,1)),
-            url('sfondo-elyndra.png') center/cover no-repeat;
-            padding: 5rem 2rem; text-align: center; border-bottom: 1px solid #333;
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(13, 15, 20, 0.2), rgba(13, 15, 20, 1)),
+                        url('img/lyra.png') center/cover no-repeat;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            align-items: center; text-align: center; padding-bottom: 2rem;
+            border-bottom: 1px solid #4a3b2b;
         }
-        .fog-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; opacity: 0.2; }
-        .fog-layer { position: absolute; width: 200%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: fogMove 30s linear infinite; }
-        @keyframes fogMove { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
-        
-        nav { padding: 1rem; text-align: center; background: #11141b; }
-        nav a { color: #c9a24d; text-decoration: none; margin: 0 15px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
-        
-        main { max-width: 850px; margin: 0 auto; padding: 4rem 2rem; }
-        .journal-entry { margin-bottom: 5rem; padding-left: 2rem; border-left: 1px solid #c9a24d; position: relative; }
-        .date { font-family: 'Courier New', monospace; color: #c9a24d; font-size: 0.9rem; display: block; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
-        h2 { color: #fff; font-weight: normal; font-size: 2.2rem; margin-top: 0; letter-spacing: 1px; }
-        .highlight { color: #9db4ff; font-weight: bold; }
-        
-        /* Stile per i ricordi Samsaran */
+
+        header h1 {
+            font-family: 'Georgia', serif; font-size: 3rem; color: #e0e0e0;
+            margin: 0; letter-spacing: 5px;
+            animation: litostasi-vibration 4s infinite; /* Glitch lento sul titolo */
+        }
+
+        nav { padding: 1rem; text-align: center; background: #0a0c10; }
+        nav a { color: #8e7341; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; }
+        nav a:hover { color: #c9a24d; text-shadow: 0 0 5px #c9a24d; }
+
+        main { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; }
+
+        .entry {
+            background: rgba(20, 23, 28, 0.6);
+            border-left: 3px solid #4a3b2b;
+            padding: 2rem; margin-bottom: 4rem;
+            position: relative; transition: 0.3s;
+        }
+
+        .entry:hover { border-left-color: #8e7341; background: rgba(25, 28, 35, 0.8); }
+
+        /* Glitch sui titoli delle entry al passaggio del mouse */
+        .entry:hover h2 { animation: litostasi-vibration 0.2s infinite; color: #fff; }
+
+        .date { font-family: 'Georgia', serif; color: #8e7341; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 1rem; }
+
+        .entry h2 { color: #d1d1d1; margin-top: 0; font-style: italic; transition: 0.2s; }
+
+        /* EFFETTO MEMORIA SAMSARAN CON GLITCH COSTANTE */
         .memory-fragment {
+            border: 1px dashed #4a3b2b;
+            padding: 1.2rem;
+            background: rgba(0,0,0,0.3);
+            font-size: 1.05rem;
+            color: #9db4ff; /* Azzurro Samsaran */
             font-style: italic;
-            color: #a3a3a3;
-            background: rgba(157, 180, 255, 0.05);
-            padding: 1rem;
-            border-radius: 4px;
             margin: 1.5rem 0;
-            border-right: 2px solid rgba(157, 180, 255, 0.3);
+            animation: litostasi-vibration 5s infinite; /* Vibrazione costante dei ricordi */
         }
 
-        .mission-alert { background: rgba(201, 162, 77, 0.05); border: 1px solid #c9a24d; padding: 2.5rem; margin-top: 4rem; position: relative; }
-        .mission-alert::before { content: "!"; position: absolute; top: -15px; left: 20px; background: #c9a24d; color: #000; width: 30px; height: 30px; text-align: center; line-height: 30px; font-weight: bold; border-radius: 50%; }
+        .ink-stain {
+            position: absolute; bottom: 10px; right: 20px;
+            font-family: 'Brush Script MT', cursive;
+            color: rgba(142, 115, 65, 0.2); font-size: 1.5rem;
+            transform: rotate(-5deg);
+        }
 
-        footer { text-align: center; padding: 3rem; color: #444; font-size: 0.8rem; }
+        footer { text-align: center; padding: 4rem; font-size: 0.8rem; color: #444; border-top: 1px solid #1a1d24; }
     </style>
 </head>
 <body>
 
-<nav><a href="index.html">← Torna all'Archivio</a></nav>
+<nav><a href="index.html">← Torna all'Ingresso</a></nav>
 
 <header>
-    <div class="fog-container"><div class="fog-layer"></div></div>
-    <h1 id="diary-title">Cronache del Silenzio</h1>
-    <p>Le memorie di una Samsaran tra le macerie di Elyndra</p>
+    <h1>Frammenti di Vite</h1>
+    <p style="color: #8e7341; font-style: italic;">"Il passato non è morto, è solo pietrificato."</p>
 </header>
 
 <main>
-    <article class="journal-entry">
-        <span class="date">Luna Calante, Era dell'Erosione</span>
-        <h2>Il Giorno in cui il Vento si Fermò</h2>
-        <p>È iniziato tutto come un sussurro tra i mercanti di Aetherys. Dicevano che a nord le foreste non stormivano più. Pensavamo a una maledizione locale... Non sapevamo che la <span class="highlight">Litostasi</span> aveva iniziato il suo banchetto. Ho visto città trasformarsi in musei di carne grigia. Il 92% del mondo è ormai un monumento all'immobilità.</p>
-    </article>
 
-    <article class="journal-entry">
-        <span class="date">Solstizio d'Inverno, Porto Althamar</span>
-        <h2>L'Ultima Lanterna</h2>
-        <p>Siamo stipati a <span class="highlight">Porto Althamar</span> come bestiame spaventato. È l'ultima terra che respira ancora. Le navi dell'Ultima Spedizione dondolano nel porto. Dicono che oltre l'oceano esista <span class="highlight">Nyxoria</span>, dove la vita è troppo selvaggia per essere fermata. Ma per noi è solo un miraggio dipinto sulla nebbia.</p>
-    </article>
-
-    <article class="journal-entry">
-        <span class="date">Luna Nuova, 18° Inverno della mia carne</span>
-        <h2>Frammenti di Specchi Lontani</h2>
+    <div class="entry">
+        <span class="date">31 Gennaio 2026 - Porto Althamar</span>
+        <h2>L'odore della pioggia che non cade mai</h2>
         <p>
-            Oggi ho compiuto diciotto anni. Per i miei compagni nati tra i profughi, questo è l'unico mondo possibile: cenere, polvere e navi. Ma io sento il peso di mille altri compleanni. 
+            Oggi ho guardato l'orizzonte verso Aetherys. Il cielo è di quel colore cenere che ormai chiamiamo "normale". 
+            Mentre i mercanti urlavano, io ho ricordato...
         </p>
         <div class="memory-fragment">
-            "Ricordo l'odore del grano dorato prima che diventasse ossidiana. Ricordo il calore di una mano che non era di pietra, e il modo in cui il fiume scorreva senza restare prigioniero del ghiaccio minerale."
+            "C'era una fontana di marmo bianco, prima del Silenzio. Non era pietra morta, era viva. L'acqua cantava. Ricordo una bambina che rideva... ero io? O era qualcun altro che indossava questa stessa anima?"
         </div>
         <p>
-            Essere una <span class="highlight">Samsaran</span> qui è una maledizione. Chiudo gli occhi e vedo Elyndra quando il vento faceva davvero piegare l'erba. La mia mente corre a vite in cui correvo per chilometri, mentre ora i miei piedi temono che ogni passo possa essere l'ultimo prima di diventare parte del suolo.
+            Il Generale Thorne è passato vicino a me. La sua armatura brilla troppo. Cerca draghi nelle leggende, ma i draghi che ricordo io erano d'ombra.
         </p>
-    </article>
+        <div class="ink-stain">Lyra</div>
+    </div>
 
-    <article class="journal-entry">
-        <span class="date">Tre giorni alla Levata delle Ancore</span>
-        <h2>Il Terrore del Sogno Lucido</h2>
-        <p>
-            Ho visto un bambino ieri. Stava giocando finché la Litostasi non gli ha sfiorato la caviglia. È diventato una statua in pochi secondi. La madre non piangeva. Nessuno piange più. Credono tutti che lui stia solo "sognando".
-        </p>
-        <p>
-            Ma io ricordo cosa significa morire davvero. La Litostasi non è morte, è una <span class="highlight">prigione di coscienza</span>. Sento sussurri nelle mie vecchie voci... dicono che il "Secondo Battito" non è una cura, ma un reset. Ho paura che Nyxoria sia solo un altro modo per ricominciare a soffrire.
-        </p>
-    </article>
+    </main>
 
-    <article class="journal-entry">
-        <span class="date">Stasera, tra le ombre di Porto Althamar</span>
-        <h2>L'Ultima Scelta</h2>
-        <p>
-            Non mi hanno ancora dato il lasciapassare. Il Concordato diffida di quelli come me; dicono che portiamo il "caos del passato". Ma stasera, mentre guardo l'orizzonte, sento che la mia missione non è solo fuggire. 
-        </p>
-        <p>
-            Dobbiamo recuperare quel manufatto nel <span class="highlight">Distretto Vecchio</span> prima di partire. Sento che apparteneva a una mia vita di tre secoli fa. Se la stasi lo reclama, perderò l'unico legame che ho con la verità. Il fango sotto i miei stivali sta diventando duro. Non voglio essere un monumento.
-        </p>
-    </article>
-
-    <section class="mission-alert">
-        <p><strong>Nota del Master - Sessione 0:</strong> I venti soffiano verso Ovest, ma le catene non sono ancora state sciolte. La compagna Samsaran ha percepito un richiamo dal passato. Solo recuperando quell'antico frammento e risolvendo l'ultimo enigma di Porto Althamar potrete assicurarvi un posto sulla flotta.</p>
-    </section>
-</main>
-
-<footer>Proprietà dell'Archivio delle Voci Immobili • Non bruciare i ricordi.</footer>
-
-<script>
-    const title = document.getElementById('diary-title');
-    const originalText = title.innerText;
-    let interval = null;
-    title.addEventListener('mouseenter', () => {
-        let iteration = 0; clearInterval(interval);
-        interval = setInterval(() => {
-            title.innerText = title.innerText.split("").map((l, i) => {
-                if(i < iteration) return originalText[i];
-                return "ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░🜏🜓"[Math.floor(Math.random() * 32)];
-            }).join("");
-            if(iteration >= originalText.length) clearInterval(interval);
-            iteration += 1/3;
-        }, 30);
-    });
-    title.addEventListener('mouseleave', () => { clearInterval(interval); title.innerText = originalText; });
-</script>
+<footer>
+    Proprietà di Lyra • Elyndra 2026
+</footer>
 
 </body>
 </html>
-

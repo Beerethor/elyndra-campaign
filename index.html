@@ -1,163 +1,137 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elyndra – Archivio della Campagna</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elyndra – L'Ultima Spedizione</title>
     <style>
+        * { box-sizing: border-box; }
         body {
-            margin: 0;
+            margin: 0; padding: 0;
             font-family: 'Georgia', serif;
-            background: #0f1115;
-            color: #e6e6e6;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: #05070a;
+            color: #e0e0e0;
+            display: flex; flex-direction: column;
+            min-height: 100vh; overflow-x: hidden;
         }
 
-        header {
+        /* ANIMAZIONE GLITCH / LITOSTASI */
+        @keyframes litostasi-glitch {
+            0% { text-shadow: 2px 0 #555, -2px 0 #888; transform: skew(0deg); }
+            20% { text-shadow: -2px 0 #c9a24d, 2px 0 #444; transform: skew(0.8deg); }
+            40% { text-shadow: 2px 0 #333, -2px 0 #c9a24d; transform: skew(-0.8deg); }
+            60% { text-shadow: -1px 0 #666, 1px 0 #222; transform: skew(0deg); }
+            80% { text-shadow: 2px 0 #c9a24d, -2px 0 #888; transform: skew(0.3deg); }
+            100% { text-shadow: -2px 0 #777, 2px 0 #444; transform: skew(0deg); }
+        }
+
+        .hero {
             position: relative;
-            /* AGGIORNATO A .PNG */
-            background: 
-                linear-gradient(to bottom, rgba(15,17,21,0.2), rgba(15,17,21,1)),
-                url('sfondo-elyndra.png') center/cover no-repeat;
-            padding: 8rem 2rem;
+            height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
             text-align: center;
-            overflow: hidden;
-            border-bottom: 2px solid #333;
+            background: linear-gradient(rgba(5, 7, 10, 0.6), rgba(5, 7, 10, 0.9)), 
+                        url('img/sfondo-elyndra.png') center/cover no-repeat;
+            border-bottom: 2px solid #c9a24d;
         }
 
-        .fog-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        .fog-layer {
-            position: absolute;
-            width: 200%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: fogMove 25s linear infinite;
-        }
-
-        @keyframes fogMove {
-            from { transform: translateX(-50%); }
-            to { transform: translateX(0%); }
-        }
-
-        header h1 { 
-            font-size: 5rem; 
-            margin-bottom: 0.5rem; 
+        .hero h1 {
+            font-size: 5rem; margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            animation: litostasi-glitch 5s infinite;
             color: #fff;
-            text-shadow: 0 0 30px rgba(0,0,0,1);
+        }
+
+        .hero p {
+            font-size: 1.2rem; color: #c9a24d;
+            max-width: 650px; margin: 25px auto;
+            font-style: italic; letter-spacing: 2px;
+        }
+
+        /* GRIGLIA NAVIGAZIONE */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px; max-width: 1000px;
+            width: 90%; margin-top: 50px;
+        }
+
+        .nav-card {
+            background: rgba(20, 25, 35, 0.85);
+            border: 1px solid rgba(201, 162, 77, 0.2);
+            padding: 35px; text-decoration: none;
+            color: #fff; transition: 0.3s ease;
+            text-align: center; backdrop-filter: blur(10px);
             position: relative;
-            z-index: 10;
-            letter-spacing: 8px;
-            text-transform: uppercase;
+            overflow: hidden;
         }
 
-        header p { 
-            font-style: italic; color: #d1d1d1; position: relative; z-index: 10; font-size: 1.2rem;
+        /* Effetto glitch sui tasti al passaggio del mouse */
+        .nav-card:hover {
+            border-color: #c9a24d;
+            background: rgba(201, 162, 77, 0.1);
+            transform: translateY(-5px);
         }
 
-        main { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
-
-        h2 { color: #c9a24d; border-bottom: 1px solid #c9a24d; display: inline-block; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; font-weight: normal; }
-
-        .hub { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
-
-        .card {
-            background: rgba(21, 24, 33, 0.9);
-            padding: 2.5rem;
-            border: 1px solid #2a2d35;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            backdrop-filter: blur(5px);
+        .nav-card:hover h2 {
+            animation: litostasi-glitch 0.3s infinite;
+            color: #fff;
         }
 
-        .card:hover {
-            border-color: #999;
-            background: #1e212a;
-            transform: translateY(-10px);
-            filter: grayscale(1) contrast(1.2);
+        .nav-card h2 { 
+            margin: 0; 
+            font-size: 1.6rem; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            color: #c9a24d; 
+            transition: 0.3s;
         }
 
-        .card h3 { color: #9db4ff; margin-top: 0; font-size: 1.4rem; transition: color 0.4s; }
-        .card:hover h3 { color: #ffffff !important; }
-
-        .card a {
-            display: inline-block;
-            margin-top: 1.5rem;
-            color: #c9a24d;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.75rem;
-            border: 1px solid #c9a24d;
-            padding: 8px 20px;
-            transition: all 0.3s;
+        .nav-card p { 
+            font-size: 0.9rem; 
+            color: #aaa; 
+            margin-top: 12px; 
+            line-height: 1.5;
         }
 
-        .card a:hover { background: #c9a24d; color: #000; }
+        footer { padding: 40px; text-align: center; font-size: 0.75rem; color: #444; letter-spacing: 2px; }
 
-        footer { text-align: center; padding: 5rem 2rem; font-size: 0.8rem; color: #444; background: #0a0c10; }
+        /* Media query per mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; letter-spacing: 6px; }
+            .nav-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="fog-container"><div class="fog-layer"></div></div>
-    <h1 id="main-title">ELYNDRA</h1>
-    <p>Dall'ombra di Aetherys verso l'ignoto di Nyxoria</p>
-</header>
+    <section class="hero">
+        <h1>ELYNDRA</h1>
+        <p>"Mentre il mondo si ferma in un eterno silenzio di pietra, noi siamo il battito che ancora risuona."</p>
 
-<main>
-    <h2>L'Ultima Spedizione</h2>
-    <p>Il mondo di <strong>Thyrael</strong> sta morendo sotto il peso della Litostasi. L'ultima speranza risiede oltre l'oceano.</p>
+        <div class="nav-grid">
+            <a href="wiki.html" class="nav-card">
+                <h2>L'Archivio</h2>
+                <p>Esplora le fazioni, i leader e i segreti della Litostasi.</p>
+            </a>
 
-    <div class="hub">
-        <div class="card">
-            <h3>📖 Diario di Campagna</h3>
-            <p>Le memorie dei superstiti e il resoconto delle sessioni. Ogni passo verso Kha'Ruun viene scritto qui.</p>
-            <a href="diario.html">Leggi Memorie</a> </div>
+            <a href="diario.html" class="nav-card">
+                <h2>Diario di Lyra</h2>
+                <p>Frammenti di memorie e sussurri dai moli di Porto Althamar.</p>
+            </a>
 
-        <div class="card">
-            <h3>📚 Wiki di Elyndra</h3>
-            <p>Conoscenza frammentata su Fazioni, Khaari e la natura della Pietrificazione Silente.</p>
-            <a href="wiki.html">Consulta Tomi</a>
+            <a href="#" class="nav-card" style="opacity: 0.3; cursor: not-allowed;">
+                <h2>Mappa</h2>
+                <p>Le rotte per Nyxoria sono ancora avvolte dal Silenzio.</p>
+            </a>
         </div>
+    </section>
 
-        <div class="card">
-            <h3>🜏 Archivio del Master</h3>
-            <p>I segreti del Secondo Battito e le verità che il Concordato della Scaglia Antica tiene nascoste.</p>
-            <a href="master.html">Oltre il Velo</a>
-        </div>
-    </div>
-</main>
+    <footer>
+        ARCHIVIO DELLE VOCI IMMOBILI &copy; 2026 • ELYNDRA NON DIMENTICA
+    </footer>
 
-<footer>ELYNDRA © CAMPAGNA D&D 5E</footer>
-
-<script>
-    const elements = document.querySelectorAll('.card h3, header h1');
-    elements.forEach(el => {
-        const originalText = el.innerText;
-        let interval = null;
-        el.addEventListener('mouseenter', event => {
-            let iteration = 0;
-            clearInterval(interval);
-            interval = setInterval(() => {
-                event.target.innerText = event.target.innerText.split("").map((l, i) => {
-                    if(i < iteration) return originalText[i];
-                    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ█▓▒░🜏🜓"[Math.floor(Math.random() * 32)];
-                }).join("");
-                if(iteration >= originalText.length) clearInterval(interval);
-                iteration += 1/3;
-            }, 30);
-        });
-        el.addEventListener('mouseleave', () => { clearInterval(interval); el.innerText = originalText; });
-    });
-</script>
 </body>
 </html>

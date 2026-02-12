@@ -5,7 +5,7 @@
     "ruolo": "Navigatrice dell'Oltre",
     "descrizione": "Sguardo perso nell'orizzonte. Dice di sentire le vibrazioni delle antiche macchine dormienti prima che si riattivino.",
     "foto": "img/lyra.png",
-    "tratti": ["Calma", "Intuizione 4", "Sesto Senso"],
+    "tratti": ["Calma", "Intuizione", "Sesto Senso", "Diario"],
     "fazione": "Esploratori"
   },
   {
@@ -14,7 +14,7 @@
     "ruolo": "Guardiano della Litostasi",
     "descrizione": "Veterano con un braccio parzialmente pietrificato, ricordo di un'escursione troppo profonda nelle zone di silenzio.",
     "foto": "img/kaelen.png",
-    "tratti": ["Resistente", "Vigore 5", "Sopravvissuto"],
+    "tratti": ["Resistente", "Vigore", "Sopravvissuto"],
     "fazione": "Guardiani"
   }
 ]

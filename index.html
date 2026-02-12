@@ -154,6 +154,8 @@
 </head>
 <body>
 
+    <div id="player" style="display:none;"></div>
+
     <section class="hero">
     <div class="fog-wrapper">
         <div class="fog-layer-1"></div>
@@ -184,5 +186,43 @@
         ARCHIVIO DELLE VOCI IMMOBILI &copy; 2026 • ELYNDRA NON DIMENTICA
     </footer>
 
+    <script>
+    // Carica l'API di YouTube in modo asincrono
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '0',
+            width: '0',
+            videoId: '6fp81GzKarQ', // ID del video di To Zanarkand
+            playerVars: {
+                'autoplay': 1,
+                'loop': 1,
+                'playlist': '6fp81GzKarQ', // Necessario per il loop
+                'controls': 0,
+                'showinfo': 0,
+                'autohide': 1,
+                'modestbranding': 1,
+                'mute': 0 // Iniziamo senza muto, ma il browser potrebbe bloccarlo
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Funzione per far partire l'audio al primo click sulla pagina
+        document.body.addEventListener('click', function() {
+            player.playVideo();
+        }, { once: true }); // Si attiva solo una volta
+    }
+</script>
+    
 </body>
 </html>
+

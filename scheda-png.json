@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedario PNG – Elyndra</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Georgia', serif;
+            background: #05070a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header in stile Archivio */
+        header {
+            padding: 60px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(201, 162, 77, 0.1), transparent);
+            border-bottom: 1px solid rgba(201, 162, 77, 0.2);
+        }
+
+        h1 {
+            color: #c9a24d;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px rgba(201, 162, 77, 0.3);
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #888;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* Container della Griglia */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .grid-png {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card del Personaggio */
+        .card-png {
+            background: rgba(15, 20, 25, 0.9);
+            border: 1px solid rgba(201, 162, 77, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+        }
+
+        .card-png:hover {
+            border-color: #c9a24d;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+        }
+
+        /* Immagine del Personaggio */
+        .portrait {
+            width: 100%;
+            height: 280px;
+            background: #111;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(201, 162, 77, 0.2);
+            filter: grayscale(0.2) sepia(0.1);
+            transition: 0.5s;
+        }
+
+        .card-png:hover .portrait {
+            filter: grayscale(0);
+            transform: scale(1.05);
+        }
+
+        /* Info Personaggio */
+        .info {
+            padding: 25px;
+        }
+
+        .info h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .role {
+            color: #c9a24d;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .desc {
+            font-size: 0.95rem;
+            color: #bbb;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        /* Tag Tratti (Pokerole) */
+        .traits {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .trait-tag {
+            font-size: 0.7rem;
+            background: rgba(201, 162, 77, 0.05);
+            color: #c9a24d;
+            padding: 4px 10px;
+            border: 1px solid rgba(201, 162, 77, 0.3);
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Pulsante Indietro */
+        .footer-nav {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .back-btn {
+            color: #c9a24d;
+            text-decoration: none;
+            border: 1px solid #c9a24d;
+            padding: 15px 40px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        .back-btn:hover {
+            background: #c9a24d;
+            color: #05070a;
+            box-shadow: 0 0 20px rgba(201, 162, 77, 0.4);
+        }
+
+        /* Messaggio Caricamento */
+        #loading {
+            text-align: center;
+            color: #555;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Schedario PNG</h1>
+        <p class="subtitle">"Memorie di chi cammina tra le rovine di Aetherys."</p>
+    </header>
+
+    <div class="container">
+        <div class="grid-png" id="png-container">
+            <p id="loading">Consultando gli archivi della Litostasi...</p>
+        </div>
+
+        <div class="footer-nav">
+            <a href="wiki.html" class="back-btn">← Torna all'Archivio</a>
+        </div>
+    </div>
+
+    <script>
+        // Funzione per caricare i dati dal file JSON
+        async function loadPNGs() {
+            try {
+                const response = await fetch('png.json');
+                if (!response.ok) throw new Error("Impossibile caricare il file JSON");
+                
+                const data = await response.json();
+                const container = document.getElementById('png-container');
+                
+                // Puliamo il contenitore (rimuove il messaggio di caricamento)
+                container.innerHTML = '';
+
+                data.forEach(png => {
+                    const card = `
+                        <article class="card-png">
+                            <img src="${png.foto}" alt="${png.nome}" class="portrait" onerror="this.src='https://via.placeholder.com/300x280?text=Immagine+Mancante'">
+                            <div class="info">
+                                <span class="role">${png.ruolo}</span>
+                                <h2>${png.nome}</h2>
+                                <p class="desc">"${png.descrizione}"</p>
+                                <div class="traits">
+                                    ${png.tratti.map(t => `<span class="trait-tag">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                    container.innerHTML += card;
+                });
+            } catch (error) {
+                console.error('Errore:', error);
+                document.getElementById('png-container').innerHTML = 
+                    `<p style="color: #ff4d4d; text-align: center; width: 100%;">Errore nel caricamento del database: ${error.message}</p>`;
+            }
+        }
+
+        // Avvia il caricamento
+        loadPNGs();
+    </script>
+
+</body>
+</html>

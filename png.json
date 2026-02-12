@@ -3,7 +3,7 @@
     "id": 1,
     "nome": "Lyra Valerius",
     "ruolo": "Navigatrice dell'Oltre",
-    "descrizione": "Sguardo perso nell'orizzonte. Dice di sentire le vibrazioni delle antiche macchine dormienti prima che si riattivino.",
+    "descrizione": "Una figura nota nel porto per il suo sguardo costantemente rivolto al mare di nebbia. I marinai dicono che riesca a prevedere i movimenti della stasi prima che avvengano.",
     "foto": "img/lyra.png",
     "tratti": ["Calma", "Intuizione", "Sesto Senso", "Diario"],
     "fazione": "Esploratori"
@@ -12,7 +12,7 @@
     "id": 2,
     "nome": "Kaelen il Grigio",
     "ruolo": "Guardiano della Litostasi",
-    "descrizione": "Veterano con un braccio parzialmente pietrificato, ricordo di un'escursione troppo profonda nelle zone di silenzio.",
+    "descrizione": "Un veterano segnato visibilmente dalla piaga. Il suo braccio sinistro, ormai rigido come pietra, è un monito per chiunque osi avventurarsi incautamente fuori dalle mura.",
     "foto": "img/kaelen.png",
     "tratti": ["Resistente", "Vigore", "Sopravvissuto"],
     "fazione": "Guardiani"
@@ -21,7 +21,7 @@
     "id": 3,
     "nome": "Silas l'Alchimista",
     "ruolo": "Ricercatore del Concordato",
-    "descrizione": "Lavora incessantemente alla creazione di sieri anti-pietra. Le sue dita sono costantemente macchiate di reagenti bluastri.",
+    "descrizione": "Lo si vede spesso nei laboratori del porto, circolato da fumi bluastri. È l'uomo a cui tutti si rivolgono per ottenere sieri e unguenti contro l'avanzata del brivido grigio.",
     "foto": "img/silas.png",
     "tratti": ["Geniale", "Scienza", "Metodico"],
     "fazione": "Concordato"
@@ -30,7 +30,7 @@
     "id": 4,
     "nome": "Elowen della Radice",
     "ruolo": "Eremita di Nyxoria",
-    "descrizione": "Si dice che parli con la vegetazione bioluminescente. Indossa abiti fatti di fibre che emettono un debole chiarore notturno.",
+    "descrizione": "Una donna che sembra fatta della stessa sostanza della giungla. Chi l'ha incontrata parla di abiti che emettono luce propria e di una strana affinità con la flora locale.",
     "foto": "img/elowen.png",
     "tratti": ["Selvatica", "Empatia", "Conoscenza Nyxoria"],
     "fazione": "Circolo"
@@ -39,7 +39,7 @@
     "id": 5,
     "nome": "Alto Comandante Valerius",
     "ruolo": "Leader del Concordato",
-    "descrizione": "Un uomo d'acciaio che crede nel sacrificio necessario. La sua armatura è incisa con i nomi dei caduti durante la Grande Ritirata.",
+    "descrizione": "L'uomo che guida la difesa di Porto Althamar. La sua autorità è indiscussa e la sua armatura cerimoniale porta incisi i nomi delle città cadute sotto la Litostasi.",
     "foto": "img/valerius.png",
     "tratti": ["Autorità", "Strategia", "Inamovibile"],
     "fazione": "Concordato"
@@ -48,7 +48,7 @@
     "id": 6,
     "nome": "Madre Verna",
     "ruolo": "Sacerdotessa del Circolo",
-    "descrizione": "I suoi occhi brillano di una leggera luce verde. Sostiene che la Litostasi sia solo un lungo letargo prima di una nuova fioritura.",
+    "descrizione": "La guida spirituale di chi crede in una rinascita. I suoi occhi, velati da una strana luminescenza verde, infondono speranza (o timore) in chiunque la incontri.",
     "foto": "img/verna.png",
     "tratti": ["Saggezza", "Guarigione", "Connessione Nyxoria"],
     "fazione": "Circolo"
@@ -57,7 +57,7 @@
     "id": 7,
     "nome": "L'Archivista Xanos",
     "ruolo": "Custode delle Voci Immobili",
-    "descrizione": "Ha sostituito i suoi occhi con lenti alchemiche per leggere le memorie impresse nella pietra. Parla poco, preferisce ascoltare il silenzio.",
+    "descrizione": "Un individuo enigmatico che vive tra i corridoi dell'Archivio. Le lenti che porta sugli occhi suggeriscono metodi di studio poco ortodossi sui frammenti di pietra recuperati.",
     "foto": "img/xanos.png",
     "tratti": ["Psicomanzia", "Storia Antica", "Oscuro"],
     "fazione": "Archivio"
@@ -66,7 +66,7 @@
     "id": 8,
     "nome": "Capitano Jax",
     "ruolo": "Ammiraglio del Patto",
-    "descrizione": "L'uomo che ha sfidato la nebbia e ne è tornato. Ha un tatuaggio di cenere che si muove sulla pelle in base alle correnti.",
+    "descrizione": "Leggenda vivente tra i navigatori. Si dice sia l'unico uomo ad aver solcato l'oceano di nebbia e aver visto cosa si nasconde oltre l'orizzonte grigio.",
     "foto": "img/jax.png",
     "tratti": ["Navigazione", "Carisma", "Sprezzo del Pericolo"],
     "fazione": "Patto"
@@ -75,7 +75,7 @@
     "id": 9,
     "nome": "Vesper",
     "ruolo": "Esecutore del Velo",
-    "descrizione": "Un fanatico avvolto in bende rituali imbevute di pigmento cremisi. Si muove nel silenzio assoluto e crede che la pietra sia la forma finale di purificazione dell'anima.",
+    "descrizione": "Una figura inquietante che appare spesso dove la Litostasi colpisce più duramente. Le sue vesti rosse sono un segnale di sventura per i cittadini superstiziosi.",
     "foto": "img/vesper.png",
     "tratti": ["Furtività", "Fanatismo", "Lama Sacra"],
     "fazione": "Il Velo Cremisi"
@@ -83,8 +83,8 @@
   {
     "id": 10,
     "nome": "Kazul",
-    "ruolo": "Guida delle Tribù Khaari",
-    "descrizione": "Una giovane cacciatrice con pitture facciali bioluminescenti. Sente il battito vitale di Nyxoria e sa quali sentieri evitare quando la Litostasi si intensifica.",
+    "ruolo": "Cacciatrice Khaari",
+    "descrizione": "Una giovane nativa di Nyxoria con pitture rituali che brillano nel buio. Conosce i sentieri segreti della giungla che la stasi non ha ancora raggiunto.",
     "foto": "img/kazul.png",
     "tratti": ["Agilità", "Sopravvivenza", "Lingua della Selva"],
     "fazione": "Le Tribù Khaari"
@@ -92,8 +92,8 @@
   {
     "id": 11,
     "nome": "Elara",
-    "ruolo": "Ricettatore di Reliquie",
-    "descrizione": "Un cercatore di tesori che opera nell'ombra di Porto Althamar. Si dice che possieda una bussola capace di puntare verso le aree non ancora colpite dalla stasi.",
+    "ruolo": "Cercatrice di Reliquie",
+    "descrizione": "Una commerciante che opera nei vicoli di Porto Althamar. Se cerchi un oggetto antico o una bussola che funzioni ancora, lei è la persona giusta... al giusto prezzo.",
     "foto": "img/elara.png",
     "tratti": ["Valutazione", "Negoziazione", "Contatti Oscuri"],
     "fazione": "Patto delle Ceneri Erranti"

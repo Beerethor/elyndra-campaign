@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nome": "Lyra Valerius",
+    "ruolo": "Navigatrice dell'Oltre",
+    "descrizione": "Sguardo perso nell'orizzonte. Dice di sentire il canto dei Pokémon fossili prima che si risveglino.",
+    "foto": "img/png-lyra.png",
+    "tratti": ["Calma", "Intuizione 4", "Legame Spettrale"],
+    "fazione": "Esploratori"
+  },
+  {
+    "id": 2,
+    "nome": "Kaelen il Grigio",
+    "ruolo": "Guardiano della Litostasi",
+    "descrizione": "Veterano con un braccio parzialmente pietrificato dopo uno scontro con un Regirock.",
+    "foto": "img/png-kael.png",
+    "tratti": ["Resistente", "Lotta 5", "Sopravvissuto"],
+    "fazione": "Guardiani"
+  }
+]

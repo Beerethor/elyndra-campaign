@@ -49,8 +49,8 @@
     "nome": "Madre Verna",
     "ruolo": "Sacerdotessa del Circolo",
     "descrizione": "I suoi occhi brillano di una leggera luce verde. Sostiene che la Litostasi sia solo un lungo letargo prima di una nuova fioritura.",
-    "foto": "img/leader-circolo.png",
-    "tratti": ["Saggezza 5", "Guarigione", "Connessione Nyxoria"],
+    "foto": "img/verna.png",
+    "tratti": ["Saggezza", "Guarigione", "Connessione Nyxoria"],
     "fazione": "Circolo"
   },
   {
@@ -58,8 +58,8 @@
     "nome": "L'Archivista Xanos",
     "ruolo": "Custode delle Voci Immobili",
     "descrizione": "Ha sostituito i suoi occhi con lenti alchemiche per leggere le memorie impresse nella pietra. Parla poco, preferisce ascoltare il silenzio.",
-    "foto": "img/leader-archivio.png",
-    "tratti": ["Psicomanzia", "Storia Antica 5", "Oscuro"],
+    "foto": "img/xanos.png",
+    "tratti": ["Psicomanzia", "Storia Antica", "Oscuro"],
     "fazione": "Archivio"
   },
   {
@@ -67,8 +67,8 @@
     "nome": "Capitano Jax",
     "ruolo": "Ammiraglio del Patto",
     "descrizione": "L'uomo che ha sfidato la nebbia e ne è tornato. Ha un tatuaggio di cenere che si muove sulla pelle in base alle correnti.",
-    "foto": "img/leader-patto.png",
-    "tratti": ["Navigazione 5", "Carisma", "Sprezzo del Pericolo"],
+    "foto": "img/jax.png",
+    "tratti": ["Navigazione", "Carisma", "Sprezzo del Pericolo"],
     "fazione": "Patto"
   },
   {
@@ -76,8 +76,8 @@
     "nome": "Vesper",
     "ruolo": "Esecutore del Velo",
     "descrizione": "Un fanatico avvolto in bende rituali imbevute di pigmento cremisi. Si muove nel silenzio assoluto e crede che la pietra sia la forma finale di purificazione dell'anima.",
-    "foto": "img/png-vesper.png",
-    "tratti": ["Furtività 5", "Fanatismo", "Lama Sacra"],
+    "foto": "img/vesper.png",
+    "tratti": ["Furtività", "Fanatismo", "Lama Sacra"],
     "fazione": "Il Velo Cremisi"
   },
   {
@@ -94,7 +94,7 @@
     "nome": "Elara",
     "ruolo": "Ricettatore di Reliquie",
     "descrizione": "Un cercatore di tesori che opera nell'ombra di Porto Althamar. Si dice che possieda una bussola capace di puntare verso le aree non ancora colpite dalla stasi.",
-    "foto": "img/Elara.png",
+    "foto": "img/elara.png",
     "tratti": ["Valutazione", "Negoziazione", "Contatti Oscuri"],
     "fazione": "Patto delle Ceneri Erranti"
   }

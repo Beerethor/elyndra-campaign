@@ -17,4 +17,85 @@
     "tratti": ["Resistente", "Vigore", "Sopravvissuto"],
     "fazione": "Guardiani"
   }
+  {
+    "id": 3,
+    "nome": "Silas l'Alchimista",
+    "ruolo": "Ricercatore del Concordato",
+    "descrizione": "Lavora incessantemente alla creazione di sieri anti-pietra. Le sue dita sono costantemente macchiate di reagenti bluastri.",
+    "foto": "img/silas.png",
+    "tratti": ["Geniale", "Scienza", "Metodico"],
+    "fazione": "Concordato"
+  },
+  {
+    "id": 4,
+    "nome": "Elowen della Radice",
+    "ruolo": "Eremita di Nyxoria",
+    "descrizione": "Si dice che parli con la vegetazione bioluminescente. Indossa abiti fatti di fibre che emettono un debole chiarore notturno.",
+    "foto": "img/elowen.png",
+    "tratti": ["Selvatica", "Empatia", "Conoscenza Nyxoria"],
+    "fazione": "Circolo"
+  }
+  {
+    "id": 5,
+    "nome": "Alto Comandante Valerius",
+    "ruolo": "Leader del Concordato",
+    "descrizione": "Un uomo d'acciaio che crede nel sacrificio necessario. La sua armatura è incisa con i nomi dei caduti durante la Grande Ritirata.",
+    "foto": "img/valerius.png",
+    "tratti": ["Autorità", "Strategia", "Inamovibile"],
+    "fazione": "Concordato"
+  },
+  {
+    "id": 6,
+    "nome": "Madre Verna",
+    "ruolo": "Sacerdotessa del Circolo",
+    "descrizione": "I suoi occhi brillano di una leggera luce verde. Sostiene che la Litostasi sia solo un lungo letargo prima di una nuova fioritura.",
+    "foto": "img/leader-circolo.png",
+    "tratti": ["Saggezza 5", "Guarigione", "Connessione Nyxoria"],
+    "fazione": "Circolo"
+  },
+  {
+    "id": 7,
+    "nome": "L'Archivista Xanos",
+    "ruolo": "Custode delle Voci Immobili",
+    "descrizione": "Ha sostituito i suoi occhi con lenti alchemiche per leggere le memorie impresse nella pietra. Parla poco, preferisce ascoltare il silenzio.",
+    "foto": "img/leader-archivio.png",
+    "tratti": ["Psicomanzia", "Storia Antica 5", "Oscuro"],
+    "fazione": "Archivio"
+  },
+  {
+    "id": 8,
+    "nome": "Capitano Jax",
+    "ruolo": "Ammiraglio del Patto",
+    "descrizione": "L'uomo che ha sfidato la nebbia e ne è tornato. Ha un tatuaggio di cenere che si muove sulla pelle in base alle correnti.",
+    "foto": "img/leader-patto.png",
+    "tratti": ["Navigazione 5", "Carisma", "Sprezzo del Pericolo"],
+    "fazione": "Patto"
+  }
+  {
+    "id": 9,
+    "nome": "Vesper",
+    "ruolo": "Esecutore del Velo",
+    "descrizione": "Un fanatico avvolto in bende rituali imbevute di pigmento cremisi. Si muove nel silenzio assoluto e crede che la pietra sia la forma finale di purificazione dell'anima.",
+    "foto": "img/png-vesper.png",
+    "tratti": ["Furtività 5", "Fanatismo", "Lama Sacra"],
+    "fazione": "Il Velo Cremisi"
+  },
+  {
+    "id": 10,
+    "nome": "Kazul",
+    "ruolo": "Guida delle Tribù Khaari",
+    "descrizione": "Una giovane cacciatrice con pitture facciali bioluminescenti. Sente il battito vitale di Nyxoria e sa quali sentieri evitare quando la Litostasi si intensifica.",
+    "foto": "img/kazul.png",
+    "tratti": ["Agilità", "Sopravvivenza", "Lingua della Selva"],
+    "fazione": "Le Tribù Khaari"
+  },
+  {
+    "id": 11,
+    "nome": "Elara",
+    "ruolo": "Ricettatore di Reliquie",
+    "descrizione": "Un cercatore di tesori che opera nell'ombra di Porto Althamar. Si dice che possieda una bussola capace di puntare verso le aree non ancora colpite dalla stasi.",
+    "foto": "img/Elara.png",
+    "tratti": ["Valutazione", "Negoziazione", "Contatti Oscuri"],
+    "fazione": "Patto delle Ceneri Erranti"
+  }
 ]

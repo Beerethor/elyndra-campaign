@@ -66,7 +66,7 @@
     "id": 8,
     "nome": "Capitano Jax",
     "ruolo": "Ammiraglio del Patto",
-    "descrizione": "Leggenda vivente tra i navigatori. Si dice sia l'unico uomo ad aver solcato l'oceano di nebbia e aver visto cosa si nasconde oltre l'orizzonte grigio.",
+    "descrizione": "Leggenda vivente tra i navigatori. Si dice sia l'unica donna ad aver solcato l'oceano di nebbia e aver visto cosa si nasconde oltre l'orizzonte grigio. Il suo comando è assoluto e il suo sguardo fermo come la chiglia di una nave.",
     "foto": "img/jax.png",
     "tratti": ["Navigazione", "Carisma", "Sprezzo del Pericolo"],
     "fazione": "Patto"

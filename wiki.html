@@ -15,7 +15,8 @@
         body {
             margin: 0;
             font-family: 'Georgia', serif;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('img/sfondo-index.jpg') center/cover fixed;
+            /* SFONDO AGGIORNATO */
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('sfondo-archivio.png') center/cover fixed no-repeat;
             color: #e0e0e0;
             line-height: 1.6;
             scroll-behavior: smooth;
@@ -34,6 +35,7 @@
             text-transform: uppercase;
             letter-spacing: 8px;
             margin: 0;
+            text-shadow: 0 0 20px rgba(0,0,0,1);
         }
 
         nav {
@@ -68,6 +70,7 @@
             margin-bottom: 60px;
             border: 1px solid #1a1d24;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
 
         h2 { border-bottom: 1px solid var(--gold); padding-bottom: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; }
@@ -124,6 +127,21 @@
         .faction-content { padding: 15px; }
 
         footer { text-align: center; padding: 60px; color: #444; font-size: 0.8rem; }
+
+        /* STILE AGGIUNTIVO PER LINK SCHEDARIO */
+        .nav-card {
+            display: block;
+            text-decoration: none;
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--gold);
+            text-align: center;
+            transition: 0.3s;
+            background: rgba(201, 162, 77, 0.05);
+        }
+        .nav-card:hover {
+            background: rgba(201, 162, 77, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -203,14 +221,14 @@
                 <p>Jax del Patto attraversa la nebbia e riporta prove di una terra vibrante. Nasce il progetto dell'Ultima Spedizione.</p>
             </div>
             <div class="time-event" style="margin-bottom: 0;">
-                <h4 style="color: var(--danger);">L'Ora Finale (Oggi)</h4>
+                <h4 style="color: #ff4d4d;">L'Ora Finale (Oggi)</h4>
                 <p>Le scogliere di Porto Althamar iniziano a pietrificarsi. Non c'è più tempo per attendere: la flotta deve salpare.</p>
             </div>
         </div>
     </section>
 
 
-    <section id="factions">
+    <section id="fazioni">
         <h2>Le Grandi Fazioni di Althamar</h2>
         <div class="factions-grid">
             <a href="fazioni/concordato.html" class="faction-btn">
@@ -263,7 +281,7 @@
             </a>
         </div>
         <a href="schedario-png.html" class="nav-card">
-    <h2>Schedario PNG</h2>
+            <h2>Schedario PNG</h2>
         </a>
     </section>
 
@@ -275,7 +293,3 @@
 
 </body>
 </html>
-
-
-
-

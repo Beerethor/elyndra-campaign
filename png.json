@@ -16,7 +16,7 @@
     "foto": "img/kaelen.png",
     "tratti": ["Resistente", "Vigore", "Sopravvissuto"],
     "fazione": "Guardiani"
-  }
+  },
   {
     "id": 3,
     "nome": "Silas l'Alchimista",
@@ -34,7 +34,7 @@
     "foto": "img/elowen.png",
     "tratti": ["Selvatica", "Empatia", "Conoscenza Nyxoria"],
     "fazione": "Circolo"
-  }
+  },
   {
     "id": 5,
     "nome": "Alto Comandante Valerius",
@@ -70,7 +70,7 @@
     "foto": "img/leader-patto.png",
     "tratti": ["Navigazione 5", "Carisma", "Sprezzo del Pericolo"],
     "fazione": "Patto"
-  }
+  },
   {
     "id": 9,
     "nome": "Vesper",

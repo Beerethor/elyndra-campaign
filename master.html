@@ -9,26 +9,57 @@
             --gold: #c9a24d;
             --gold-glow: rgba(201, 162, 77, 0.4);
             --bg-dark: #05070a;
-            --panel-bg: #11141b;
+            --panel-bg: rgba(17, 20, 27, 0.85); /* Leggera trasparenza */
             --crit-red: #ff4d4d;
             --lore-blue: #9db4ff;
+            --sidebar-width: 280px;
         }
 
         body {
             margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: var(--bg-dark); color: #e0e0e0; line-height: 1.6;
-            background-image: radial-gradient(circle at 50% 50%, #11151f 0%, #05070a 100%);
-            background-attachment: fixed;
+            color: #e0e0e0; line-height: 1.6;
+            /* SFONDO MASTER INTEGRATO */
+            background: 
+                linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.9)), 
+                url('sfondo-master.png') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
         }
 
-        /* --- Animazioni --- */
-        @keyframes glitch {
-            0% { text-shadow: 1px 0 var(--crit-red); transform: translateX(0); }
-            20% { text-shadow: -1px 0 var(--gold); transform: translateX(1px); }
-            100% { text-shadow: -1px 0 var(--gold); transform: translateX(0); }
+        /* --- Sidebar Laterale --- */
+        .sidebar {
+            height: 100%; width: 0; position: fixed; z-index: 1000;
+            top: 0; right: 0; background-color: rgba(17, 20, 27, 0.98);
+            border-left: 0px solid var(--gold); overflow-x: hidden;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 60px; box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
         }
 
-        .glitch-alert { color: var(--crit-red); animation: glitch 0.4s infinite; font-weight: bold; }
+        .sidebar h3 {
+            color: var(--gold); text-align: center; text-transform: uppercase;
+            letter-spacing: 2px; font-size: 1rem; margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            padding: 15px 25px; text-decoration: none; font-size: 0.95rem;
+            color: #ccc; display: block; transition: 0.3s; border-bottom: 1px solid #1f232b;
+        }
+
+        .sidebar a:hover { background: rgba(201, 162, 77, 0.1); color: var(--gold); padding-left: 35px; }
+
+        .sidebar .closebtn {
+            position: absolute; top: 10px; left: 15px; font-size: 30px;
+            border: none; cursor: pointer; background: none; color: var(--gold);
+        }
+
+        .openbtn {
+            font-size: 0.8rem; cursor: pointer; background: transparent;
+            color: var(--gold); padding: 8px 15px; border: 1px solid var(--gold);
+            transition: 0.3s; letter-spacing: 1px;
+        }
+
+        .openbtn:hover { background-color: var(--gold); color: #000; box-shadow: 0 0 15px var(--gold-glow); }
 
         /* --- Header --- */
         header {
@@ -38,203 +69,163 @@
             backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
         }
 
-        header h1 { 
-            margin: 0; font-size: 1.3rem; letter-spacing: 4px; 
-            text-transform: uppercase; color: var(--gold); 
-        }
+        header h1 { margin: 0; font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); }
 
-        nav a { 
-            color: var(--gold); text-decoration: none; font-size: 0.8rem; 
-            border: 1px solid var(--gold); padding: 6px 12px; transition: 0.3s; 
-            letter-spacing: 1px;
-        }
-        nav a:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold-glow); }
-
-        /* --- Layout --- */
+        /* --- Layout Pannelli --- */
         main { 
             padding: 2rem; display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
-            gap: 2rem; max-width: 1400px; margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            gap: 2rem; max-width: 1400px; margin: 0 auto; 
         }
 
         .panel { 
-            background: var(--panel-bg); border: 1px solid #2a2d35; 
-            padding: 1.5rem; border-radius: 4px; 
+            background: var(--panel-bg); 
+            border: 1px solid rgba(201, 162, 77, 0.2); 
+            padding: 1.5rem; border-radius: 8px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px); /* Effetto vetro smerigliato */
         }
 
-        h2 {  
-            color: var(--gold); border-bottom: 1px solid #333; 
-            padding-bottom: 10px; margin-top: 0;
-            text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem;
-        }
+        h2 { color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; }
 
-        /* --- Box Contenuti --- */
-        .mechanic-box { 
-            background: rgba(0,0,0,0.4); padding: 15px; 
-            border-left: 4px solid var(--gold); margin-bottom: 20px; 
-        }
-
-        .secret-box { 
-            background: rgba(255, 77, 77, 0.05); border-left: 4px solid var(--crit-red); 
-            padding: 15px; margin-bottom: 15px; font-size: 0.9rem; 
-            transition: 0.3s;
-        }
-        .secret-box:hover { background: rgba(255, 77, 77, 0.1); }
+        .mechanic-box { background: rgba(0,0,0,0.4); padding: 15px; border-left: 4px solid var(--gold); margin-bottom: 20px; }
+        .secret-box { background: rgba(255, 77, 77, 0.08); border-left: 4px solid var(--crit-red); padding: 15px; margin-bottom: 15px; font-size: 0.9rem; border-radius: 0 4px 4px 0; }
         
         strong { color: var(--gold); }
         .critical { color: var(--crit-red); font-weight: bold; }
-
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
-        th, td { border: 1px solid #333; padding: 12px; text-align: left; }
-        th { background: #1a1d24; color: var(--gold); }
-
-        .lore-note { 
-            font-style: italic; color: var(--lore-blue); 
-            margin-top: 15px; font-size: 0.85rem; padding: 8px; 
-            background: rgba(157, 180, 255, 0.05); border-radius: 4px;
-        }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; background: rgba(0,0,0,0.2); }
+        th, td { border: 1px solid rgba(255,255,255,0.1); padding: 12px; text-align: left; }
+        th { background: rgba(201, 162, 77, 0.15); color: var(--gold); }
 
         /* --- Overlay Password --- */
         #password-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #05070a; z-index: 9999; display: flex; 
-            flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('sfondo-master.png') no-repeat center center fixed;
+            background-size: cover; z-index: 9999; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; backdrop-filter: blur(10px);
         }
-
-        .login-card {
+        .login-card { 
             border: 1px solid var(--gold); padding: 40px; 
-            background: #11141b; text-align: center;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            background: rgba(17, 20, 27, 0.95); text-align: center; 
+            box-shadow: 0 0 50px rgba(0,0,0,1); border-radius: 4px;
         }
 
-        footer { 
-            text-align: center; padding: 3rem; color: #444; 
-            font-size: 0.8rem; letter-spacing: 2px;
-        }
-
-        .tool-link {
-            display: block; text-align: center; text-decoration: none;
-            padding: 10px; background: #1a1d24; border: 1px solid #333;
-            color: #fff; margin-bottom: 10px; border-radius: 4px; transition: 0.3s;
-        }
-        .tool-link:hover { border-color: var(--gold); color: var(--gold); }
+        footer { text-align: center; padding: 3rem; color: #666; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
+<div id="mySidebar" class="sidebar">
+    <button class="closebtn" onclick="closeNav()">&times;</button>
+    <h3>🛠️ Toolbox Master</h3>
+    <a href="https://progettolumi.github.io/dnd-master-screen/" target="_blank">🛡️ Schermo del Master</a>
+    <a href="https://www.aidedd.org/dnd-filters/monsters.php" target="_blank">🐉 Bestiario</a>
+    <a href="https://koboldplus.club/" target="_blank">⚔️ Gestione Incontri</a>
+    <a href="#" onclick="alert('Sistema di salvataggio note non rilevato.')">📜 Note di Sessione</a>
+</div>
+
 <div id="password-overlay">
     <div class="login-card">
-        <h2 style="border:none; letter-spacing: 6px;">Archivio Proibito</h2>
-        <p style="color: #666; font-size: 0.8rem; margin-bottom: 25px;">Sussurra la chiave per dissolvere la Litostasi</p>
-        <input type="password" id="password-input" style="
-            padding: 12px; border: 1px solid #333; background: #000; color: var(--gold); 
-            text-align: center; margin-bottom: 20px; outline: none; width: 250px; letter-spacing: 3px;">
+        <h2 style="border:none; letter-spacing: 6px; color: var(--gold);">Archivio Proibito</h2>
+        <p style="color: #888; font-size: 0.8rem; margin-bottom: 25px; text-transform: uppercase;">Sussurra la chiave per dissolvere la Litostasi</p>
+        <input type="password" id="password-input" placeholder="..." style="padding: 12px; border: 1px solid #444; background: #000; color: var(--gold); text-align: center; margin-bottom: 20px; outline: none; width: 250px; letter-spacing: 5px;">
         <br>
-        <button onclick="checkPassword()" style="
-            padding: 10px 30px; background: var(--gold); border: none; cursor: pointer; 
-            font-weight: bold; text-transform: uppercase; color: #000;">Accedi</button>
-        <p id="error-msg" style="color: var(--crit-red); margin-top: 20px; display: none; font-style: italic;">Parola errata. La nebbia persiste.</p>
+        <button onclick="checkPassword()" style="padding: 12px 40px; background: var(--gold); border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; color: #000; transition: 0.3s;">Accedi</button>
     </div>
 </div>
 
-<script>
-function checkPassword() {
-    const psw = document.getElementById('password-input').value;
-    if (psw === "Litostasi") {
-        const overlay = document.getElementById('password-overlay');
-        overlay.style.transition = "opacity 0.8s ease";
-        overlay.style.opacity = "0";
-        setTimeout(() => { overlay.style.display = 'none'; }, 800);
-    } else {
-        document.getElementById('error-msg').style.display = 'block';
-    }
-}
-document.getElementById('password-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') checkPassword(); });
-</script>
-
 <header>
     <h1>Console del Narratore</h1>
-    <nav><a href="index.html">TORNA ALL'ARCHIVIO</a></nav>
+    <div>
+        <button class="openbtn" onclick="openNav()">🛠️ STRUMENTI</button>
+        <a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 0.8rem; margin-left: 15px; border: 1px solid var(--gold); padding: 7px 12px; vertical-align: middle;">ESCI</a>
+    </div>
 </header>
 
 <main>
     <section class="panel">
-        <h2>Meccanica Base: <span class="glitch-alert">Litostasi</span></h2>
+        <h2>Meccanica: <span style="color:var(--crit-red)">Litostasi</span></h2>
         <div class="mechanic-box">
-            <strong>TS Costituzione (Ogni ora trascorsa):</strong>
-            <ul>
-                <li>Zona Periferica: <strong>CD 12</strong></li>
+            <strong>TS Costituzione (Cadenza Oraria):</strong>
+            <ul style="margin: 8px 0; padding-left: 20px;">
+                <li>Periferia: <strong>CD 12</strong></li>
                 <li>Zona Avanzata: <strong>CD 15</strong></li>
-                <li>Nucleo / Aetherys Profonda: <strong>CD 18+</strong></li>
+                <li>Nucleo: <strong>CD 18+</strong></li>
             </ul>
         </div>
-        <strong>Progressione della Pietrificazione:</strong>
         <table>
             <tr><th>Grado</th><th>Effetto Meccanico</th></tr>
-            <tr><td>1°</td><td>Velocità ridotta di 3 m.</td></tr>
-            <tr><td>2°</td><td>Svantaggio a tutte le prove di Forza e Destrezza.</td></tr>
-            <tr><td>3°</td><td>Vulnerabilità ai danni contundenti (la pelle si spacca).</td></tr>
-            <tr><td>4°</td><td>Pietrificazione Incompleta (Condizione: Restrained).</td></tr>
-            <tr><td>5°</td><td><span class="critical">PIETRIFICAZIONE TOTALE (Morte apparente).</span></td></tr>
+            <tr><td>1°</td><td>Velocità -3 m.</td></tr>
+            <tr><td>2°</td><td>Svantaggio Prove Fisiche.</td></tr>
+            <tr><td>3°</td><td>Vulnerabilità Contundenti.</td></tr>
+            <tr><td>4°</td><td>Stato: Trattenuto (Restrained).</td></tr>
+            <tr><td>5°</td><td><span class="critical">Pietrificazione Totale.</span></td></tr>
         </table>
     </section>
 
     <section class="panel">
-        <h2>Segreti Oscuri delle Fazioni</h2>
-        <div class="secret-box">
-            <strong>Concordato:</strong> Valerius Thorne è affetto da Litostasi interna; i suoi organi mutano in piombo. Cerca il soffio di un Drago per "riforgiarsi".
-        </div>
-        <div class="secret-box">
-            <strong>Circolo:</strong> La linfa di Nyxoria non cura, ma infesta. I guariti diventano parte di una mente alveare comandata dal continente.
-        </div>
-        <div class="secret-box">
-            <strong>Archivio:</strong> Mastro Kaelen estrae ricordi dalle statue per alimentare un salto temporale che cancellerebbe gli ultimi 50 anni di storia.
-        </div>
-        <div class="secret-box">
-            <strong>Patto:</strong> Il capitano Jax sa che l'umanità è già stata qui. I Khaari sono ciò che resta delle precedenti spedizioni mutate.
-        </div>
-        <div class="secret-box">
-            <strong>Velo Cremisi:</strong> "Il Silenzio" non è un dio, ma la coscienza stessa della Litostasi che brama un mondo di statue eterne.
-        </div>
-        <div class="secret-box">
-            <strong>Khaari:</strong> La loro bioluminescenza si spegne. Hanno bisogno di "anime fresche" dai nuovi arrivati per non svanire.
-        </div>
+        <h2>Segreti delle Fazioni</h2>
+        <div class="secret-box"><strong>Concordato:</strong> Valerius Thorne ha il cuore che sta mutando in piombo.</div>
+        <div class="secret-box"><strong>Circolo:</strong> La linfa sostituisce la coscienza con quella del continente.</div>
+        <div class="secret-box"><strong>Archivio:</strong> Kaelen vuole cancellare 50 anni di storia tramite un manufatto.</div>
+        <div class="secret-box"><strong>Patto:</strong> I Khaari sono il risultato dell'ultima spedizione fallita.</div>
     </section>
 
     <section class="panel">
-        <h2>Note sulle Razze</h2>
+        <h2>Razze & Lore</h2>
         <div class="mechanic-box">
-            <strong>Khaari (Giocabili):</strong> +2 Sag, +1 Cos. Scurovisione. 
-            <br><em>Figli del Flusso:</em> Vantaggio al primo TS contro immobilizzazione. 
-            <br><em>Ritmo del Mondo:</em> 1/giorno ignora 'restrained' per 1 round.
+            <strong>Khaari:</strong> +2 Sag, +1 Cos. 
+            <br><em>Figli del Flusso:</em> Vantaggio TS contro pietrificazione. 
         </div>
-        <p class="lore-note">I Dragonborn hanno Svantaggio ai TS contro Litostasi per via della loro natura elementale pura.</p>
+        <p style="font-size: 0.85rem; color: var(--lore-blue); font-style: italic;">
+            Nota Master: I Dragonborn sono conduttori naturali di Aether; hanno svantaggio ai TS Litostasi.
+        </p>
     </section>
 
     <section class="panel">
-        <h2>Pianificazione Campagna</h2>
-        <ul style="list-style: none; padding: 0;">
-            <li style="margin-bottom: 10px;"><strong>Tier 1 (1-5):</strong> Sopravvivenza e sbarco su Nyxoria.</li>
-            <li style="margin-bottom: 10px;"><strong>Tier 2 (6-10):</strong> La verità sui Khaari e guerra civile tra Fazioni.</li>
-            <li style="margin-bottom: 10px;"><strong>Tier 3 (11-15):</strong> Discesa nel Nucleo di Aetherys.</li>
-            <li style="margin-bottom: 10px;"><strong>Tier 4 (16-20):</strong> Il Secondo Battito e lo scontro finale col Silenzio.</li>
-        </ul>
-    </section>
-
-    <section class="panel" style="grid-column: 1 / -1;">
-        <h2>🛠️ Strumenti Rapidi</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-            <a href="https://www.aidedd.org/dnd-filters/monsters.php" target="_blank" class="tool-link">🐉 Bestiario</a>
-            <a href="https://koboldplus.club/" target="_blank" class="tool-link">⚔️ Incontri</a>
-            <a href="#" class="tool-link">📜 Note di Sessione</a>
-        </div>
+        <h2>Roadmap Campagna</h2>
+        <p style="font-size: 0.95rem; line-height: 1.8;">
+            🔴 <strong>Tier 1:</strong> Sopravvivenza a Porto Althamar.<br>
+            🟠 <strong>Tier 2:</strong> Guerra tra fazioni su Nyxoria.<br>
+            🟡 <strong>Tier 3:</strong> La discesa nelle profondità di Aetherys.<br>
+            ⚪ <strong>Tier 4:</strong> Il Secondo Battito e il destino del mondo.
+        </p>
     </section>
 </main>
 
 <footer>
-    ELYNDRA RPG • SISTEMA PROPRIETARIO • 2026
+    ELYNDRA RPG • 2026 • ACCESSO MASTER CRIPTATO
 </footer>
+
+<script>
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "var(--sidebar-width)";
+        document.getElementById("mySidebar").style.borderLeft = "2px solid var(--gold)";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("mySidebar").style.borderLeft = "0px solid var(--gold)";
+    }
+
+    function checkPassword() {
+        const psw = document.getElementById('password-input').value;
+        if (psw === "Litostasi") {
+            const overlay = document.getElementById('password-overlay');
+            overlay.style.transition = "all 0.8s ease";
+            overlay.style.opacity = "0";
+            overlay.style.filter = "blur(20px)";
+            setTimeout(() => { overlay.style.display = 'none'; }, 800);
+        } else {
+            document.getElementById('password-input').style.borderColor = "var(--crit-red)";
+        }
+    }
+
+    document.getElementById('password-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') checkPassword();
+    });
+</script>
 
 </body>
 </html>

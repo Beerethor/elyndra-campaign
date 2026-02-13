@@ -3,105 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elyndra - Portale dei Viaggiatori</title>
+    <title>Elyndra - Cronache della Litostasi</title>
     <style>
         :root {
             --gold: #c9a24d;
+            --gold-glow: rgba(201, 162, 77, 0.4);
             --bg-dark: #05070a;
             --panel-bg: rgba(17, 20, 27, 0.9);
+            --crit-red: #ff4d4d;
         }
 
         body {
-            margin: 0; font-family: 'Segoe UI', sans-serif;
+            margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
             background: radial-gradient(circle, #0f1218 0%, #05070a 100%);
-            color: #e0e0e0; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
+            color: #e0e0e0; line-height: 1.6;
         }
 
+        /* --- Hero Section --- */
         header {
-            width: 100%; padding: 40px 0; text-align: center;
-            border-bottom: 1px solid rgba(201, 162, 77, 0.3);
-            margin-bottom: 50px;
+            height: 60vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; border-bottom: 2px solid var(--gold);
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero-bg.jpg') no-repeat center center;
+            background-size: cover;
         }
 
-        h1 { font-size: 2.5rem; letter-spacing: 8px; text-transform: uppercase; color: var(--gold); margin: 0; }
+        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; color: var(--gold); margin: 0; text-shadow: 0 0 20px var(--gold-glow); }
+        .subtitle { font-size: 1.2rem; letter-spacing: 4px; color: #888; margin-top: 10px; text-transform: uppercase; }
 
-        .auth-container {
-            background: var(--panel-bg); padding: 30px;
-            border: 1px solid rgba(201, 162, 77, 0.2);
-            border-radius: 8px; width: 90%; max-width: 400px;
-            text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        /* --- Main Layout --- */
+        main { max-width: 1200px; margin: -50px auto 50px; padding: 0 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+
+        .content-section { background: var(--panel-bg); padding: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* --- Sidebar & Login Box --- */
+        .sidebar { display: flex; flex-direction: column; gap: 30px; }
+
+        .auth-box { 
+            background: var(--panel-bg); padding: 25px; border: 1px solid var(--gold); 
+            border-radius: 8px; text-align: center; position: sticky; top: 20px;
         }
 
+        /* --- UI Elements --- */
         .auth-btn {
-            width: 100%; padding: 12px; margin: 10px 0;
-            background: transparent; border: 1px solid var(--gold);
-            color: var(--gold); cursor: pointer; font-weight: bold;
-            text-transform: uppercase; transition: 0.3s; letter-spacing: 1px;
+            width: 100%; padding: 12px; margin: 10px 0; background: transparent; 
+            border: 1px solid var(--gold); color: var(--gold); cursor: pointer; 
+            font-weight: bold; text-transform: uppercase; transition: 0.3s;
         }
-
-        .auth-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 15px rgba(201, 162, 77, 0.4); }
+        .auth-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 15px var(--gold-glow); }
 
         .hidden { display: none !important; }
+
+        h2 { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(201,162,77,0.3); padding-bottom: 10px; }
+        
+        .lore-card { background: rgba(0,0,0,0.3); padding: 20px; border-left: 3px solid var(--gold); margin-bottom: 20px; }
 
         /* Modale Email */
         #email-modal {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: #111; border: 1px solid var(--gold); padding: 30px;
-            z-index: 1000; box-shadow: 0 0 100px rgba(0,0,0,0.9);
+            z-index: 1000; box-shadow: 0 0 100px rgba(0,0,0,0.9); width: 300px;
         }
+        #email-modal input { width: 100%; padding: 10px; margin-bottom: 15px; background: #000; border: 1px solid #444; color: var(--gold); box-sizing: border-box; }
 
-        #email-modal input {
-            display: block; width: 100%; padding: 10px; margin-bottom: 15px;
-            background: #000; border: 1px solid #444; color: var(--gold);
-            box-sizing: border-box;
-        }
-
-        #master-link-container { margin-top: 40px; animation: fadeIn 1s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        footer { text-align: center; padding: 50px; color: #444; font-size: 0.8rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Elyndra</h1>
-    <p style="color: #666; letter-spacing: 2px;">Cronache della Litostasi</p>
+    <div class="subtitle">Il Secondo Battito si avvicina</div>
 </header>
 
-<div class="auth-container">
-    <div id="logged-out-ui">
-        <p style="margin-bottom: 20px; font-size: 0.9rem; color: #888;">IDENTIFICATI PER PROCEDERE</p>
-        <button class="auth-btn" onclick="loginGoogle()">Entra con Google</button>
-        <button class="auth-btn" onclick="toggleEmailLogin()">Login Email</button>
-    </div>
+<main>
+    <section class="content-section">
+        <h2>Il Mondo</h2>
+        <p>Benvenuti su Elyndra, un mondo sospeso tra la gloria del passato e l'inevitabile avanzata della <strong>Litostasi</strong>. Qui, l'Aether non è solo energia, ma una condanna per chi non sa domarlo.</p>
+        
+        <div class="lore-card">
+            <h3>La Litostasi</h3>
+            <p>Una piaga che trasforma la carne in pietra viva. Dragonborn e creature magiche sono i primi a cadere, conduttori naturali di un potere che li consuma dall'interno.</p>
+        </div>
 
-    <div id="logged-in-ui" class="hidden">
-        <p style="font-size: 0.8rem; color: #888;">VIAGGIATORE RICONOSCIUTO</p>
-        <p id="user-info" style="color: var(--gold); font-weight: bold; margin-bottom: 20px;"></p>
-        <button class="auth-btn" style="border-color: #444; color: #888;" onclick="logout()">Disconnetti</button>
-    </div>
-</div>
+        <h2>Ultime Notizie</h2>
+        <p>• Porto Althamar ha dichiarato la quarantena totale.<br>
+           • I Khaari segnalano movimenti insoliti nel Nucleo di Nyxoria.<br>
+           • Il Concordato cerca mercenari per una spedizione nelle Terre Grigie.</p>
+    </section>
 
-<div id="master-link-container" class="hidden">
-    <a href="master.html" style="text-decoration: none;">
-        <button class="auth-btn" style="padding: 20px; border-width: 2px;">👁️ Accedi alla Console Master</button>
-    </a>
-</div>
+    <aside class="sidebar">
+        <div class="auth-box">
+            <div id="logged-out-ui">
+                <h3 style="color: var(--gold); margin-top: 0;">ACCESSO DATI</h3>
+                <p style="font-size: 0.8rem; color: #888;">Identificati per consultare i tuoi documenti di viaggio.</p>
+                <button class="auth-btn" onclick="loginGoogle()">Entra con Google</button>
+                <button class="auth-btn" onclick="toggleEmailLogin()">Email & Pass</button>
+            </div>
+
+            <div id="logged-in-ui" class="hidden">
+                <h3 style="color: var(--gold); margin-top: 0;">BENVENUTO</h3>
+                <p id="user-info" style="font-weight: bold; margin-bottom: 20px;"></p>
+                <button class="auth-btn" style="border-color: #444; color: #666; font-size: 0.7rem;" onclick="logout()">Disconnetti</button>
+            </div>
+
+            <div id="master-link-container" class="hidden" style="margin-top: 20px; border-top: 1px solid rgba(201,162,77,0.3); padding-top: 20px;">
+                <p style="color: var(--crit-red); font-size: 0.7rem; font-weight: bold;">AUTORIZZAZIONE MASTER RILEVATA</p>
+                <a href="master.html" style="text-decoration: none;">
+                    <button class="auth-btn" style="border-color: var(--crit-red); color: var(--crit-red);">CONSOLE MASTER</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="auth-box" style="border-color: #333;">
+            <h3 style="color: #666; margin-top: 0;">RISORSE</h3>
+            <p style="font-size: 0.8rem;"><a href="#" style="color: var(--gold);">Regolamento Pokerole</a></p>
+            <p style="font-size: 0.8rem;"><a href="#" style="color: var(--gold);">Mappa di Nyxoria</a></p>
+        </div>
+    </aside>
+</main>
 
 <div id="email-modal" class="hidden">
-    <h3 style="color: var(--gold); margin-top: 0;">Accesso Archivio</h3>
+    <h3 style="color: var(--gold); margin-top: 0;">Login Archivio</h3>
     <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
     <button class="auth-btn" onclick="signInEmail()">Accedi</button>
-    <button class="auth-btn" style="font-size: 0.7rem; border:none;" onclick="signUpEmail()">Non hai un account? Registrati</button>
-    <button onclick="toggleEmailLogin()" style="background:none; border:none; color:#666; cursor:pointer; width:100%; margin-top:10px;">Chiudi</button>
+    <button class="auth-btn" style="font-size: 0.7rem; border:none;" onclick="signUpEmail()">Registrati</button>
+    <button onclick="toggleEmailLogin()" style="background:none; border:none; color:#666; cursor:pointer; width:100%; margin-top:10px;">Annulla</button>
 </div>
+
+<footer>ELYNDRA • PROGETTO MASTER SCREEN • 2026</footer>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { 
         getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, 
-        signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification 
+        signInWithEmailAndPassword, createUserWithEmailAndPassword 
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -120,7 +157,6 @@
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
 
-    // --- CONTROLLO STATO UTENTE ---
     onAuthStateChanged(auth, async (user) => {
         const outUI = document.getElementById('logged-out-ui');
         const inUI = document.getElementById('logged-in-ui');
@@ -132,14 +168,11 @@
             inUI.classList.remove('hidden');
             userInfo.innerText = user.displayName || user.email;
 
-            // Chiedi a Firestore chi è il Master
-            try {
-                const docSnap = await getDoc(doc(db, "configurazione", "ruoli"));
-                if (docSnap.exists() && user.email === docSnap.data().masterEmail) {
-                    masterUI.classList.remove('hidden');
-                }
-            } catch (e) { console.error("Errore verifica master:", e); }
-            
+            // Controllo Master tramite Database
+            const docSnap = await getDoc(doc(db, "configurazione", "ruoli"));
+            if (docSnap.exists() && user.email === docSnap.data().masterEmail) {
+                masterUI.classList.remove('hidden');
+            }
         } else {
             outUI.classList.remove('hidden');
             inUI.classList.add('hidden');
@@ -147,35 +180,19 @@
         }
     });
 
-    // --- FUNZIONI GLOBALI ---
-    window.loginGoogle = () => {
-        signInWithPopup(auth, provider).catch(e => {
-            if(e.code === 'auth/popup-blocked') alert("Sblocca i popup del browser per accedere.");
-            else alert("Errore Google: " + e.message);
-        });
-    };
-
+    window.loginGoogle = () => signInWithPopup(auth, provider).catch(e => alert(e.message));
     window.logout = () => signOut(auth);
     window.toggleEmailLogin = () => document.getElementById('email-modal').classList.toggle('hidden');
-
     window.signInEmail = () => {
         const e = document.getElementById('email').value;
         const p = document.getElementById('password').value;
         signInWithEmailAndPassword(auth, e, p).then(() => toggleEmailLogin()).catch(err => alert(err.message));
     };
-
     window.signUpEmail = () => {
         const e = document.getElementById('email').value;
         const p = document.getElementById('password').value;
-        createUserWithEmailAndPassword(auth, e, p)
-            .then(cred => {
-                sendEmailVerification(cred.user);
-                alert("Registrazione effettuata! Controlla la mail per verificare il profilo.");
-                toggleEmailLogin();
-            })
-            .catch(err => alert(err.message));
+        createUserWithEmailAndPassword(auth, e, p).then(() => toggleEmailLogin()).catch(err => alert(err.message));
     };
 </script>
-
 </body>
 </html>

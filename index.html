@@ -3,143 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elyndra - Cronache della Litostasi</title>
+    <title>Elyndra - Portale dei Viaggiatori</title>
     <style>
         :root {
             --gold: #c9a24d;
             --gold-glow: rgba(201, 162, 77, 0.4);
             --bg-dark: #05070a;
             --panel-bg: rgba(17, 20, 27, 0.9);
-            --crit-red: #ff4d4d;
         }
 
         body {
-            margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0; font-family: 'Segoe UI', sans-serif;
             background: radial-gradient(circle, #0f1218 0%, #05070a 100%);
-            color: #e0e0e0; line-height: 1.6;
+            color: #e0e0e0; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* --- Hero Section --- */
         header {
-            height: 60vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; border-bottom: 2px solid var(--gold);
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/hero-bg.jpg') no-repeat center center;
+            width: 100%; padding: 60px 0; text-align: center;
+            border-bottom: 2px solid var(--gold);
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('img/hero-bg.jpg') no-repeat center center;
             background-size: cover;
         }
 
-        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; color: var(--gold); margin: 0; text-shadow: 0 0 20px var(--gold-glow); }
-        .subtitle { font-size: 1.2rem; letter-spacing: 4px; color: #888; margin-top: 10px; text-transform: uppercase; }
+        h1 { font-size: 3.5rem; letter-spacing: 12px; text-transform: uppercase; color: var(--gold); margin: 0; text-shadow: 0 0 20px var(--gold-glow); }
 
-        /* --- Main Layout --- */
-        main { max-width: 1200px; margin: -50px auto 50px; padding: 0 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
+        main { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
 
-        .content-section { background: var(--panel-bg); padding: 40px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .content-section { background: var(--panel-bg); padding: 30px; border-radius: 8px; border: 1px solid rgba(201, 162, 77, 0.1); }
         
-        /* --- Sidebar & Login Box --- */
-        .sidebar { display: flex; flex-direction: column; gap: 30px; }
+        .nav-card { background: rgba(0,0,0,0.3); padding: 20px; border-left: 3px solid var(--gold); margin-bottom: 20px; transition: 0.3s; text-decoration: none; display: block; color: inherit; }
+        .nav-card:hover { background: rgba(201, 162, 77, 0.1); transform: translateX(10px); }
+        .nav-card h3 { margin: 0; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
 
-        .auth-box { 
-            background: var(--panel-bg); padding: 25px; border: 1px solid var(--gold); 
-            border-radius: 8px; text-align: center; position: sticky; top: 20px;
-        }
-
-        /* --- UI Elements --- */
+        .auth-box { background: var(--panel-bg); padding: 25px; border: 1px solid var(--gold); border-radius: 8px; text-align: center; }
+        
         .auth-btn {
             width: 100%; padding: 12px; margin: 10px 0; background: transparent; 
             border: 1px solid var(--gold); color: var(--gold); cursor: pointer; 
             font-weight: bold; text-transform: uppercase; transition: 0.3s;
         }
-        .auth-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 15px var(--gold-glow); }
+        .auth-btn:hover { background: var(--gold); color: black; }
 
         .hidden { display: none !important; }
-
-        h2 { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid rgba(201,162,77,0.3); padding-bottom: 10px; }
-        
-        .lore-card { background: rgba(0,0,0,0.3); padding: 20px; border-left: 3px solid var(--gold); margin-bottom: 20px; }
 
         /* Modale Email */
         #email-modal {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: #111; border: 1px solid var(--gold); padding: 30px;
-            z-index: 1000; box-shadow: 0 0 100px rgba(0,0,0,0.9); width: 300px;
+            background: #111; border: 1px solid var(--gold); padding: 30px; z-index: 1000; width: 300px;
         }
-        #email-modal input { width: 100%; padding: 10px; margin-bottom: 15px; background: #000; border: 1px solid #444; color: var(--gold); box-sizing: border-box; }
-
-        footer { text-align: center; padding: 50px; color: #444; font-size: 0.8rem; letter-spacing: 2px; }
+        #email-modal input { width: 100%; padding: 10px; margin-bottom: 15px; background: #000; border: 1px solid #444; color: var(--gold); }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Elyndra</h1>
-    <div class="subtitle">Il Secondo Battito si avvicina</div>
+    <p style="color: #888; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px;">Cronache della Litostasi</p>
 </header>
 
 <main>
     <section class="content-section">
-        <h2>Il Mondo</h2>
-        <p>Benvenuti su Elyndra, un mondo sospeso tra la gloria del passato e l'inevitabile avanzata della <strong>Litostasi</strong>. Qui, l'Aether non è solo energia, ma una condanna per chi non sa domarlo.</p>
+        <h2>📚 Risorse del Mondo</h2>
         
-        <div class="lore-card">
-            <h3>La Litostasi</h3>
-            <p>Una piaga che trasforma la carne in pietra viva. Dragonborn e creature magiche sono i primi a cadere, conduttori naturali di un potere che li consuma dall'interno.</p>
-        </div>
+        <a href="wiki.html" class="nav-card">
+            <h3>📖 Wiki di Elyndra</h3>
+            <p>Consulta l'enciclopedia su regioni, razze e la piaga della Litostasi.</p>
+        </a>
 
-        <h2>Ultime Notizie</h2>
-        <p>• Porto Althamar ha dichiarato la quarantena totale.<br>
-           • I Khaari segnalano movimenti insoliti nel Nucleo di Nyxoria.<br>
-           • Il Concordato cerca mercenari per una spedizione nelle Terre Grigie.</p>
+        <a href="diario.html" class="nav-card">
+            <h3>📓 Diario di Viaggio</h3>
+            <p>Cronologia delle sessioni e appunti pubblici dei giocatori.</p>
+        </a>
     </section>
 
     <aside class="sidebar">
         <div class="auth-box">
             <div id="logged-out-ui">
-                <h3 style="color: var(--gold); margin-top: 0;">ACCESSO DATI</h3>
-                <p style="font-size: 0.8rem; color: #888;">Identificati per consultare i tuoi documenti di viaggio.</p>
+                <h3 style="color: var(--gold); margin-top: 0;">ACCESSO</h3>
                 <button class="auth-btn" onclick="loginGoogle()">Entra con Google</button>
-                <button class="auth-btn" onclick="toggleEmailLogin()">Email & Pass</button>
+                <button class="auth-btn" onclick="toggleEmailLogin()">Email & Password</button>
             </div>
 
             <div id="logged-in-ui" class="hidden">
                 <h3 style="color: var(--gold); margin-top: 0;">BENVENUTO</h3>
-                <p id="user-info" style="font-weight: bold; margin-bottom: 20px;"></p>
+                <p id="user-info" style="font-weight: bold; margin-bottom: 20px; font-size: 0.9rem;"></p>
                 <button class="auth-btn" style="border-color: #444; color: #666; font-size: 0.7rem;" onclick="logout()">Disconnetti</button>
             </div>
 
-            <div id="master-link-container" class="hidden" style="margin-top: 20px; border-top: 1px solid rgba(201,162,77,0.3); padding-top: 20px;">
-                <p style="color: var(--crit-red); font-size: 0.7rem; font-weight: bold;">AUTORIZZAZIONE MASTER RILEVATA</p>
+            <div id="master-link-container" class="hidden" style="margin-top: 20px; border-top: 1px solid rgba(201, 162, 77, 0.3); padding-top: 20px;">
                 <a href="master.html" style="text-decoration: none;">
-                    <button class="auth-btn" style="border-color: var(--crit-red); color: var(--crit-red);">CONSOLE MASTER</button>
+                    <button class="auth-btn" style="border-color: #ff4d4d; color: #ff4d4d;">CONSOLE MASTER</button>
                 </a>
             </div>
-        </div>
-
-        <div class="auth-box" style="border-color: #333;">
-            <h3 style="color: #666; margin-top: 0;">RISORSE</h3>
-            <p style="font-size: 0.8rem;"><a href="#" style="color: var(--gold);">Regolamento Pokerole</a></p>
-            <p style="font-size: 0.8rem;"><a href="#" style="color: var(--gold);">Mappa di Nyxoria</a></p>
         </div>
     </aside>
 </main>
 
 <div id="email-modal" class="hidden">
-    <h3 style="color: var(--gold); margin-top: 0;">Login Archivio</h3>
+    <h3 style="color: var(--gold); margin-top: 0;">Login</h3>
     <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
     <button class="auth-btn" onclick="signInEmail()">Accedi</button>
     <button class="auth-btn" style="font-size: 0.7rem; border:none;" onclick="signUpEmail()">Registrati</button>
-    <button onclick="toggleEmailLogin()" style="background:none; border:none; color:#666; cursor:pointer; width:100%; margin-top:10px;">Annulla</button>
+    <button onclick="toggleEmailLogin()" style="background:none; border:none; color:#666; cursor:pointer; width:100%; margin-top:10px;">Chiudi</button>
 </div>
-
-<footer>ELYNDRA • PROGETTO MASTER SCREEN • 2026</footer>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { 
-        getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, 
-        signInWithEmailAndPassword, createUserWithEmailAndPassword 
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {

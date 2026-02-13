@@ -3,122 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schermo del Master – Elyndra</title>
+    <title>Console del Narratore – Elyndra</title>
     <style>
+        :root {
+            --gold: #c9a24d;
+            --gold-glow: rgba(201, 162, 77, 0.4);
+            --bg-dark: #05070a;
+            --panel-bg: #11141b;
+            --crit-red: #ff4d4d;
+            --lore-blue: #9db4ff;
+        }
+
         body {
             margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
-            background: #05070a; color: #e0e0e0; line-height: 1.5;
+            background: var(--bg-dark); color: #e0e0e0; line-height: 1.6;
+            background-image: radial-gradient(circle at 50% 50%, #11151f 0%, #05070a 100%);
+            background-attachment: fixed;
         }
 
-        @keyframes master-glitch {
-            0% { text-shadow: 1px 0 #ff4d4d; transform: translateX(0); }
-            20% { text-shadow: -1px 0 #c9a24d; transform: translateX(1px); }
-            100% { text-shadow: -1px 0 #c9a24d; transform: translateX(0); }
+        /* --- Animazioni --- */
+        @keyframes glitch {
+            0% { text-shadow: 1px 0 var(--crit-red); transform: translateX(0); }
+            20% { text-shadow: -1px 0 var(--gold); transform: translateX(1px); }
+            100% { text-shadow: -1px 0 var(--gold); transform: translateX(0); }
         }
 
-        .glitch-alert { color: #ff4d4d; animation: master-glitch 0.3s infinite; font-weight: bold; }
+        .glitch-alert { color: var(--crit-red); animation: glitch 0.4s infinite; font-weight: bold; }
 
+        /* --- Header --- */
         header {
-            background: #11141b; padding: 1rem 2rem;
-            border-bottom: 2px solid #c9a24d;
+            background: rgba(17, 20, 27, 0.9); padding: 1rem 2rem;
+            border-bottom: 2px solid var(--gold);
             display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
         }
 
-        nav a { color: #c9a24d; text-decoration: none; font-size: 0.9rem; border: 1px solid #c9a24d; padding: 5px 10px; transition: 0.3s; }
-        nav a:hover { background: #c9a24d; color: #000; }
+        header h1 { 
+            margin: 0; font-size: 1.3rem; letter-spacing: 4px; 
+            text-transform: uppercase; color: var(--gold); 
+        }
 
-        main { padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem; }
+        nav a { 
+            color: var(--gold); text-decoration: none; font-size: 0.8rem; 
+            border: 1px solid var(--gold); padding: 6px 12px; transition: 0.3s; 
+            letter-spacing: 1px;
+        }
+        nav a:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold-glow); }
 
-        .panel { background: #1a1d24; border: 1px solid #333; padding: 1.5rem; border-radius: 4px; }
+        /* --- Layout --- */
+        main { 
+            padding: 2rem; display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+            gap: 2rem; max-width: 1400px; margin: 0 auto;
+        }
 
-        h2 { 
-            color: #c9a24d; border-bottom: 1px solid #444; 
+        .panel { 
+            background: var(--panel-bg); border: 1px solid #2a2d35; 
+            padding: 1.5rem; border-radius: 4px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 {  
+            color: var(--gold); border-bottom: 1px solid #333; 
             padding-bottom: 10px; margin-top: 0;
-            text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem;
         }
 
-        .mechanic-box { background: rgba(0,0,0,0.4); padding: 15px; border-left: 4px solid #c9a24d; margin-bottom: 15px; }
-        .secret-box { 
-            background: rgba(255, 77, 77, 0.05); 
-            border-left: 4px solid #ff4d4d; 
-            padding: 15px; margin-bottom: 15px; 
-            font-size: 0.9rem;
+        /* --- Box Contenuti --- */
+        .mechanic-box { 
+            background: rgba(0,0,0,0.4); padding: 15px; 
+            border-left: 4px solid var(--gold); margin-bottom: 20px; 
         }
+
+        .secret-box { 
+            background: rgba(255, 77, 77, 0.05); border-left: 4px solid var(--crit-red); 
+            padding: 15px; margin-bottom: 15px; font-size: 0.9rem; 
+            transition: 0.3s;
+        }
+        .secret-box:hover { background: rgba(255, 77, 77, 0.1); }
         
-        strong { color: #c9a24d; }
-        .critical { color: #ff4d4d; }
+        strong { color: var(--gold); }
+        .critical { color: var(--crit-red); font-weight: bold; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
-        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
-        th { background: #222; }
+        th, td { border: 1px solid #333; padding: 12px; text-align: left; }
+        th { background: #1a1d24; color: var(--gold); }
 
-        .lore-note { font-style: italic; color: #9db4ff; margin-top: 10px; font-size: 0.85rem; }
+        .lore-note { 
+            font-style: italic; color: var(--lore-blue); 
+            margin-top: 15px; font-size: 0.85rem; padding: 8px; 
+            background: rgba(157, 180, 255, 0.05); border-radius: 4px;
+        }
 
-        footer { text-align: center; padding: 2rem; color: #444; font-size: 0.8rem; border-top: 1px solid #222; }
+        /* --- Overlay Password --- */
+        #password-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #05070a; z-index: 9999; display: flex; 
+            flex-direction: column; justify-content: center; align-items: center;
+        }
+
+        .login-card {
+            border: 1px solid var(--gold); padding: 40px; 
+            background: #11141b; text-align: center;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        footer { 
+            text-align: center; padding: 3rem; color: #444; 
+            font-size: 0.8rem; letter-spacing: 2px;
+        }
+
+        .tool-link {
+            display: block; text-align: center; text-decoration: none;
+            padding: 10px; background: #1a1d24; border: 1px solid #333;
+            color: #fff; margin-bottom: 10px; border-radius: 4px; transition: 0.3s;
+        }
+        .tool-link:hover { border-color: var(--gold); color: var(--gold); }
     </style>
 </head>
 <body>
-    <div id="password-overlay" style="
-    position: fixed; 
-    top: 0; left: 0; width: 100%; height: 100%; 
-    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('img/sfondo-elyndra.jpg') center/cover; 
-    z-index: 9999; 
-    display: flex; flex-direction: column; 
-    justify-content: center; align-items: center;
-    backdrop-filter: blur(10px); /* Sfoca leggermente lo sfondo per un effetto premium */
-    font-family: 'Georgia', serif;
-    text-align: center;">
-    
-    <div style="border: 2px solid #c9a24d; padding: 20px; margin-bottom: 20px; background: rgba(0,0,0,0.5);">
-        <h2 style="color: #c9a24d; letter-spacing: 5px; margin: 0; text-transform: uppercase;">Archivio Proibito</h2>
-        <p style="color: #a0a0a0; font-size: 0.9rem; margin-top: 10px;">Accesso limitato ai Custodi della Memoria</p>
-    </div>
-    
-    <div style="background: rgba(17, 20, 27, 0.9); padding: 30px; border-radius: 4px; border-bottom: 3px solid #c9a24d; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-        <input type="password" id="password-input" placeholder="Sussurra la parola..." style="
-            padding: 12px; border: 1px solid #333; 
-            background: #05070a; color: #c9a24d; text-align: center;
-            margin-bottom: 20px; outline: none; width: 250px; font-size: 1.1rem;
-            letter-spacing: 2px;">
+
+<div id="password-overlay">
+    <div class="login-card">
+        <h2 style="border:none; letter-spacing: 6px;">Archivio Proibito</h2>
+        <p style="color: #666; font-size: 0.8rem; margin-bottom: 25px;">Sussurra la chiave per dissolvere la Litostasi</p>
+        <input type="password" id="password-input" style="
+            padding: 12px; border: 1px solid #333; background: #000; color: var(--gold); 
+            text-align: center; margin-bottom: 20px; outline: none; width: 250px; letter-spacing: 3px;">
         <br>
         <button onclick="checkPassword()" style="
-            padding: 10px 40px; background: #c9a24d; 
-            border: none; cursor: pointer; font-weight: bold;
-            text-transform: uppercase; color: #05070a;
-            transition: 0.3s;">Dissolvi la Nebbia</button>
-        
-        <p id="error-msg" style="color: #ff4d4d; margin-top: 20px; display: none; font-style: italic;">
-            La Litostasi ti blocca le labbra. La parola è errata.
-        </p>
+            padding: 10px 30px; background: var(--gold); border: none; cursor: pointer; 
+            font-weight: bold; text-transform: uppercase; color: #000;">Accedi</button>
+        <p id="error-msg" style="color: var(--crit-red); margin-top: 20px; display: none; font-style: italic;">Parola errata. La nebbia persiste.</p>
     </div>
 </div>
 
 <script>
 function checkPassword() {
     const psw = document.getElementById('password-input').value;
-    // CONTROLLO PASSWORD
     if (psw === "Litostasi") {
-        // Effetto dissolvenza in uscita
         const overlay = document.getElementById('password-overlay');
         overlay.style.transition = "opacity 0.8s ease";
         overlay.style.opacity = "0";
-        setTimeout(() => {
-            overlay.style.display = 'none';
-        }, 800);
+        setTimeout(() => { overlay.style.display = 'none'; }, 800);
     } else {
-        const error = document.getElementById('error-msg');
-        error.style.display = 'block';
-        // Animazione shake per l'errore
-        document.getElementById('password-input').style.borderColor = "#ff4d4d";
+        document.getElementById('error-msg').style.display = 'block';
     }
 }
-
-// Supporto tasto Invio
-document.getElementById('password-input').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        checkPassword();
-    }
-});
+document.getElementById('password-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') checkPassword(); });
 </script>
 
 <header>
@@ -137,42 +169,36 @@ document.getElementById('password-input').addEventListener('keypress', function 
                 <li>Nucleo / Aetherys Profonda: <strong>CD 18+</strong></li>
             </ul>
         </div>
-        <strong>Tabella Fallimenti Cumulativi:</strong>
+        <strong>Progressione della Pietrificazione:</strong>
         <table>
             <tr><th>Grado</th><th>Effetto Meccanico</th></tr>
             <tr><td>1°</td><td>Velocità ridotta di 3 m.</td></tr>
             <tr><td>2°</td><td>Svantaggio a tutte le prove di Forza e Destrezza.</td></tr>
             <tr><td>3°</td><td>Vulnerabilità ai danni contundenti (la pelle si spacca).</td></tr>
             <tr><td>4°</td><td>Pietrificazione Incompleta (Condizione: Restrained).</td></tr>
-            <tr><td>5°</td><td><span class="critical">PIETRIFICAZIONE TOTALE (Vita sospesa).</span></td></tr>
+            <tr><td>5°</td><td><span class="critical">PIETRIFICAZIONE TOTALE (Morte apparente).</span></td></tr>
         </table>
     </section>
 
     <section class="panel">
         <h2>Segreti Oscuri delle Fazioni</h2>
-        
         <div class="secret-box">
-            <strong>Concordato (Valerius Thorne):</strong> Valerius non cerca i draghi per gloria. È affetto da una Litostasi degenerativa interna: i suoi organi stanno diventando piombo. Crede che solo il soffio di un Drago Antico possa "riforgiare" la sua carne prima che il suo cuore si fermi.
+            <strong>Concordato:</strong> Valerius Thorne è affetto da Litostasi interna; i suoi organi mutano in piombo. Cerca il soffio di un Drago per "riforgiarsi".
         </div>
-
         <div class="secret-box">
-            <strong>Circolo (Elara Veridiana):</strong> Elara ha scoperto che la linfa di Nyxoria è un parassita. Non cura la Litostasi, la sostituisce con un'infestazione vegetale. Chi viene "curato" da lei diventerà parte di una mente alveare comandata dal continente stesso.
+            <strong>Circolo:</strong> La linfa di Nyxoria non cura, ma infesta. I guariti diventano parte di una mente alveare comandata dal continente.
         </div>
-
         <div class="secret-box">
-            <strong>Archivio (Mastro Kaelen):</strong> Kaelen non sta salvando la storia. Sta estraendo i ricordi dalle statue per alimentare un manufatto che permetterà solo a lui di viaggiare nel tempo e impedire il Primo Battito, a costo di cancellare l'esistenza di tutti i nati negli ultimi 50 anni.
+            <strong>Archivio:</strong> Mastro Kaelen estrae ricordi dalle statue per alimentare un salto temporale che cancellerebbe gli ultimi 50 anni di storia.
         </div>
-
         <div class="secret-box">
-            <strong>Patto (Capitano Jax):</strong> Jax sa che Nyxoria non è una terra vergine. Ha trovato resti di navi umane di ere precedenti. Il "Secondo Battito" è un ciclo che si ripete: l'umanità scappa, muta in Khaari e poi viene dimenticata.
+            <strong>Patto:</strong> Il capitano Jax sa che l'umanità è già stata qui. I Khaari sono ciò che resta delle precedenti spedizioni mutate.
         </div>
-
         <div class="secret-box">
-            <strong>Velo Cremisi (Vesper):</strong> Vesper riceve ordini da un'entità chiamata "Il Silenzio". Non è un dio, ma una creatura della Litostasi primordiale che vuole trasformare l'intero piano materiale in un giardino di statue perenni.
+            <strong>Velo Cremisi:</strong> "Il Silenzio" non è un dio, ma la coscienza stessa della Litostasi che brama un mondo di statue eterne.
         </div>
-
         <div class="secret-box">
-            <strong>Khaari (Matriarca Ka'Zul):</strong> Ka'Zul nasconde che i Khaari stanno morendo. La bioluminescenza che li nutre sta svanendo perché richiede "anime fresche". L'Ultima Spedizione non è un'invasione per loro, è un banchetto necessario.
+            <strong>Khaari:</strong> La loro bioluminescenza si spegne. Hanno bisogno di "anime fresche" dai nuovi arrivati per non svanire.
         </div>
     </section>
 
@@ -181,60 +207,34 @@ document.getElementById('password-input').addEventListener('keypress', function 
         <div class="mechanic-box">
             <strong>Khaari (Giocabili):</strong> +2 Sag, +1 Cos. Scurovisione. 
             <br><em>Figli del Flusso:</em> Vantaggio al primo TS contro immobilizzazione. 
-            <br><em>Ritmo del Mondo:</em> 1/giorno ignora 'restrained' o 'slowed' per 1 round.
+            <br><em>Ritmo del Mondo:</em> 1/giorno ignora 'restrained' per 1 round.
         </div>
-        <p class="lore-note">Narrativamente: Elfi e Nani resistono meglio (+2 al TS), i Dragonborn sono vulnerabili (Svantaggio al TS) a causa della loro connessione con l'energia vitale elementale.</p>
+        <p class="lore-note">I Dragonborn hanno Svantaggio ai TS contro Litostasi per via della loro natura elementale pura.</p>
     </section>
 
     <section class="panel">
-        <h2>Progressione Livelli</h2>
-        <ul>
-            <li><strong>Liv. 1–5:</strong> Porto Althamar, la traversata, il primo impatto con la nebbia grigia.</li>
-            <li><strong>Liv. 6–10:</strong> Nyxoria, guerra tra fazioni, la scoperta della vera natura dei Khaari.</li>
-            <li><strong>Liv. 11–15:</strong> Ritorno ad Aetherys, ricerca della verità sulla Litostasi nel Nucleo.</li>
-            <li><strong>Liv. 16–20:</strong> Il Secondo Battito. Scontro finale con l'entità del Silenzio o il reset del mondo.</li>
+        <h2>Pianificazione Campagna</h2>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 10px;"><strong>Tier 1 (1-5):</strong> Sopravvivenza e sbarco su Nyxoria.</li>
+            <li style="margin-bottom: 10px;"><strong>Tier 2 (6-10):</strong> La verità sui Khaari e guerra civile tra Fazioni.</li>
+            <li style="margin-bottom: 10px;"><strong>Tier 3 (11-15):</strong> Discesa nel Nucleo di Aetherys.</li>
+            <li style="margin-bottom: 10px;"><strong>Tier 4 (16-20):</strong> Il Secondo Battito e lo scontro finale col Silenzio.</li>
         </ul>
     </section>
 
-    <div class="master-resources" style="max-width: 400px; margin: 20px auto;">
-    <h3 style="color: var(--gold); text-align: center; text-transform: uppercase; letter-spacing: 2px;">
-        🛠️ Strumenti di Gestione
-    </h3>
-    <ul style="list-style: none; padding: 0;">
-        <li style="margin-bottom: 15px;">
-            <a href="https://www.aidedd.org/dnd-filters/monsters.php" 
-               target="_blank" 
-               class="back-btn" 
-               style="display: block; text-align: center; text-decoration: none;">
-               🐉 Schede Mostri
-            </a>
-        </li>
-        <li style="margin-bottom: 15px;">
-            <a href="https://koboldplus.club/" 
-               target="_blank" 
-               class="back-btn" 
-               style="display: block; text-align: center; text-decoration: none;">
-               ⚔️ Generatore Combattimenti
-            </a>
-        </li>
-        <li style="margin-bottom: 15px;">
-            <a href="https://koboldplus.club/" 
-               target="_blank" 
-               class="back-btn" 
-               style="display: block; text-align: center; text-decoration: none;">
-               🛡️ Schermo del Master
-            </a>
-        </li>
-    </ul>
-</div>
+    <section class="panel" style="grid-column: 1 / -1;">
+        <h2>🛠️ Strumenti Rapidi</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+            <a href="https://www.aidedd.org/dnd-filters/monsters.php" target="_blank" class="tool-link">🐉 Bestiario</a>
+            <a href="https://koboldplus.club/" target="_blank" class="tool-link">⚔️ Incontri</a>
+            <a href="#" class="tool-link">📜 Note di Sessione</a>
+        </div>
+    </section>
 </main>
 
 <footer>
-    SCHERMO DEL MASTER • ELYNDRA RPG • 2026 • ACCESSO CRIPTATO
+    ELYNDRA RPG • SISTEMA PROPRIETARIO • 2026
 </footer>
 
 </body>
 </html>
-
-
-

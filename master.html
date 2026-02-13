@@ -108,29 +108,72 @@
 </header>
 
 <main>
+    <div id="notesModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="margin:0; border:none;">📓 Diario Segreto</h2>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span id="saveStatus" style="font-size: 0.7rem; color: var(--gold); opacity: 0;">Sincronizzazione...</span>
+                <button onclick="closeNotes()" style="background:none; border:none; color:var(--gold); font-size: 2rem; cursor:pointer;">&times;</button>
+            </div>
+        </div>
+        <textarea id="masterNotes" placeholder="Scrivi qui i segreti di Elyndra..."></textarea>
+    </div>
+</div>
+
+    
     <section class="panel">
-        <h2>Meccanica: Litostasi</h2>
+        <h2>Meccanica: <span style="color:var(--crit-red)">Litostasi</span></h2>
         <div class="mechanic-box">
-            <strong>TS Costituzione Orario:</strong> Periferia (12), Avanzata (15), Nucleo (18+).
+            <strong>TS Costituzione (Cadenza Oraria):</strong>
+            <ul style="margin: 8px 0; padding-left: 20px;">
+                <li>Periferia: <strong>CD 12</strong></li>
+                <li>Zona Avanzata: <strong>CD 15</strong></li>
+                <li>Nucleo: <strong>CD 18+</strong></li>
+            </ul>
         </div>
         <table>
-            <tr><th>Grado</th><th>Effetto</th></tr>
-            <tr><td>1°</td><td>Velocità -3m.</td></tr>
-            <tr><td>2°</td><td>Svantaggio For/Des.</td></tr>
-            <tr><td>5°</td><td><span style="color:var(--crit-red)">Pietrificazione Totale.</span></td></tr>
+            <tr><th>Grado</th><th>Effetto Meccanico</th></tr>
+            <tr><td>1°</td><td>Velocità ridotta di 3 m.</td></tr>
+            <tr><td>2°</td><td>Svantaggio a tutte le prove di Forza e Destrezza.</td></tr>
+            <tr><td>3°</td><td>Vulnerabilità ai danni contundenti (la pelle si spacca).</td></tr>
+            <tr><td>4°</td><td>Pietrificazione Incompleta (Condizione: Restrained).</td></tr>
+            <tr><td>5°</td><td><span class="critical">PIETRIFICAZIONE TOTALE (Vita sospesa).</span></td></tr>
         </table>
     </section>
 
     <section class="panel">
-        <h2>📜 Archivio Appunti</h2>
-        <div id="display-notes">Caricamento dati...</div>
-        <button onclick="openNotes()" style="margin-top:15px; width:100%; padding:10px; background:none; border:1px solid var(--gold); color:var(--gold); cursor:pointer;">Modifica Note</button>
+        <h2>Segreti delle Fazioni</h2>
+        <div class="secret-box"><strong>Concordato (Valerius Thorne):</strong> Valerius non cerca i draghi per gloria. È affetto da una Litostasi degenerativa interna: i suoi organi stanno diventando piombo. Crede che solo il soffio di un Drago Antico possa "riforgiare" la sua carne prima che il suo cuore si fermi.</div>
+        <div class="secret-box"><strong>Circolo (Elara Veridiana):</strong> Elara ha scoperto che la linfa di Nyxoria è un parassita. Non cura la Litostasi, la sostituisce con un'infestazione vegetale. Chi viene "curato" da lei diventerà parte di una mente alveare comandata dal continente stesso.</div>
+        <div class="secret-box"><strong>Archivio (Mastro Kaelen):</strong> Kaelen non sta salvando la storia. Sta estraendo i ricordi dalle statue per alimentare un manufatto che permetterà solo a lui di viaggiare nel tempo e impedire il Primo Battito, a costo di cancellare l'esistenza di tutti i nati negli ultimi 50 anni.</div>
+        <div class="secret-box"><strong>Patto (Capitano Jax):</strong> Jax sa che Nyxoria non è una terra vergine. Ha trovato resti di navi umane di ere precedenti. Il "Secondo Battito" è un ciclo che si ripete: l'umanità scappa, muta in Khaari e poi viene dimenticata.</div>
+        <div class="secret-box"><strong>Velo Cremisi (Vesper):</strong> Vesper riceve ordini da un'entità chiamata "Il Silenzio". Non è un dio, ma una creatura della Litostasi primordiale che vuole trasformare l'intero piano materiale in un giardino di statue perenni.</div>
+        <div class="secret-box"><strong>Khaari (Matriarca Ka'Zul):</strong> Ka'Zul nasconde che i Khaari stanno morendo. La bioluminescenza che li nutre sta svanendo perché richiede "anime fresche". L'Ultima Spedizione non è un'invasione per loro, è un banchetto necessario.</div>
     </section>
 
     <section class="panel">
-        <h2>Segreti Fazioni</h2>
-        <div class="secret-box"><strong>Concordato:</strong> Thorne sta diventando di piombo.</div>
-        <div class="secret-box"><strong>Circolo:</strong> La linfa è un parassita vegetale.</div>
+        <h2>Razze & Lore</h2>
+        <div class="mechanic-box">
+            <strong>Khaari:</strong> +2 Sag, +1 Cos. 
+            <br><em>Figli del Flusso:</em> Vantaggio TS contro pietrificazione. 
+        </div>
+        <p style="font-size: 0.85rem; color: var(--lore-blue); font-style: italic;">
+            Nota Master: I Dragonborn sono conduttori naturali di Aether; hanno svantaggio ai TS Litostasi.
+        </p>
+    </section>
+
+    <section class="panel">
+        <h2>Roadmap Campagna</h2>
+        <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 20px;">
+            🔴 <strong>Tier 1 (Liv. 1–5):</strong> Sopravvivenza a Porto Althamar.<br>
+            🟠 <strong>Tier 2 (Liv. 6–10):</strong> Guerra tra fazioni su Nyxoria.<br>
+            🟡 <strong>Tier 3 (Liv. 10–15):</strong> La discesa nelle profondità di Aetherys.<br>
+            ⚪ <strong>Tier 4 (Liv. 16–20):</strong> Il Secondo Battito e il destino del mondo.
+        </p>
+        <hr style="border: 0; border-top: 1px solid rgba(201, 162, 77, 0.2); margin-bottom: 15px;">
+        <h2>Ultimi Appunti</h2>
+        <div id="display-notes">Caricamento appunti...</div>
     </section>
 </main>
 
@@ -203,3 +246,4 @@
 </script>
 </body>
 </html>
+

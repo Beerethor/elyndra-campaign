@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "nome": "Lyra Valerius",
+    "nome": "Lyra",
     "ruolo": "Navigatrice dell'Oltre",
-    "descrizione": "Una figura nota nel porto per il suo sguardo costantemente rivolto al mare di nebbia. I marinai dicono che riesca a prevedere i movimenti della stasi prima che avvengano.",
+    "descrizione": "Una figura enigmatica dalla pelle diafana. Pur collaborando con gli Esploratori, sembra non appartenere a questo tempo. I suoi ricordi sembrano risalire a epoche che la Litostasi ha cancellato secoli fa.",
     "foto": "img/lyra.png",
-    "tratti": ["Calma", "Intuizione", "Sesto Senso", "Diario"],
+    "tratti": ["Calma", "Intuizione", "Sesto Senso", "Anima Antica"],
     "fazione": "Esploratori"
   },
   {

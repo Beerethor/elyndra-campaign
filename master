@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console del Narratore – Elyndra</title>
+    <style>
+        :root {
+            --gold: #c9a24d;
+            --gold-glow: rgba(201, 162, 77, 0.4);
+            --bg-dark: #05070a;
+            --panel-bg: rgba(17, 20, 27, 0.85);
+            --crit-red: #ff4d4d;
+            --lore-blue: #9db4ff;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
+            color: #e0e0e0; line-height: 1.6;
+            background: 
+                linear-gradient(rgba(5, 7, 10, 0.8), rgba(5, 7, 10, 0.9)), 
+                url('img/sfondo-master.png') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            background: rgba(17, 20, 27, 0.9); padding: 1rem 2rem;
+            border-bottom: 2px solid var(--gold);
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+        header h1 { margin: 0; font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            height: 100%; width: 0; position: fixed; z-index: 1000;
+            top: 0; right: 0; background-color: rgba(17, 20, 27, 0.98);
+            border-left: 0px solid var(--gold); overflow-x: hidden;
+            transition: 0.4s; padding-top: 60px; box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 0.95rem; color: #ccc; display: block; transition: 0.3s; border-bottom: 1px solid #1f232b; }
+        .sidebar .closebtn { position: absolute; top: 10px; left: 15px; font-size: 30px; border: none; background: none; color: var(--gold); cursor: pointer; }
+
+        .openbtn { font-size: 0.8rem; cursor: pointer; background: transparent; color: var(--gold); padding: 8px 15px; border: 1px solid var(--gold); transition: 0.3s; }
+        .openbtn:hover { background-color: var(--gold); color: #000; }
+
+        /* --- Layout --- */
+        main { padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+        .panel { background: var(--panel-bg); border: 1px solid rgba(201, 162, 77, 0.2); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(8px); }
+        h2 { color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; }
+
+        /* --- Boxes --- */
+        .mechanic-box { background: rgba(0,0,0,0.4); padding: 15px; border-left: 4px solid var(--gold); margin-bottom: 20px; }
+        .secret-box { background: rgba(255, 77, 77, 0.08); border-left: 4px solid var(--crit-red); padding: 15px; margin-bottom: 15px; font-size: 0.9rem; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th, td { border: 1px solid rgba(255,255,255,0.1); padding: 12px; text-align: left; }
+        th { background: rgba(201, 162, 77, 0.15); color: var(--gold); }
+
+        /* --- Modale Appunti --- */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+        .modal-content { background: var(--panel-bg); margin: 5% auto; padding: 20px; border: 1px solid var(--gold); width: 80%; max-width: 900px; }
+        #masterNotes { width: 100%; height: 500px; background: rgba(0,0,0,0.3); color: #e0e0e0; border: 1px solid rgba(201, 162, 77, 0.2); padding: 15px; font-family: 'Georgia', serif; font-size: 1.1rem; resize: none; box-sizing: border-box; }
+        #display-notes { white-space: pre-wrap; font-family: 'Georgia', serif; color: #bbb; padding: 15px; background: rgba(0,0,0,0.3); border-left: 3px solid var(--gold); }
+
+        /* --- Access Denied Overlay --- */
+        #access-denied { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #05070a; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+        footer { text-align: center; padding: 3rem; color: #666; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<div id="access-denied">
+    <h2 style="color: var(--crit-red); letter-spacing: 5px;">ACCESSO NEGATO</h2>
+    <p style="color: #888;">Sincronizzazione identità in corso...</p>
+    <a href="index.html" style="margin-top: 20px; color: var(--gold); text-decoration: none; border: 1px solid var(--gold); padding: 10px 20px;">Torna alla Home</a>
+</div>
+
+<div id="mySidebar" class="sidebar">
+    <button class="closebtn" onclick="closeNav()">&times;</button>
+    <a href="#" onclick="openNotes()">📜 Note di Sessione</a>
+    <a href="https://progettolumi.github.io/dnd-master-screen/" target="_blank">🛡️ Schermo Master</a>
+</div>
+
+<div id="notesModal" class="modal">
+    <div class="modal-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gold); margin-bottom:15px;">
+            <h2 style="border:none; margin:0;">📓 Diario Master</h2>
+            <div>
+                <span id="saveStatus" style="font-size: 0.7rem; color: var(--gold); opacity: 0; margin-right: 10px;">Salvataggio...</span>
+                <button onclick="closeNotes()" style="background:none; border:none; color:var(--gold); font-size: 2rem; cursor:pointer;">&times;</button>
+            </div>
+        </div>
+        <textarea id="masterNotes"></textarea>
+    </div>
+</div>
+
+<header>
+    <h1>Console del Narratore</h1>
+    <div>
+        <button class="openbtn" onclick="openNav()">🛠️ STRUMENTI</button>
+        <a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 0.8rem; margin-left: 15px; border: 1px solid var(--gold); padding: 7px 12px;">ESCI</a>
+    </div>
+</header>
+
+<main>
+    <section class="panel">
+        <h2>Meccanica: Litostasi</h2>
+        <div class="mechanic-box">
+            <strong>TS Costituzione Orario:</strong> Periferia (12), Avanzata (15), Nucleo (18+).
+        </div>
+        <table>
+            <tr><th>Grado</th><th>Effetto</th></tr>
+            <tr><td>1°</td><td>Velocità -3m.</td></tr>
+            <tr><td>2°</td><td>Svantaggio For/Des.</td></tr>
+            <tr><td>5°</td><td><span style="color:var(--crit-red)">Pietrificazione Totale.</span></td></tr>
+        </table>
+    </section>
+
+    <section class="panel">
+        <h2>📜 Archivio Appunti</h2>
+        <div id="display-notes">Caricamento dati...</div>
+        <button onclick="openNotes()" style="margin-top:15px; width:100%; padding:10px; background:none; border:1px solid var(--gold); color:var(--gold); cursor:pointer;">Modifica Note</button>
+    </section>
+
+    <section class="panel">
+        <h2>Segreti Fazioni</h2>
+        <div class="secret-box"><strong>Concordato:</strong> Thorne sta diventando di piombo.</div>
+        <div class="secret-box"><strong>Circolo:</strong> La linfa è un parassita vegetale.</div>
+    </section>
+</main>
+
+<footer>ELYNDRA RPG • 2026</footer>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, onSnapshot, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBxwbmUT7efDSF5K2FT-JICRb59_letUS0",
+        authDomain: "elyndra-6be99.firebaseapp.com",
+        projectId: "elyndra-6be99",
+        storageBucket: "elyndra-6be99.firebasestorage.app",
+        messagingSenderId: "1062810114473",
+        appId: "1:1062810114473:web:3abf8900d4513c132f0cb8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    
+    const overlay = document.getElementById('access-denied');
+    const textarea = document.getElementById('masterNotes');
+    const displayArea = document.getElementById('display-notes');
+
+    // --- CONTROLLO ACCESSO DINAMICO ---
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const docRef = doc(db, "configurazione", "ruoli");
+            const docSnap = await getDoc(docRef);
+            
+            if (docSnap.exists() && user.email === docSnap.data().masterEmail) {
+                overlay.style.display = 'none'; // Sblocca pagina
+                startSync();
+            } else {
+                overlay.innerHTML = `<h2 style="color:var(--crit-red)">NON SEI IL MASTER</h2><a href="index.html" style="color:white">Torna indietro</a>`;
+            }
+        } else {
+            window.location.href = "index.html"; // Se non loggato, rimanda alla home
+        }
+    });
+
+    function startSync() {
+        const noteDoc = doc(db, "archivio_master", "appunti_principali");
+        onSnapshot(noteDoc, (s) => {
+            if (s.exists()) {
+                const txt = s.data().testo;
+                if (document.activeElement !== textarea) textarea.value = txt;
+                displayArea.innerText = txt;
+            }
+        });
+
+        textarea.addEventListener('input', () => {
+            document.getElementById('saveStatus').style.opacity = 1;
+            clearTimeout(window.saveTimer);
+            window.saveTimer = setTimeout(async () => {
+                await setDoc(noteDoc, { testo: textarea.value }, { merge: true });
+                document.getElementById('saveStatus').style.opacity = 0;
+            }, 1000);
+        });
+    }
+
+    // Interfaccia
+    window.openNav = () => document.getElementById("mySidebar").style.width = "var(--sidebar-width)";
+    window.closeNav = () => document.getElementById("mySidebar").style.width = "0";
+    window.openNotes = () => { document.getElementById("notesModal").style.display = "block"; closeNav(); };
+    window.closeNotes = () => document.getElementById("notesModal").style.display = "none";
+</script>
+</body>
+</html>

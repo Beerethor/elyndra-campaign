@@ -14,7 +14,29 @@
             --lore-blue: #9db4ff;
             --sidebar-width: 280px;
         }
+        
+    #display-notes {
+    line-height: 1.6;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
 
+/* Scrollbar stilizzata per il diario */
+#display-notes::-webkit-scrollbar { width: 5px; }
+#display-notes::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+#display-notes::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+        
         body {
             margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif;
             color: #e0e0e0; line-height: 1.6;
@@ -49,7 +71,7 @@
         .openbtn:hover { background-color: var(--gold); color: #000; }
 
         /* --- Layout --- */
-        main { padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+         { padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
         .panel { background: var(--panel-bg); border: 1px solid rgba(201, 162, 77, 0.2); padding: 1.5rem; border-radius: 8px; backdrop-filter: blur(8px); }
         h2 { color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top: 0; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; }
 
@@ -112,6 +134,19 @@
 </header>
 
 <main>
+    <section class="panel">
+    <h2>📜 Archivio Cronache</h2>
+    <div class="mechanic-box" style="border-color: var(--lore-blue); background: rgba(0,0,0,0.2);">
+        <div id="display-notes" style="white-space: pre-wrap; font-family: 'Georgia', serif; font-size: 0.95rem; color: #ccc; min-height: 100px;">
+            In attesa di sincronizzazione...
+        </div>
+    </div>
+    <button onclick="openNotes()" class="openbtn" style="width: 100%; margin-top: 10px; border-style: dashed; opacity: 0.7;">
+        ✍️ AGGIORNA DIARIO SEGRETO
+    </button>
+</section>
+
+    
     <div id="notesModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -247,6 +282,7 @@
 </script>
 </body>
 </html>
+
 
 
 

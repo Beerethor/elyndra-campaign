@@ -82,23 +82,27 @@
 
 <div id="mySidebar" class="sidebar">
     <button class="closebtn" onclick="closeNav()">&times;</button>
+    <h3>🛠️ Toolbox Master</h3>
+    <a href="https://ceryliae.github.io/5edmscreen/index" target="_blank">🛡️ Schermo del Master</a>
+    <a href="https://www.aidedd.org/dnd-filters/monsters.php" target="_blank">🐉 Bestiario</a>
+    <a href="https://koboldplus.club/" target="_blank">⚔️ Gestione Incontri</a>
     <a href="#" onclick="openNotes()">📜 Note di Sessione</a>
-    <a href="https://ceryliae.github.io/5edmscreen/index" target="_blank">🛡️ Schermo Master</a>
 </div>
 
 <div id="notesModal" class="modal">
     <div class="modal-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gold); margin-bottom:15px;">
-            <h2 style="border:none; margin:0;">📓 Diario Master</h2>
-            <div>
-                <span id="saveStatus" style="font-size: 0.7rem; color: var(--gold); opacity: 0; margin-right: 10px;">Salvataggio...</span>
+        <div class="modal-header">
+            <h2 style="margin:0; border:none;">📓 Diario Segreto</h2>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span id="saveStatus" style="font-size: 0.7rem; color: var(--gold); opacity: 0;">Sincronizzazione...</span>
                 <button onclick="closeNotes()" style="background:none; border:none; color:var(--gold); font-size: 2rem; cursor:pointer;">&times;</button>
             </div>
         </div>
-        <textarea id="masterNotes"></textarea>
+        <textarea id="masterNotes" placeholder="Scrivi qui i segreti di Elyndra..."></textarea>
     </div>
 </div>
 
+    
 <header>
     <h1>Console del Narratore</h1>
     <div>
@@ -243,6 +247,7 @@
 </script>
 </body>
 </html>
+
 
 
 

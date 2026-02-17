@@ -14,6 +14,47 @@
             overflow-x: hidden;
         }
 
+        .lyra-diary-container {
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.lyra-post {
+    background: rgba(157, 180, 255, 0.05);
+    border-left: 2px solid var(--lore-blue);
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.lyra-post:hover {
+    background: rgba(157, 180, 255, 0.1);
+}
+
+.lyra-date {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--lore-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.lyra-post p {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Scrollbar sottile per il diario di Lyra */
+.lyra-diary-container::-webkit-scrollbar { width: 4px; }
+.lyra-diary-container::-webkit-scrollbar-thumb { background: var(--lore-blue); }
+
         /* ANIMAZIONE LITOSTASI (Glitch) */
         @keyframes litostasi-vibration {
             0% { text-shadow: 1px 0 #8e7341; transform: translateX(0); }
@@ -173,10 +214,57 @@
         </p>
     </article>
 
-    <section class="mission-alert">
-        <p><strong>Nota del Master - Sessione 0:</strong> I venti soffiano verso Ovest, ma le catene non sono ancora state sciolte. La compagna Samsaran ha percepito un richiamo dal passato. Solo recuperando quell'antico frammento e risolvendo l'ultimo enigma di Porto Althamar potrete assicurarvi un posto sulla flotta.</p>
-    </section>
-</main>
+    <section class="panel">
+    <h2>📓 Frammenti di Lyra</h2>
+    <div class="mechanic-box" style="border-color: var(--lore-blue); background: rgba(157, 180, 255, 0.05);">
+        <div style="font-style: italic; color: var(--lore-blue); font-size: 0.9rem; margin-bottom: 15px;">
+            "La pietra non può fermare ciò che non ha forma."
+        </div>
+        <div id="lyra-diary-display" style="font-family: 'Georgia', serif; font-size: 0.95rem; line-height: 1.8; color: #ddd;">
+            <strong>Annotazione #114:</strong><br>
+            La linfa del Circolo profuma di antico inganno. Elara sorride, ma le sue radici tremano...
+        </div>
+    </div>
+</section>
+
+    <section class="panel">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--lore-blue); padding-bottom: 10px; margin-bottom: 20px;">
+        <h2 style="border: none; margin: 0; color: var(--lore-blue);">📓 Memorie di Lyra</h2>
+        <span style="font-size: 0.7rem; color: var(--lore-blue); letter-spacing: 2px;">SAMSARAN IMMUNE</span>
+    </div>
+
+    <div class="lyra-diary-container">
+        <div class="lyra-post">
+            <span class="lyra-date">Ciclo della Quarantena - Porto Althamar</span>
+            <p>"Osservo i coloni del <strong>Concordato</strong> marciare con le loro armature lucenti. Valerius Thorne parla di 'ordine', ma la sua voce vibra di una frequenza distorta. Sento l'odore del piombo nel suo respiro; la Litostasi lo sta divorando e lui cerca di nascondere il declino dietro mura di ferro."</p>
+        </div>
+
+        <div class="lyra-post">
+            <span class="lyra-date">Annotazione sul Circolo</span>
+            <p>"Elara Veridiana mi ha offerto la linfa di Nyxoria. Dice che è un modo per 'fiorire', ma io vedo solo un parassita affamato che vuole sostituire la prigione di pietra con una rete di radici senzienti. Il Circolo non cura le anime, le annette."</p>
+        </div>
+
+        <div class="lyra-post">
+            <span class="lyra-date">Riflessione sui Khaari</span>
+            <p>"La Matriarca Ka'Zul nasconde una verità che solo chi ha vissuto mille vite può intuire: la loro luce si sta spegnendo. Non sono predatori, sono naufraghi di un ciclo precedente che cercano di non svanire nel buio."</p>
+        </div>
+
+        <div class="lyra-post">
+            <span class="lyra-date">Nota per il Capitano Jax</span>
+            <p>"Jax è così immerso nel presente che non vede l'ombra del <strong>Secondo Battito</strong>. Dice che 'il lavoro sporco' salverà la spedizione. Finché le sue navi si muovono, avrò un sedile in prima fila per assistere a questa trasformazione."</p>
+        </div>
+    </div>
+</section>
+
+    <section class="mission-alert" style="border-left-color: var(--gold); background: rgba(201, 162, 77, 0.1);">
+    <p>
+        <strong>Nota del Master - Sessione 1: Il Salto nel Flusso</strong><br>
+        Le ancore sono state levate e Porto Althamar non è che un ricordo di fumo all'orizzonte. La traversata è iniziata: mentre la chiglia taglia onde cariche di Aether, i ponti della flotta pullulano di volti che segneranno il vostro destino. 
+        <br><br>
+        <span style="color: var(--lore-blue);">◈ Lyra osserva le correnti: il suo silenzio è un monito.</span><br>
+        È il momento di scegliere con chi spartire il rancio e i segreti: i fanatici del <strong>Velo</strong>, i mistici del <strong>Circolo</strong> o i calcolatori dell'<strong>Archivio</strong>? Studiate chi vi siede accanto, perché nel mare aperto la Litostasi non è l'unico mostro che morde.
+    </p>
+</section>
 
 <footer>
     DIARIO DI LYRA • ELYNDRA 2026
@@ -184,3 +272,4 @@
 
 </body>
 </html>
+

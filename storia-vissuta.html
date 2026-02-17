@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storia Vissuta – Elyndra</title>
+    <style>
+        :root {
+            --gold: #c9a24d;
+            --bg-dark: #05070a;
+            --panel-bg: rgba(17, 20, 27, 0.9);
+            --border: 1px solid rgba(201, 162, 77, 0.2);
+        }
+
+        body {
+            margin: 0; font-family: 'Segoe UI', serif;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('img/sfondo-elyndra.png') no-repeat center center fixed;
+            background-size: cover; color: #e0e0e0;
+        }
+
+        header {
+            padding: 40px; text-align: center; border-bottom: var(--border);
+            background: rgba(0,0,0,0.4); backdrop-filter: blur(10px);
+        }
+
+        h1 { font-size: 2.5rem; letter-spacing: 8px; text-transform: uppercase; color: var(--gold); margin: 0; }
+        .subtitle { color: #888; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-top: 10px; }
+
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+
+        /* Barra di Ricerca */
+        .search-box {
+            width: 100%; padding: 15px; margin-bottom: 40px;
+            background: var(--panel-bg); border: var(--border);
+            color: var(--gold); font-size: 1.1rem; border-radius: 8px;
+            box-sizing: border-box; outline: none;
+        }
+
+        /* Stile Sessione */
+        .session-card {
+            background: var(--panel-bg); border: var(--border);
+            padding: 25px; border-radius: 8px; margin-bottom: 30px;
+            transition: 0.3s; backdrop-filter: blur(5px);
+        }
+        .session-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+        .session-header {
+            display: flex; justify-content: space-between; align-items: baseline;
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 15px;
+        }
+
+        .session-title { color: var(--gold); font-size: 1.4rem; font-weight: bold; text-transform: uppercase; }
+        .session-date { color: #666; font-size: 0.85rem; }
+        
+        .session-content { line-height: 1.8; color: #ccc; white-space: pre-wrap; }
+
+        .no-results { text-align: center; color: #555; margin-top: 50px; font-style: italic; }
+
+        .back-home {
+            display: inline-block; margin-top: 20px; color: var(--gold);
+            text-decoration: none; border: 1px solid var(--gold); padding: 8px 15px;
+            transition: 0.3s; font-size: 0.8rem;
+        }
+        .back-home:hover { background: var(--gold); color: black; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Storia Vissuta</h1>
+    <div class="subtitle">Cronache delle Ere Trascorse</div>
+    <a href="index.html" class="back-home">⬅ Torna al Portale</a>
+</header>
+
+<div class="container">
+    <input type="text" id="searchInput" class="search-box" placeholder="Cerca parole chiave, personaggi o luoghi nelle sessioni...">
+    
+    <div id="sessions-list">
+        <p style="text-align:center;">Sincronizzazione con gli Annali...</p>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBxwbmUT7efDSF5K2FT-JICRb59_letUS0",
+        authDomain: "elyndra-6be99.firebaseapp.com",
+        projectId: "elyndra-6be99",
+        storageBucket: "elyndra-6be99.firebasestorage.app",
+        messagingSenderId: "1062810114473",
+        appId: "1:1062810114473:web:3abf8900d4513c132f0cb8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    let allSessions = [];
+
+    const sessionsList = document.getElementById('sessions-list');
+    const searchInput = document.getElementById('searchInput');
+
+    // Caricamento sessioni da Firebase
+    const q = query(collection(db, "riassunti_sessioni"), orderBy("numero", "desc"));
+    
+    onSnapshot(q, (snapshot) => {
+        allSessions = [];
+        snapshot.forEach(doc => {
+            allSessions.push({ id: doc.id, ...doc.data() });
+        });
+        renderSessions(allSessions);
+    });
+
+    function renderSessions(sessions) {
+        if (sessions.length === 0) {
+            sessionsList.innerHTML = '<p class="no-results">Nessun frammento di memoria trovato.</p>';
+            return;
+        }
+
+        sessionsList.innerHTML = sessions.map(s => `
+            <div class="session-card">
+                <div class="session-header">
+                    <div class="session-title">Sessione ${s.numero}: ${s.titolo}</div>
+                    <div class="session-date">${s.data_reale || ''}</div>
+                </div>
+                <div class="session-content">${s.riassunto}</div>
+            </div>
+        `).join('');
+    }
+
+    // Funzione di Ricerca
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = allSessions.filter(s => 
+            s.titolo.toLowerCase().includes(term) || 
+            s.riassunto.toLowerCase().includes(term)
+        );
+        renderSessions(filtered);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Reperti – Elyndra</title>
+    <style>
+        :root {
+            --gold: #c9a24d;
+            --bg-dark: #05070a;
+            --panel-bg: rgba(17, 20, 27, 0.9);
+            --lore-blue: #9db4ff;
+        }
+
+        body {
+            margin: 0; font-family: 'Segoe UI', sans-serif; color: #e0e0e0;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #05070a 100%);
+            padding: 2rem; line-height: 1.6;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        header {
+            border-bottom: 1px solid var(--lore-blue);
+            padding-bottom: 20px; margin-bottom: 40px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .item-card {
+            background: var(--panel-bg);
+            border-left: 4px solid var(--lore-blue);
+            padding: 20px; margin-bottom: 25px;
+            display: grid; grid-template-columns: 180px 1fr; gap: 20px;
+            border-radius: 4px;
+        }
+
+        .item-image {
+            width: 100%; height: 180px; object-fit: cover;
+            border: 1px solid rgba(157, 180, 255, 0.2); background: #000;
+        }
+
+        .item-name { color: var(--gold); font-size: 1.3rem; text-transform: uppercase; margin-bottom: 10px; }
+        
+        .lore-text { font-family: 'Georgia', serif; font-style: italic; color: #bbb; }
+
+        .back-btn {
+            text-decoration: none; color: var(--lore-blue); border: 1px solid var(--lore-blue);
+            padding: 5px 15px; font-size: 0.8rem; transition: 0.3s;
+        }
+        .back-btn:hover { background: var(--lore-blue); color: #000; }
+
+        @media (max-width: 600px) { .item-card { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1 style="color: var(--lore-blue); margin:0; letter-spacing: 3px;">Registro Reperti</h1>
+        <a href="index.html" class="back-btn">TORNA ALLA HOME</a>
+    </header>
+
+    <article class="item-card">
+        <img src="img/reliquie/spada-vayne.png" alt="Reperto" class="item-image" onerror="this.src='https://via.placeholder.com/180x180/111/9db4ff?text=Reperto+01'">
+        <div>
+            <div class="item-name">Lama spezzata dei Vayne</div>
+            <p class="lore-text">"Un frammento di acciaio nero rinvenuto nelle catacombe di Porto Althamar. Reca incisioni in una lingua arcaica legata alle antiche casate guerriere."</p>
+            <p style="font-size: 0.85rem; color: #888;">
+                <strong>Stato:</strong> Smarrito/Abbandonato.<br>
+                <strong>Nota dell'Archivista:</strong> Emana una debole risonanza aetherica negativa.
+            </p>
+        </div>
+    </article>
+
+  <article class="item-card" style="border-left-color: #ffcf40;">
+    <img src="img/reliquie/clarissa.png" alt="Reperto" class="item-image" onerror="this.src='https://via.placeholder.com/180x180/111/ffcf40?text=Oggetto+Ignoto'">
+    <div>
+        <div class="item-name">Ornamento Oculare "Clarissa"</div>
+        <p class="lore-text">"Un manufatto di foggia sconosciuta, composto da un oro che sembra riflettere luci di un'altra dimensione. Un grande occhio centrale sembra seguire i movimenti di chiunque si avvicini."</p>
+        <p style="font-size: 0.85rem; color: #888;">
+            <strong>Proprietario:</strong> Attualmente in possesso di un esponente di spicco del <strong>Patto (Capitano Jax)</strong>.<br>
+            <strong>Nota dell'Archivista:</strong> L'oggetto manifesta una forma di coscienza rudimentale. È sconsigliato il contatto diretto senza autorizzazione superiore. I poteri effettivi rimangono non documentati per ragioni di sicurezza.
+        </p>
+    </div>
+</article>
+
+    </div>
+
+<footer>
+    <p style="text-align:center; color: #444; font-size: 0.7rem; margin-top: 50px;">DOCUMENTAZIONE ACCESSIBILE ALL'ULTIMA SPEDIZIONE</p>
+</footer>
+
+</body>
+</html>

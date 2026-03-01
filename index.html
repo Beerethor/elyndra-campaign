@@ -9,94 +9,156 @@
             --gold: #c9a24d;
             --gold-glow: rgba(201, 162, 77, 0.4);
             --bg-dark: #05070a;
-            --panel-bg: rgba(17, 20, 27, 0.92);
-            --border-style: 1px solid rgba(201, 162, 77, 0.3);
+            --panel-bg: rgba(7, 10, 15, 0.85);
+            --border-style: 1px solid rgba(201, 162, 77, 0.2);
+            --accent-blue: #9db4ff;
+            --lyra-purple: #b38eff;
         }
 
         body {
-            margin: 0; font-family: 'Segoe UI', sans-serif;
+            margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #e0e0e0; min-height: 100vh;
-            /* SFONDO PERSONALIZZATO */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), 
-                        url('img/sfondo-elyndra.png') no-repeat center center fixed;
-            background-size: cover;
+            background: #05070a;
+            overflow-x: hidden;
             display: flex; flex-direction: column; align-items: center;
         }
 
-        header {
-            width: 100%; padding: 80px 0; text-align: center;
-            margin-bottom: 20px;
+        /* --- SFONDO E NEBBIA DINAMICA --- */
+        .background-fixed {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
+                        url('img/sfondo-elyndra.png') no-repeat center center;
+            background-size: cover;
+            z-index: -3;
         }
 
-        h1 { font-size: 4rem; letter-spacing: 15px; text-transform: uppercase; color: var(--gold); margin: 0; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+        .fog-layer {
+            position: fixed; top: 0; left: 0; width: 200%; height: 100%;
+            background: url('img/nebbia.png') repeat-x;
+            background-size: contain;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .fog-1 { animation: drift 65s linear infinite; opacity: 0.35; }
+        .fog-2 { animation: drift 120s linear infinite reverse; opacity: 0.15; top: 15%; }
+
+        @keyframes drift {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* --- LAYOUT --- */
+        header {
+            width: 100%; padding: 100px 0 60px; text-align: center;
+            position: relative;
+        }
+
+        h1 { 
+            font-size: 5rem; letter-spacing: 20px; text-transform: uppercase; 
+            color: var(--gold); margin: 0; 
+            text-shadow: 0 0 30px rgba(201, 162, 77, 0.3), 0 5px 15px rgba(0,0,0,0.9);
+            font-weight: 900;
+        }
 
         main { 
-            max-width: 1200px; width: 95%; margin-bottom: 60px;
-            display: grid; grid-template-columns: 1fr 350px; gap: 30px; 
+            max-width: 1200px; width: 95%; margin-bottom: 100px;
+            display: grid; grid-template-columns: 1fr 350px; gap: 40px; 
+            position: relative; z-index: 1;
         }
 
-        /* --- BLOCCHI --- */
+        /* --- BLOCCHI CONTENUTO --- */
         .block {
             background: var(--panel-bg); 
-            padding: 30px; 
-            border-radius: 12px; 
+            padding: 35px; 
+            border-radius: 4px; 
             border: var(--border-style);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
-            margin-bottom: 25px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 20px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            margin-bottom: 30px;
+            position: relative;
         }
 
-        h2 { color: var(--gold); text-transform: uppercase; letter-spacing: 3px; border-bottom: 1px solid rgba(201,162,77,0.2); padding-bottom: 15px; margin-top: 0; }
+        /* Decorazione angolo superiore */
+        .block::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 30px; height: 30px;
+            border-top: 2px solid var(--gold); border-left: 2px solid var(--gold);
+            opacity: 0.4; pointer-events: none;
+        }
+
+        h2 { 
+            color: var(--gold); text-transform: uppercase; letter-spacing: 4px; 
+            font-size: 1.2rem; border-bottom: 1px solid rgba(201,162,77,0.1); 
+            padding-bottom: 20px; margin-top: 0;
+        }
 
         /* --- NAVIGAZIONE --- */
         .nav-link { 
-            background: rgba(255,255,255,0.03); 
-            padding: 20px; 
+            background: rgba(255,255,255,0.02); 
+            padding: 22px; 
             border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
-            margin-bottom: 15px; 
-            transition: all 0.4s ease; 
+            border-radius: 4px;
+            margin-bottom: 18px; 
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
             text-decoration: none; 
             display: block; 
-            color: inherit; 
+            color: inherit;
         }
-        .nav-link:hover { 
-            background: rgba(201, 162, 77, 0.1); 
-            border-color: var(--gold);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .nav-link h3 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 1.1rem; }
-        .nav-link p { margin: 8px 0 0; color: #aaa; font-size: 0.9rem; }
 
-        /* --- AUTH BOX --- */
+        .nav-link:hover { 
+            background: rgba(201, 162, 77, 0.08); 
+            border-color: var(--gold);
+            transform: translateX(8px);
+            box-shadow: -5px 0 15px rgba(201, 162, 77, 0.15);
+        }
+
+        /* Link Speciale: Diario di Lyra */
+        .nav-link.special { border-left: 3px solid var(--lyra-purple); }
+        .nav-link.special:hover { border-color: var(--lyra-purple); background: rgba(179, 142, 255, 0.05); }
+
+        .nav-link h3 { margin: 0; color: var(--gold); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 2px; }
+        .nav-link p { margin: 10px 0 0; color: #999; font-size: 0.9rem; line-height: 1.4; }
+
+        /* --- SIDEBAR & AUTH --- */
         .auth-block { text-align: center; position: sticky; top: 30px; }
         
         .auth-btn {
-            width: 100%; padding: 14px; margin: 10px 0; background: transparent; 
+            width: 100%; padding: 15px; margin: 12px 0; background: rgba(0,0,0,0.4); 
             border: 1px solid var(--gold); color: var(--gold); cursor: pointer; 
-            font-weight: bold; text-transform: uppercase; transition: 0.3s;
-            border-radius: 4px;
+            font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.3s; border-radius: 2px;
         }
         .auth-btn:hover { background: var(--gold); color: black; box-shadow: 0 0 20px var(--gold-glow); }
 
         .hidden { display: none !important; }
 
+        /* News styling */
+        .news-item { border-left: 2px solid var(--gold); padding-left: 20px; margin-bottom: 25px; }
+        .news-item strong { display: block; margin-bottom: 5px; font-size: 0.85rem; letter-spacing: 1px; }
+
+        footer { 
+            padding: 60px; color: rgba(201, 162, 77, 0.3); font-size: 0.75rem; 
+            letter-spacing: 5px; text-transform: uppercase; text-align: center;
+        }
+
         /* Modale */
         #email-modal {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: #111; border: 1px solid var(--gold); padding: 40px; z-index: 1000; width: 320px; border-radius: 8px;
+            background: #0a0c10; border: 1px solid var(--gold); padding: 40px; z-index: 1000; 
+            width: 350px; border-radius: 4px; box-shadow: 0 0 100px rgba(0,0,0,0.9);
         }
-        #email-modal input { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #444; color: var(--gold); border-radius: 4px; box-sizing: border-box; }
-
-        footer { padding: 40px; color: #555; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; }
+        #email-modal input { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: var(--gold); box-sizing: border-box; }
     </style>
 </head>
 <body>
 
+<div class="background-fixed"></div>
+<div class="fog-layer fog-1"></div>
+<div class="fog-layer fog-2"></div>
+
 <header>
     <h1>Elyndra</h1>
-    <p style="color: var(--gold); letter-spacing: 5px; text-transform: uppercase; opacity: 0.7;">Portale dell'Aether</p>
+    <p style="color: var(--gold); letter-spacing: 8px; text-transform: uppercase; opacity: 0.6; font-size: 0.9rem;">Chronicles of the Aether Void</p>
 </header>
 
 <main>
@@ -106,57 +168,61 @@
             
             <a href="wiki.html" class="nav-link">
                 <h3>📖 Wiki del Mondo</h3>
-                <p>Esplora la geografia, le fazioni e le leggende di Elyndra.</p>
+                <p>Esplora la geografia, le fazioni e le leggende proibite di Elyndra.</p>
             </a>
 
-            <a href="diario.html" class="nav-link">
+            <a href="storia-vissuta.html" class="nav-link">
                 <h3>📓 Diario di Viaggio</h3>
-                <p>Ripercorri le cronache delle sessioni e i progressi della campagna.</p>
+                <p>Cronache delle sessioni e progressi della campagna della flotta.</p>
+            </a>
+
+            <a href="diario-lyra.html" class="nav-link special">
+                <h3 style="color: var(--lyra-purple);">✨ Diario di Lyra</h3>
+                <p>Frammenti di memorie recuperate. Un'eco dal passato che sfida la realtà.</p>
+            </a>
+            
+            <a href="oggetit-pubblici.html" class="nav-link">
+                <h3>💎 Registro Reperti</h3>
+                <p>Analisi e proprietà degli oggetti magici recuperati nel vuoto.</p>
             </a>
         </div>
 
-        <a href="storia-vissuta.html" class="nav-link">
-    <h3>📓 Storia Vissuta</h3>
-    <p>Ripercorri le cronache delle sessioni e i progressi della campagna.</p>
-    </a>
+        <div class="block">
+            <h2>📢 Ultime dal Fronte</h2>
+            <div class="news-item">
+                <strong style="color: var(--accent-blue);">🚢 Diario della Flotta:</strong>
+                <p style="color: #bbb; margin: 0;">Le ancore sono state levate. La traversata del Mare di Aether è iniziata, sfidando correnti instabili.</p>
+            </div>
+            
+            <div class="news-item" style="border-color: #ff9d00;">
+                <strong style="color: #ff9d00;">⚠️ Avviso Sanitario:</strong>
+                <p style="color: #bbb; margin: 0;">Casi di "Mal d'Aether" segnalati nei ponti inferiori. Evitare il contatto con i cristalli sulla chiglia.</p>
+            </div>
 
-       <div class="block">
-    <h2>📢 Ultime dal Fronte</h2>
-    <div style="display: flex; flex-direction: column; gap: 15px;">
-        <div>
-            <strong style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase;">🚢 Diario della Flotta:</strong>
-            <p style="color: #bbb; margin: 5px 0 0;">Le ancore sono state levate. La traversata del Mare di Aether è iniziata, ma le correnti instabili rendono il viaggio più turbolento del previsto.</p>
-        </div>
-        
-        <div style="border-top: 1px solid rgba(201, 162, 77, 0.1); padding-top: 10px;">
-            <strong style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase;">⚠️ Avviso Sanitario:</strong>
-            <p style="color: #bbb; margin: 5px 0 0;">Casi di "Mal d'Aether" segnalati nei ponti inferiori. I medici del Concordato raccomandano di non toccare i residui cristallini sulle chiglie.</p>
-        </div>
-
-        <div style="border-top: 1px solid rgba(201, 162, 77, 0.1); padding-top: 10px;">
-            <strong style="color: #ff4d4d; font-size: 0.8rem; text-transform: uppercase;">👁️ Avvistamenti:</strong>
-            <p style="color: #bbb; margin: 5px 0 0;">Ombre massicce rilevate sotto la superficie del flusso. I più esperti a bordo mantengono il silenzio, ma la tensione tra i marinai è palpabile.</p>
+            <div class="news-item" style="border-color: #ff4d4d; margin-bottom: 0;">
+                <strong style="color: #ff4d4d;">👁️ Avvistamenti:</strong>
+                <p style="color: #bbb; margin: 0;">Ombre massicce rilevate sotto la superficie del flusso. La tensione tra i marinai è palpabile.</p>
+            </div>
         </div>
     </div>
-</div>
 
     <aside class="sidebar-col">
         <div class="block auth-block">
             <div id="logged-out-ui">
-                <h3 style="color: var(--gold); margin-top: 0; letter-spacing: 2px;">IDENTIFICATI</h3>
+                <h3 style="color: var(--gold); margin: 0 0 20px; letter-spacing: 3px; font-size: 0.9rem;">IDENTIFICAZIONE</h3>
                 <button class="auth-btn" onclick="loginGoogle()">Google Login</button>
-                <button class="auth-btn" onclick="toggleEmailLogin()">Email Access</button>
+                <button class="auth-btn" style="border-color: rgba(255,255,255,0.1); color: #666; font-size: 0.8rem;" onclick="toggleEmailLogin()">Email Access</button>
             </div>
 
             <div id="logged-in-ui" class="hidden">
-                <h3 style="color: var(--gold); margin-top: 0;">BENVENUTO</h3>
-                <p id="user-info" style="font-weight: bold; margin-bottom: 25px; color: #fff;"></p>
-                <button class="auth-btn" style="border-color: #555; color: #888; font-size: 0.7rem;" onclick="logout()">Disconnetti</button>
+                <h3 style="color: var(--gold); margin-top: 0; font-size: 0.8rem; letter-spacing: 2px;">SESSIONE ATTIVA</h3>
+                <p id="user-info" style="font-weight: bold; margin-bottom: 25px; color: var(--accent-blue);"></p>
+                <button class="auth-btn" style="border-color: #444; color: #666; font-size: 0.7rem;" onclick="logout()">Disconnetti</button>
             </div>
 
-            <div id="master-link-container" class="hidden" style="margin-top: 25px; border-top: 1px solid rgba(201, 162, 77, 0.2); padding-top: 25px;">
+            <div id="master-link-container" class="hidden" style="margin-top: 30px; border-top: 1px solid rgba(201, 162, 77, 0.2); padding-top: 25px;">
                 <a href="master.html" style="text-decoration: none;">
-                    <button class="auth-btn" style="border-color: #ff4d4d; color: #ff4d4d;">⚙️ CONSOLE MASTER</button>
+                    <button class="auth-btn" style="border-color: #ff4d4d; color: #ff4d4d; background: rgba(255, 77, 77, 0.05);">⚙️ CONSOLE MASTER</button>
                 </a>
             </div>
         </div>
@@ -164,15 +230,14 @@
 </main>
 
 <div id="email-modal" class="hidden">
-    <h3 style="color: var(--gold); margin-top: 0;">Accesso Archivio</h3>
-    <input type="email" id="email" placeholder="Indirizzo Email">
+    <h3 style="color: var(--gold); margin: 0 0 20px; text-align: center;">Accesso Archivio</h3>
+    <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
     <button class="auth-btn" onclick="signInEmail()">Accedi</button>
-    <button class="auth-btn" style="font-size: 0.7rem; border:none;" onclick="signUpEmail()">Registrati come nuovo utente</button>
-    <button onclick="toggleEmailLogin()" style="background:none; border:none; color:#666; cursor:pointer; width:100%; margin-top:10px;">Chiudi</button>
+    <button onclick="toggleEmailLogin()" style="background:none; border:none; color:#666; cursor:pointer; width:100%; margin-top:15px; font-size: 0.8rem;">ANNULLA</button>
 </div>
 
-<footer>ELYNDRA • 2026</footer>
+<footer>ELYNDRA • CHRONICLES OF THE AETHER VOID • 2026</footer>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -192,7 +257,6 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
     const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: 'select_account' });
 
     onAuthStateChanged(auth, async (user) => {
         const outUI = document.getElementById('logged-out-ui');
@@ -204,13 +268,12 @@
             outUI.classList.add('hidden');
             inUI.classList.remove('hidden');
             userInfo.innerText = user.displayName || user.email;
-
             try {
                 const docSnap = await getDoc(doc(db, "configurazione", "ruoli"));
                 if (docSnap.exists() && user.email === docSnap.data().masterEmail) {
                     masterUI.classList.remove('hidden');
                 }
-            } catch (e) { console.log("Verifica master fallita."); }
+            } catch (e) { }
         } else {
             outUI.classList.remove('hidden');
             inUI.classList.add('hidden');
@@ -218,20 +281,19 @@
         }
     });
 
-    window.loginGoogle = () => signInWithPopup(auth, provider).catch(e => alert(e.message));
+    window.loginGoogle = () => signInWithPopup(auth, provider);
     window.logout = () => signOut(auth);
     window.toggleEmailLogin = () => document.getElementById('email-modal').classList.toggle('hidden');
     window.signInEmail = () => {
         const e = document.getElementById('email').value;
         const p = document.getElementById('password').value;
-        signInWithEmailAndPassword(auth, e, p).then(() => toggleEmailLogin()).catch(err => alert("Errore: " + err.message));
+        signInWithEmailAndPassword(auth, e, p).then(() => toggleEmailLogin()).catch(err => alert(err.message));
     };
     window.signUpEmail = () => {
         const e = document.getElementById('email').value;
         const p = document.getElementById('password').value;
-        createUserWithEmailAndPassword(auth, e, p).then(() => toggleEmailLogin()).catch(err => alert("Errore: " + err.message));
+        createUserWithEmailAndPassword(auth, e, p).then(() => toggleEmailLogin()).catch(err => alert(err.message));
     };
 </script>
 </body>
 </html>
-

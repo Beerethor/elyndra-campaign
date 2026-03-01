@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivio Reliquie Segrete – Elyndra</title>
+    <style>
+        :root {
+            --gold: #c9a24d;
+            --bg-dark: #05070a;
+            --panel-bg: rgba(17, 20, 27, 0.95);
+            --crit-red: #ff4d4d;
+            --lore-blue: #9db4ff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            color: #e0e0e0;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #05070a 100%);
+            padding: 2rem;
+            display: none; /* Nascondiamo tutto finché Firebase non dà l'OK */
+        }
+
+        /* --- Overlay Blocco --- */
+        #access-denied { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: #05070a; z-index: 9999; display: flex; 
+            flex-direction: column; justify-content: center; align-items: center; 
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        header {
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .item-card {
+            background: var(--panel-bg);
+            border-left: 5px solid var(--gold);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .item-card.cursed { border-left-color: var(--crit-red); }
+
+        .item-name { color: var(--gold); font-size: 1.4rem; text-transform: uppercase; font-weight: bold; }
+
+        .secret-reveal {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(201, 162, 77, 0.3);
+        }
+
+        .back-btn {
+            text-decoration: none; color: var(--gold); border: 1px solid var(--gold);
+            padding: 8px 15px; font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="access-denied">
+    <h2 id="status-msg" style="color: var(--gold); letter-spacing: 5px;">VERIFICA IDENTITÀ...</h2>
+    <p style="color: #666;">Accesso limitato al Narratore di Elyndra</p>
+</div>
+
+<div class="container">
+    <header>
+        <div>
+            <h1 style="color: var(--gold); letter-spacing: 5px; margin:0;">Reliquie Segrete</h1>
+            <p style="color: var(--lore-blue); margin: 5px 0 0 0; font-size: 0.8rem;">DATABASE CRIPTATO - LIVELLO 5</p>
+        </div>
+        <a href="console-master.html" class="back-btn">← TORNA ALLA CONSOLE</a>
+    </header>
+
+    <div class="item-card" style="border-left-color: var(--crit-red); background: rgba(255, 77, 77, 0.03);">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="item-name">Spezzata dei Vayne (Lama dell'Erosione)</div>
+        <span style="font-size: 0.7rem; color: var(--crit-red); border: 1px solid var(--crit-red); padding: 2px 5px;">MALEDETTO</span>
+    </div>
+    <p style="font-style: italic; color: #888; font-size: 0.9rem; margin-top: 10px;">
+        "Un troncone di acciaio nero, inciso con i nomi di coloro che Kyle doveva odiare. Nonostante sia spezzata, la sua punta sembra ancora cercare il cuore di chi la impugna."
+    </p>
+
+    <div class="mechanic-box" style="border-color: var(--crit-red); margin-top: 15px; font-size: 0.85rem;">
+        <strong>Proprietà Benefica (Apparente):</strong> 
+        Fornisce +2 ai tiri per colpire contro i nemici di sangue, ma infligge danni solo come un pugnale (1d4 + FOR).
+    </div>
+
+    <article class="item-card cursed">
+      <div class="item-name">Lama spezzata dei Vayne</div>
+        <p style="font-style: italic; color: #bbb;">"Un troncone d'odio abbandonato tra i resti di Porto Althamar."</p>
+        <p>Chiunque impugni questa lama (o ne porti un frammento) subisce i seguenti effetti:</p>
+      <li><strong>Colpo Preciso:</strong> Attaccare con questa spada concede un bonus di +2 ai <strong>tiri per colpire</strong> e ai <strong>danni</strong>.</li>
+         <div class="secret-reveal">
+          <ul style="padding-left: 20px; margin: 5px 0;">
+            <li><strong>Sfortuna Atavica:</strong> Ogni volta che il portatore ottiene un 1 naturale su un dado, la spada "vibra". Il prossimo tiro salvezza contro la Litostasi avrà <strong>Svantaggio</strong>.</li>
+            <li><strong>Erosione Spirituale:</strong> La lama consuma la speranza. Durante i riposi brevi, il portatore non può recuperare dadi vita a meno di non superare una prova di Volontà (CD 14).</li>
+            <li><strong>Richiamo della Pietra:</strong> Sebbene gettata a Porto Althamar, la spada "tira" verso Aetherys. Il portatore si sente costantemente osservato dalle statue che ha lasciato indietro.</li>
+          </ul>
+          <p style="font-size: 0.8rem; color: var(--lore-blue);">Nota Master: Kyle ha fatto bene a gettarla. Se l'avesse tenuta, al Tier 2 la sua mano sarebbe stata la prima a pietrificarsi.</p>
+        </div>
+    </article>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBxwbmUT7efDSF5K2FT-JICRb59_letUS0",
+        authDomain: "elyndra-6be99.firebaseapp.com",
+        projectId: "elyndra-6be99",
+        storageBucket: "elyndra-6be99.firebasestorage.app",
+        messagingSenderId: "1062810114473",
+        appId: "1:1062810114473:web:3abf8900d4513c132f0cb8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const overlay = document.getElementById('access-denied');
+    const statusMsg = document.getElementById('status-msg');
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const docRef = doc(db, "configurazione", "ruoli");
+            const docSnap = await getDoc(docRef);
+            
+            if (docSnap.exists() && user.email === docSnap.data().masterEmail) {
+                // UTENTE AUTORIZZATO
+                overlay.style.display = 'none';
+                document.body.style.display = 'block';
+            } else {
+                // NON È IL MASTER
+                statusMsg.innerText = "ACCESSO NEGATO";
+                statusMsg.style.color = "#ff4d4d";
+                setTimeout(() => window.location.href = "index.html", 2000);
+            }
+        } else {
+            // NON LOGGATO
+            window.location.href = "index.html";
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -40,20 +40,60 @@
             align-items: flex-end;
         }
 
+        /* --- Nuova Struttura Card Layout --- */
         .item-card {
             background: var(--panel-bg);
+            border: 1px solid rgba(201, 162, 77, 0.1);
             border-left: 5px solid var(--gold);
-            padding: 25px;
+            padding: 20px;
             margin-bottom: 30px;
             border-radius: 4px;
+            
+            /* Attiva il layout a due colonne */
+            display: grid;
+            grid-template-columns: 120px 1fr; /* Colonna immagine fissa, testo flessibile */
+            gap: 20px;
+            align-items: start;
         }
 
         .item-card.cursed { border-left-color: var(--crit-red); }
 
-        .item-name { color: var(--gold); font-size: 1.4rem; text-transform: uppercase; font-weight: bold; }
+        /* --- Stile Immagine Ridotta --- */
+        .item-image {
+            width: 120px;
+            height: 120px;
+            object-fit: cover; /* Ritaglia l'immagine per riempire il quadrato senza deformarla */
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #000;
+        }
+
+        /* Contenitore per il testo a destra dell'immagine */
+        .item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-name { color: var(--gold); font-size: 1.2rem; text-transform: uppercase; font-weight: bold; margin: 0; }
+
+        .mechanic-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            border-radius: 4px;
+        }
 
         .secret-reveal {
-            margin-top: 20px;
+            grid-column: 1 / -1; /* Fa occupare alla segreta l'intera larghezza delle due colonne */
+            margin-top: 15px;
             padding-top: 15px;
             border-top: 1px dashed rgba(201, 162, 77, 0.3);
         }
@@ -61,6 +101,17 @@
         .back-btn {
             text-decoration: none; color: var(--gold); border: 1px solid var(--gold);
             padding: 8px 15px; font-size: 0.8rem;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
+        th, td { text-align: left; padding: 8px; border: 1px solid #444; }
+        th { background: rgba(255,207,64,0.1); color: var(--gold); }
+
+        /* Responsive: su cellulare tornano uno sotto l'altro */
+        @media (max-width: 600px) {
+            .item-card { grid-template-columns: 1fr; text-align: center; }
+            .item-image { margin: 0 auto; }
+            .item-header { flex-direction: column; gap: 5px; }
         }
     </style>
 </head>
@@ -71,181 +122,120 @@
     <p style="color: #666;">Accesso limitato al Narratore di Elyndra</p>
 </div>
 
-    
 <div class="container">
     <header>
         <div>
-            <h1 style="color: var(--gold); letter-spacing: 5px; margin:0;">Reliquie Segrete</h1>
+            <h1 style="color: var(--gold); letter-spacing: 5px; margin:0; font-size: 1.5rem;">Reliquie Segrete</h1>
             <p style="color: var(--lore-blue); margin: 5px 0 0 0; font-size: 0.8rem;">DATABASE CRIPTATO - LIVELLO 5</p>
         </div>
         <a href="master.html" class="back-btn">← TORNA ALLA CONSOLE</a>
     </header>
-</div>
-
-    <div class="item-card" style="border-left-color: var(--crit-red); background: rgba(255, 77, 77, 0.03);">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <img src="img/spada-vayne.png" alt="Reperto" class="item-image" onerror="this.src='https://via.placeholder.com/180x180/111/9db4ff?text=Reperto+01'">
-        <div class="item-name">Lamapezzata dei Vayne (Lama dell'Erosione)</div>
-        <span style="font-size: 0.7rem; color: var(--crit-red); border: 1px solid var(--crit-red); padding: 2px 5px;">MALEDETTO</span>
-    </div>
-    <p style="font-style: italic; color: #888; font-size: 0.9rem; margin-top: 10px;">
-        "Un troncone di acciaio nero, inciso con i nomi di coloro che Kyle doveva odiare. Nonostante sia spezzata, la sua punta sembra ancora cercare il cuore di chi la impugna."
-    </p>
-
-    <div class="mechanic-box" style="border-color: var(--crit-red); margin-top: 15px; font-size: 0.85rem;">
-        <strong>Proprietà Benefica (Apparente):</strong> 
-        Fornisce +2 ai tiri per colpire contro i nemici di sangue, ma infligge danni solo come un pugnale (1d4 + FOR).
-    </div>
 
     <article class="item-card cursed">
-      <strong>⚠️ LA MALEDIZIONE: "IL PESO DEL PASSATO"</strong>
-        <p>Chiunque impugni questa lama (o ne porti un frammento) subisce i seguenti effetti:</p>
-         <div class="secret-reveal">
-          <ul style="padding-left: 20px; margin: 5px 0;">
-            <li><strong>Sfortuna Atavica:</strong> Ogni volta che il portatore ottiene un 1 naturale su un dado, la spada "vibra". Il prossimo tiro salvezza contro la Litostasi avrà <strong>Svantaggio</strong>.</li>
-            <li><strong>Erosione Spirituale:</strong> La lama consuma la speranza. Durante i riposi brevi, il portatore non può recuperare dadi vita a meno di non superare una prova di Volontà (CD 14).</li>
-            <li><strong>Richiamo della Pietra:</strong> Sebbene gettata a Porto Althamar, la spada "tira" verso Aetherys. Il portatore si sente costantemente osservato dalle statue che ha lasciato indietro.</li>
-          </ul>
-          <p style="font-size: 0.8rem; color: var(--lore-blue);">Nota Master: Kyle ha fatto bene a gettarla. Se l'avesse tenuta, al Tier 2 la sua mano sarebbe stata la prima a pietrificarsi.</p>
+        <img src="img/reliquie/spada-vayne.png" alt="Spada" class="item-image" onerror="this.src='https://via.placeholder.com/120x120/111/ff4d4d?text=Spada'">
+        
+        <div class="item-content">
+            <div class="item-header">
+                <h2 class="item-name">Spezzata dei Vayne</h2>
+                <span style="font-size: 0.6rem; color: var(--crit-red); border: 1px solid var(--crit-red); padding: 2px 5px; text-transform: uppercase;">Maledetto</span>
+            </div>
+            
+            <p style="font-style: italic; color: #888; font-size: 0.85rem; margin: 0;">
+                "Un troncone di acciaio nero, inciso con i nomi di coloro che Kyle doveva odiare. La sua punta sembra ancora cercare il cuore di chi la impugna."
+            </p>
+
+            <div class="mechanic-box" style="border-color: var(--crit-red);">
+                <strong>Proprietà Apparente:</strong> +2 colpire contro nemici di sangue. Danno: 1d4 + FOR.
+            </div>
+        </div>
+
+        <div class="secret-reveal">
+            <strong style="color: var(--crit-red);">⚠️ LA MALEDIZIONE: "IL PESO DEL PASSATO"</strong>
+            <ul style="padding-left: 20px; margin: 10px 0; font-size: 0.85rem;">
+                <li><strong>Sfortuna Atavica:</strong> 1 naturale su un dado = Svantaggio al prossimo TS Litostasi.</li>
+                <li><strong>Erosione Spirituale:</strong> CD 14 Volontà per recuperare dadi vita durante i riposi brevi.</li>
+                <li><strong>Richiamo della Pietra:</strong> Il portatore si sente costantemente osservato.</li>
+            </ul>
         </div>
     </article>
 
-
-        <article class="item-card">
-    <div class="item-container">
-        <img src="img/velo-nyxoria.png" alt="Velo" class="item-image" onerror="this.src='https://via.placeholder.com/220x220/111/9db4ff?text=Reliquia'">
+    <article class="item-card">
+        <img src="img/reliquie/velo-nyxoria.png" alt="Velo" class="item-image" onerror="this.src='https://via.placeholder.com/120x120/111/9db4ff?text=Velo'">
         
-        <div class="item-info">
+        <div class="item-content">
             <div class="item-header">
-                <div class="item-name">Velo di Nyxoria</div>
-                <span class="item-tag tag-relic">Bio-Lume</span>
+                <h2 class="item-name">Velo di Nyxoria</h2>
+                <span style="font-size: 0.6rem; color: var(--lore-blue); border: 1px solid var(--lore-blue); padding: 2px 5px; text-transform: uppercase;">Bio-Lume</span>
             </div>
-            <p class="item-description">"Tessuto con filamenti di muschio che reagiscono alla presenza di esseri viventi."</p>
-            <div class="mechanic-box">
+            
+            <p style="font-style: italic; color: #bbb; font-size: 0.85rem; margin: 0;">"Tessuto con filamenti di muschio che reagiscono alla presenza di esseri viventi."</p>
+            
+            <div class="mechanic-box" style="border-color: var(--lore-blue);">
                 <strong>Effetto:</strong> Vantaggio a Furtività nelle zone d'ombra.
             </div>
         </div>
-    </div>
-    <div class="secret-reveal">
-        <strong style="color: var(--lore-blue);">⚠️ SEGRETO SIMBIOTICO</strong>
-        <p style="font-size: 0.9rem;">Il velo si fonde con la pelle dell'ospite dopo 7 giorni di utilizzo continuo.</p>
-    </div>
-</article>
 
-        <article class="item-card cursed" style="border-left-color: #ffcf40; background: rgba(255, 207, 64, 0.03);">
-    <div class="item-container">
-        <img src="img/Clarissa.png" alt="Clarissa" class="item-image" onerror="this.src='https://via.placeholder.com/220x220/111/ffcf40?text=Clarissa+Eye'">
+        <div class="secret-reveal">
+            <strong style="color: var(--lore-blue);">⚠️ SEGRETO SIMBIOTICO</strong>
+            <p style="font-size: 0.85rem; margin: 5px 0;">Il velo si fonde con la pelle dell'ospite dopo 7 giorni di utilizzo continuo.</p>
+        </div>
+    </article>
+
+    <article class="item-card cursed" style="border-left-color: #ffcf40;">
+        <img src="img/reliquie/Clarissa.png" alt="Clarissa" class="item-image" onerror="this.src='https://via.placeholder.com/120x120/111/ffcf40?text=Clarissa'">
         
-        <div class="item-info">
+        <div class="item-content">
             <div class="item-header">
-                <div class="item-name" style="color: #ffcf40;">Clarissa: L'Errore Dimensionale</div>
-                <span class="item-tag" style="background: #ffcf40; color: black;">Leggendario / Senziente</span>
+                <h2 class="item-name" style="color: #ffcf40;">Clarissa</h2>
+                <span style="font-size: 0.6rem; color: #ffcf40; border: 1px solid #ffcf40; padding: 2px 5px; text-transform: uppercase;">Leggendario</span>
             </div>
-            <p class="item-description">
-                "Non è un gioiello, è una diva. Un'entità parassitaria che brilla d'oro e osserva il mondo con un unico occhio insaziabile. Esige attenzioni, sangue e fedeltà assoluta."
+            
+            <p style="font-style: italic; color: #bbb; font-size: 0.85rem; margin: 0;">"Una diva parassitaria dorata con un unico occhio insaziabile. Esige attenzioni e sangue."</p>
+            
+            <div class="mechanic-box" style="border-color: #ffcf40;">
+                <strong>Simbiosi:</strong> Cresce col livello (1 PF -> 1/3 PF Max). Gelosa, petulante.
             </div>
         </div>
-    </div>
 
-    <div class="mechanic-box" style="border-color: #ffcf40;">
-        <strong>Simbiosi Evolutiva:</strong> Cresce con il livello del portatore. 
-        <br><strong>Costo Biologico:</strong> Consuma PF ogni giorno (da 1 PF a 1/3 dei PF Max).
-        <br><strong>Personalità:</strong> Gelosa, petulante, needy. Non tollera altri oggetti magici primari.
-    </div>
+        <div class="secret-reveal">
+            <strong style="color: #ffcf40;">⚠️ EVOLUZIONE & MALEDIZIONE</strong>
+            <table>
+                <tr><th>Liv</th><th>Beneficio</th><th>Costo PF</th></tr>
+                <tr><td>1-4</td><td>+d4 a una prova (1/RL)</td><td>1 PF</td></tr>
+                <tr><td>5-8</td><td>+1 CA e Vantaggio Percezione</td><td>5 PF</td></tr>
+                <tr><td>9-12</td><td>+1 CD Incantesimi / Colpire</td><td>10 PF</td></tr>
+                <tr><td>13-16</td><td>Reazione: dimezza danno (1/giorno)</td><td>20 PF</td></tr>
+                <tr><td>17-20</td><td>+2 Caratteristica e incantesimo gratis liv 5</td><td>1/3 Max</td></tr>
+            </table>
+        </div>
+    </article>
 
-    <div class="secret-reveal">
-        <div class="secret-title">⚠️ IL PATTO NUZIALE (Maledizione & Evoluzione)</div>
-        <table style="width:100%; font-size: 0.8rem; border-collapse: collapse; margin-top: 10px;">
-            <tr style="background: rgba(255,207,64,0.1);">
-                <th style="padding: 5px;">Livello</th>
-                <th style="padding: 5px;">Beneficio</th>
-                <th style="padding: 5px;">Costo PF</th>
-            </tr>
-            <tr>
-                <td>1-4</td>
-                <td>Guida della Diva: +d4 a una prova (1/RL)</td>
-                <td>1 PF/giorno</td>
-            </tr>
-            <tr>
-                <td>5-8</td>
-                <td>Occhio Vigile: +1 CA e Vantaggio Percezione</td>
-                <td>5 PF/giorno</td>
-            </tr>
-            <tr>
-                <td>9-12</td>
-                <td>Potere Parassita: +1 CD Incantesimi / tiri Colpire</td>
-                <td>10 PF/giorno</td>
-            </tr>
-            <tr>
-                <td>13-16</td>
-                <td>Simbiosi: Reazione per dimezzare un danno (1/giorno)</td>
-                <td>20 PF/giorno</td>
-            </tr>
-            <tr>
-                <td>17-20</td>
-                <td>Apoteosi: +2 Caratteristica e incantesimo 5° liv gratis</td>
-                <td>1/3 PF Max</td>
-            </tr>
-        </table>
-        <p style="font-size: 0.85rem; color: var(--crit-red); margin-top: 10px;">
-            <strong>Maledizione:</strong> Sintonia indissolubile. Se rimossa senza <em>Desiderio</em>, infligge 10d10 danni psichici e urla attirando nemici nel raggio di 1 miglio.
-        </p>
-    </div>
-</article>
-
-<article class="item-card cursed" style="border-left-color: #555; background: rgba(85, 85, 85, 0.05);">
-    <div class="item-container">
-        <img src="img/reliquie/anello-ombra.png" alt="Anello del Falso Conforto" class="item-image" onerror="this.src='https://via.placeholder.com/220x220/05070a/555?text=Anello+Nero'">
+    <article class="item-card cursed" style="border-left-color: #555;">
+        <img src="img/reliquie/anello-ombra.png" alt="Anello" class="item-image" onerror="this.src='https://via.placeholder.com/120x120/05070a/555?text=Anello'">
         
-        <div class="item-info">
+        <div class="item-content">
             <div class="item-header">
-                <div class="item-name" style="color: #aaa;">Anello del Falso Conforto</div>
-                <span class="item-tag tag-cursed">Raro / Maledetto</span>
+                <h2 class="item-name" style="color: #aaa;">Anello del Falso Conforto</h2>
+                <span style="font-size: 0.6rem; color: #aaa; border: 1px solid #aaa; padding: 2px 5px; text-transform: uppercase;">Raro</span>
             </div>
-            <p class="item-description">
-                "Un cerchio di metallo nero opaco che pulsa di un calore artificiale. Promette la fine di ogni sofferenza, ma il prezzo è la tua stessa ombra."
-            </p>
+            
+            <p style="font-style: italic; color: #888; font-size: 0.85rem; margin: 0;">"Metallo nero che pulsa calore. Promette la fine del dolore, ma ruba l'ombra."</p>
+            
+            <div class="mechanic-box" style="border-color: #9db4ff;">
+                <strong>Benefici:</strong> Immune Affaticamento/Paura. Recupero PF max. +2 Persuasione.
+            </div>
         </div>
-    </div>
 
-    <div class="mechanic-box" style="border-color: #9db4ff;">
-        <strong>Benefici:</strong> Immune a <em>Affaticamento</em> e <em>Paura</em>. Recupero PF sempre al massimo. +2 Persuasione (Euforia).
-    </div>
-
-    <div class="secret-reveal">
-        <div class="secret-title">⚠️ LA MALEDIZIONE: L'OMBRA DISTACCATA</div>
-        <table style="width:100%; font-size: 0.8rem; border-collapse: collapse; margin: 10px 0;">
-            <tr style="background: rgba(255,255,255,0.05);">
-                <th style="padding: 5px; border: 1px solid #444;">Stadio</th>
-                <th style="padding: 5px; border: 1px solid #444;">Tempo</th>
-                <th style="padding: 5px; border: 1px solid #444;">Effetto Meccanico</th>
-            </tr>
-            <tr>
-                <td style="padding: 5px; border: 1px solid #444;">I: Ritardo</td>
-                <td style="padding: 5px; border: 1px solid #444;">1 Giorno</td>
-                <td>-2 Iniziativa (L'ombra reagisce tardi).</td>
-            </tr>
-            <tr>
-                <td style="padding: 5px; border: 1px solid #444;">II: Distacco</td>
-                <td style="padding: 5px; border: 1px solid #444;">3 Giorni</td>
-                <td>Svantaggio Percezione e Intuizione.</td>
-            </tr>
-            <tr>
-                <td style="padding: 5px; border: 1px solid #444;">III: Eclissi</td>
-                <td style="padding: 5px; border: 1px solid #444;">7 Giorni</td>
-                <td>FOR e COS -2. L'ombra punta verso il Boss.</td>
-            </tr>
-        </table>
-
-        <div style="background: rgba(255, 77, 77, 0.1); padding: 10px; border-radius: 4px; border: 1px solid var(--crit-red);">
-            <strong>⚠️ MECCANICA "RICHIAMO DELL'OMBRA" (0 PF)</strong>
-            <p style="font-size: 0.85rem; margin: 5px 0;">A 0 PF, il PG non tira TS Morte. L'ombra si stacca e diventa un <strong>Shadow (MM p. 269)</strong>. Se l'ombra muore, il PG muore. Se sopravvive, il PG resta vegetale.</p>
-            <em style="font-size: 0.8rem;">Metodi di Salvataggio: Riflesso Forzato (Sangue), Sfida di Volontà (Catene mentali) o Metodo del Mercante (Taglio del dito).</em>
+        <div class="secret-reveal">
+            <strong style="color: #ff4d4d;">⚠️ LA MALEDIZIONE: L'OMBRA DISTACCATA</strong>
+            <p style="font-size: 0.8rem; margin: 5px 0;">Stadio I (1g): -2 Iniziativa. Stadio II (3g): Svantaggio Percezione. Stadio III (7g): FOR/COS -2.</p>
+            <div style="background: rgba(255, 77, 77, 0.1); padding: 8px; border-radius: 4px; border: 1px solid var(--crit-red); font-size: 0.8rem; margin-top: 5px;">
+                <strong>⚠️ 0 PF:</strong> L'ombra diventa un <strong>Shadow (MM)</strong> ostile. Se l'ombra muore, il PG muore.
+            </div>
         </div>
-    </div>
-</article>
-    
-<script type="module">
+    </article>
+
+</div> <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";

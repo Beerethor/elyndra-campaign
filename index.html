@@ -189,21 +189,25 @@
 
         <div class="block">
             <h2>📢 Ultime dal Fronte</h2>
-            <div class="news-item">
-                <strong style="color: var(--accent-blue);">🚢 Diario della Flotta:</strong>
-                <p style="color: #bbb; margin: 0;">Le ancore sono state levate. La traversata del Mare di Aether è iniziata, sfidando correnti instabili.</p>
-            </div>
-            
-            <div class="news-item" style="border-color: #ff9d00;">
-                <strong style="color: #ff9d00;">⚠️ Avviso Sanitario:</strong>
-                <p style="color: #bbb; margin: 0;">Casi di "Mal d'Aether" segnalati nei ponti inferiori. Evitare il contatto con i cristalli sulla chiglia.</p>
-            </div>
+            <div class="block" style="border-left: 4px solid #ff4d4d; padding-left: 15px;">
+    <h2 style="color: #ff4d4d; letter-spacing: 2px;">⚠️ BOLLETTINO DI EMERGENZA: NYXORIA</h2>
+    
+    <p><strong>🚢 Stato della Flotta:</strong><br>
+    La traversata è conclusa. La nave di <strong>Jax</strong> ha toccato le coste del nuovo continente. Le operazioni di sbarco sono completate, ma la flotta resta in stato di massima allerta.</p>
 
-            <div class="news-item" style="border-color: #ff4d4d; margin-bottom: 0;">
-                <strong style="color: #ff4d4d;">👁️ Avvistamenti:</strong>
-                <p style="color: #bbb; margin: 0;">Ombre massicce rilevate sotto la superficie del flusso. La tensione tra i marinai è palpabile.</p>
-            </div>
-        </div>
+    <p><strong>⚔️ Rapporto Difesa:</strong><br>
+    Sventato attacco coordinato di stormi di Arpie nel Flusso Superiore. Si segnala l'intervento di un'unità non identificata (associata al <strong>Generale Thorne</strong>) capace di manipolazione cinetica ad alto impatto. Un assassino isolato è stato neutralizzato nel perimetro del primo accampamento.</p>
+
+    <p><strong>🏗️ Operazione Rifugio:</strong><br>
+    Iniziata la costruzione del primo insediamento. Il <strong>Concordato</strong> segnala difficoltà strutturali dovute alla morfologia instabile del terreno. Richiesta assistenza da parte di personale esperto in carpenteria e fortificazioni.</p>
+
+    <p><strong>💍 Nota del Comitato di Vigilanza:</strong><br>
+    Segnalata la circolazione di manufatti circolari (anelli) di dubbia provenienza tra i profughi. Evitare l'attivazione di oggetti non censiti dall'Archivio.</p>
+
+    <p style="font-size: 0.8rem; color: #888; font-style: italic; margin-top: 15px; border-top: 1px solid #333; padding-top: 5px;">
+        "Il fango di Nyxoria è meglio della pietra di Aetherys, ma morde con la stessa ferocia."
+    </p>
+</div>
     </div>
 
     <aside class="sidebar-col">
@@ -246,15 +250,15 @@
     <h2 style="color: #888; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 15px;">👥 ANIME RESIDUE</h2>
     
     <div id="survivor-count" style="font-family: 'Courier New', monospace; font-size: 2.2rem; color: #ff4d4d; text-shadow: 0 0 15px rgba(255, 77, 77, 0.4); font-weight: bold; letter-spacing: 5px;">
-        142.804
+        142.652
     </div>
     
     <p style="font-size: 0.7rem; color: #555; text-transform: uppercase; margin-top: 10px; letter-spacing: 1px;">
-        Censimento Flotta dell'Ultima Speranza
+        Censimento Post-Sbarco a Nyxoria
     </p>
     
     <div style="margin-top: 15px; border-top: 1px dotted #333; padding-top: 10px;">
-        <span style="color: #ff9d00; font-size: 0.75rem; font-weight: bold;">⚠️ STATO: IN DIMINUZIONE</span>
+        <span style="color: #ff9d00; font-size: 0.75rem; font-weight: bold;">⚠️ PERDITE RECENTI: -152</span>
     </div>
 </div>
     </aside>
@@ -325,6 +329,25 @@
         const p = document.getElementById('password').value;
         createUserWithEmailAndPassword(auth, e, p).then(() => toggleEmailLogin()).catch(err => alert(err.message));
     };
+    <script>
+    // Animazione del numero che scende all'apertura della pagina
+    function animateValue(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString('it-IT');
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    const obj = document.getElementById("survivor-count");
+    // Fa finta di ricalcolare partendo dal numero vecchio
+    animateValue(obj, 142804, 142652, 2000);
+</script>
 </script>
     <script>
     // Effetto glitch casuale sul contatore
@@ -342,6 +365,7 @@
 </script>
 </body>
 </html>
+
 
 
 

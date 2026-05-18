@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dizionario e Traduttore Avanzato di Lingua Khaari V3</title>
+    <title>Traduttore Universale Lingua Khaari V4</title>
     <style>
         :root {
             --bg-color: #f4f1ea;
@@ -79,38 +79,31 @@
         .output-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); font-weight: bold; margin-bottom: 5px; }
         .output-text { font-size: 1.15rem; font-weight: 500; }
         .output-note { font-size: 0.85rem; color: #666; margin-top: 5px; font-style: italic; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0 25px 0; font-size: 0.95rem; }
-        th, td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
-        th { background-color: var(--primary-color); color: white; }
-        tr:nth-child(even) { background-color: var(--table-zebra); }
-        ul { margin-left: 20px; margin-bottom: 15px; }
-        li { margin-bottom: 5px; }
-        .badge { background-color: #e2dacd; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Compendio e Traduttore Algoritmico Khaari (V3)</h1>
-        <div class="subtitle">"Il Khaari suona come acqua su pietra antica — ora con motore di scomposizione sintattica SOV."</div>
+        <h1>Compendio e Traduttore Algoritmico Khaari (V4)</h1>
+        <div class="subtitle">"Traduzione fluida universale con motore di adattamento fonetico sillabico."</div>
     </header>
 
-    <h2>Sistema di Traduzione Dinamico</h2>
-    <p>Questa versione analizza la struttura della frase italiana, identifica i verbi per spostarli in fondo (struttura SOV), e applica i prefissi di negazione o i suffissi plurali automatici.</p>
+    <h2>Sistema di Traduzione Interattivo</h2>
+    <p>Inserisci qualsiasi testo. Le parole non presenti nel dizionario verranno convertite dinamicamente rispettando la fonologia di Nyxoria (con suoni gutturali e colpi di glottide).</p>
     
     <div class="translator-box">
         <div class="form-group">
             <label for="translation-mode">Direzione Traduzione:</label>
             <select id="translation-mode" onchange="updatePlaceholders()">
-                <option value="it-to-kh">Italiano ➔ Khaari (Sintattico)</option>
+                <option value="it-to-kh">Italiano ➔ Khaari (Universale)</option>
                 <option value="kh-to-it">Khaari ➔ Italiano</option>
             </select>
         </div>
 
         <div class="form-group">
             <label id="input-label" for="input-text">Testo da Tradurre:</label>
-            <input type="text" id="input-text" placeholder="Es. La madre non vuole la guerra...">
+            <input type="text" id="input-text" placeholder="Scrivi una frase qualsiasi... Es. Il cuore non batte">
         </div>
         
         <div class="btn-group">
@@ -131,178 +124,147 @@
                 <div class="output-box" style="direction: rtl; text-align: right;">
                     <div class="output-text" id="output-secondary">-</div>
                 </div>
-                <div class="output-note">Nota rituale: Scrittura da destra a sinistra (➔).</div>
+                <div class="output-note">Nota: Scritto da destra a sinistra (➔).</div>
             </div>
         </div>
     </div>
-
-    <h2>Grammatica Essenziale Applicata</h2>
-    <ul>
-        <li><strong>Struttura SOV:</strong> Il traduttore sposta le azioni/verbi riconosciuti alla fine della frase.</li>
-        <li><strong>Negazione attiva:</strong> Inserendo "non", il verbo finale riceverà il prefisso <span class="badge">na-</span>.</li>
-        <li><strong>Plurali intelligenti:</strong> Riconosce i plurali italiani del dizionario applicando <span class="badge">-em</span> (viventi) o <span class="badge">-un</span> (inanimati).</li>
-    </ul>
 </div>
 
 <script>
-    // Dizionario dei lemmi con classificazione per i plurali
-    const dizionarioItToKh = {
-        "terra": { k: "Kha", type: "vivo" },
-        "suolo": { k: "Kha", type: "inanimato" },
-        "luogo": { k: "Kha", type: "inanimato" },
-        "respiro": { k: "Ruun", type: "vivo" },
-        "vita": { k: "Ruun", type: "vivo" },
-        "spirito": { k: "Ruun", type: "vivo" },
-        "confine": { k: "Vel", type: "inanimato" },
-        "soglia": { k: "Vel", type: "inanimato" },
-        "passaggio": { k: "Vel", type: "inanimato" },
-        "pietra": { k: "Ris", type: "vivo" }, // pietra viva
-        "pietra morta": { k: "Soth", type: "inanimato" },
-        "spirito antico": { k: "Naakha", type: "vivo" },
-        "presenza": { k: "Naakha", type: "vivo" },
-        "ombra": { k: "Soth", type: "inanimato" },
-        "silenzio": { k: "Soth", type: "inanimato" },
-        "assenza": { k: "Soth", type: "inanimato" },
-        "movimento": { k: "Shaa", type: "inanimato" },
-        "cambiamento": { k: "Shaa", type: "inanimato" },
-        "tempo": { k: "Kuur", type: "inanimato" },
-        "acqua": { k: "Thal", type: "inanimato" },
-        "profondità": { k: "Thal", type: "inanimato" },
-        "madre": { k: "Maa", type: "vivo" },
-        "origine": { k: "Maa", type: "vivo" },
-        "memoria": { k: "Siira", type: "vivo" }, // il sangue/memoria è vivo
-        "sangue": { k: "Siira", type: "vivo" },
-        "segreto": { k: "Ssara", type: "inanimato" },
-        "magia": { k: "Ssara", type: "inanimato" },
-        "guerra": { k: "Vel'nak", type: "inanimato" }
+    // Dizionario Lore Ufficiale
+    const dizionarioLore = {
+        "terra": "Kha", "suolo": "Kha", "luogo": "Kha", "respiro": "Ruun", "vita": "Ruun", 
+        "spirito": "Ruun", "confine": "Vel", "soglia": "Vel", "passaggio": "Vel", "pietra": "Ris", 
+        "ombra": "Soth", "silenzio": "Soth", "assenza": "Soth", "movimento": "Shaa", 
+        "cambiamento": "Shaa", "tempo": "Kuur", "acqua": "Thal", "profondità": "Thal", 
+        "madre": "Maa", "origine": "Maa", "memoria": "Siira", "sangue": "Siira", 
+        "segreto": "Ssara", "magia": "Ssara", "guerra": "Vel'nak"
     };
 
-    // Mappatura plurali italiani comuni per aiutare l'algoritmo
-    const pluraliIt = {
-        "terre": "terra", "spiriti": "spirito", "confini": "confine", "soglie": "soglia",
-        "presenze": "presenza", "ombre": "ombra", "acque": "acqua", "madri": "madre",
-        "memorie": "memoria", "segreti": "segreto", "guerre": "guerra"
+    // Mappa per generare fonemi Khaari coerenti partendo da parole sconosciute
+    const sillabeKhaari = {
+        "ca": "kha", "co": "kho", "cu": "khu", "ci": "shi", "ce": "she",
+        "ga": "kar", "go": "kor", "gu": "khaar", "gi": "ssi", "ge": "sse",
+        "ti": "th", "te": "tha", "to": "tho", "ta": "tha",
+        "pa": "vel", "po": "ruun", "pi": "ris", "pu": "soth",
+        "sa": "ssa", "si": "ssi", "so": "sso", "su": "ssu",
+        "re": "ra", "ri": "riis", "ro": "ruu", "ra": "khaar",
+        "ma": "maa", "me": "mii", "mi": "mira", "mo": "moth", "mu": "muun"
     };
 
-    // Lista di verbi italiani comuni che l'algoritmo deve intercettare e buttare in fondo (SOV)
-    const verbiIt = [
-        "parla", "parlano", "vede", "vedono", "cambia", "cambiano", "respira", "respirano",
-        "vuole", "vogliono", "porta", "portano", "rompe", "rompono", "viene", "vengono",
-        "cammina", "camminano", "è", "sono", "sta", "stanno"
-    ];
-
-    // Dizionario inverso per traduzione da Khaari a Italiano
-    const dizionarioKhToIt = {};
-    for (let key in dizionarioItToKh) {
-        dizionarioKhToIt[dizionarioItToKh[key].toLowerCase()] = key;
+    // Generatore fonetico procedurale per parole non incluse nel dizionario
+    function generaParolaKhaari(parolaIt) {
+        let p = parolaIt.toLowerCase();
+        if (dizionarioLore[p]) return dizionarioLore[p];
+        
+        let finale = "";
+        let i = 0;
+        while (i < p.length) {
+            let coppia = p.substr(i, 2);
+            if (sillabeKhaari[coppia]) {
+                finale += sillabeKhaari[coppia];
+                i += 2;
+            } else {
+                let singola = p.charAt(i);
+                if (["a","e","i","o","u"].includes(singola)) {
+                    finale += (i === 2) ? "'" + singola : singola; // aggiunge un colpo di glottide randomico interno
+                } else if (!["h", "q"].includes(singola)) {
+                    finale += singola;
+                }
+                i++;
+            }
+        }
+        
+        // Pulizie e formattazione estetica fonetica
+        finale = finale.replace(/cc/g, "kh").replace(/tt/g, "th").replace(/ss/g, "ss");
+        if (finale.length > 3 && !finale.includes("'") && Math.random() > 0.5) {
+            let meta = Math.floor(finale.length / 2);
+            finale = finale.substr(0, meta) + "'" + finale.substr(meta);
+        }
+        
+        // Rende la prima lettera maiuscola per estetica dei nomi Khaari
+        return finale.charAt(0).toUpperCase() + finale.slice(1);
     }
 
     function updatePlaceholders() {
         const mode = document.getElementById("translation-mode").value;
         const input = document.getElementById("input-text");
-        const boxSecondary = document.getElementById("box-secondary");
         if (mode === "it-to-kh") {
-            input.placeholder = "Es. La madre non vuole la guerra / Gli spiriti vedono le ombre";
-            boxSecondary.style.display = "block";
-            document.getElementById("title-primary").innerText = "Risultato in Khaari Vivo:";
+            input.placeholder = "Es. Il cuore non batte / La pietra viva trema";
+            document.getElementById("box-secondary").style.display = "block";
         } else {
-            input.placeholder = "Es. Maa Vel'nak na-vuole / Kha-ruun";
-            boxSecondary.style.display = "none";
-            document.getElementById("title-primary").innerText = "Significato in Italiano:";
+            input.placeholder = "Es. Kha-ruun / Soth'ruun";
+            document.getElementById("box-secondary").style.display = "none";
         }
         clearTranslator();
     }
 
     function handleTranslation() {
         const mode = document.getElementById("translation-mode").value;
-        const input = document.getElementById("input-text").value.trim().toLowerCase();
+        const input = document.getElementById("input-text").value.trim();
         const outPrimary = document.getElementById("output-primary");
         const outSecondary = document.getElementById("output-secondary");
 
         if (input === "") { clearTranslator(); return; }
 
         if (mode === "it-to-kh") {
-            // --- MOTORE DI TRADUZIONE AVANZATO: ITALIANO -> KHAARI (SOV) ---
-            let parole = input.split(/[\s,.\'\"]+/);
-            
-            let soggettiEoggetti = [];
+            let parole = input.toLowerCase().split(/[\s,.\'\"]+/);
+            let elementiSintattici = [];
             let verboRilevato = "";
-            let negazioneAttiva = false;
+            let haNegazione = false;
 
-            // Filtriamo e analizziamo la frase
+            // Analisi della frase italiana
             for (let i = 0; i < parole.length; i++) {
                 let p = parole[i];
-                
-                // Salta articoli e preposizioni vuote che il Khaari non usa
+
                 if (["il", "lo", "la", "i", "gli", "le", "un", "una", "di", "a", "da", "in", "con", "su", "per", "tra", "fra"].includes(p)) {
-                    continue;
+                    continue; // Rimuove gli articoli/preposizioni vuote
                 }
 
-                // Intercetta la negazione
                 if (p === "non") {
-                    negazioneAttiva = true;
+                    haNegazione = true;
                     continue;
                 }
 
-                // Intercetta il verbo per isolarlo
-                if (verbiIt.includes(p)) {
-                    verboRilevato = p; // Salviamo il verbo italiano (o una radice inventata se non a dizionario)
-                    continue;
-                }
-
-                // Traduzione del nome (singolo o plurale)
-                let termineTradotto = "";
-                if (dizionarioItToKh[p]) {
-                    termineTradotto = dizionarioItToKh[p].k;
-                } else if (pluraliIt[p]) {
-                    let singolare = pluraliIt[p];
-                    let info = dizionarioItToKh[singolare];
-                    // Applica il suffisso del plurale corretto (-em viventi/luoghi, -un cose)
-                    termineTradotto = info.k + (info.type === "vivo" ? "-em" : "-un");
+                // Identifica l'ultima parola della frase come Verbo d'azione (Sintassi SOV)
+                if (i === parole.length - 1 || (haNegazione && i === parole.length - 2 && verbiSimili(parole[parole.length-1]))) {
+                    verboRilevato = generaParolaKhaari(p);
                 } else {
-                    termineTradotto = "[" + p + "]"; // Parola sconosciuta lasciata indicata
+                    elementiSintattici.push(generaParolaKhaari(p));
                 }
-
-                soggettiEoggetti.push(termineTradotto);
             }
 
-            // Se non ha trovato un verbo ma c'è un'azione implicita, inventiamo o usiamo una radice
-            let verboKhaari = verboRilevato ? "-" + verboRilevato : "";
-            
-            // Gestione del tempo/negazione sul verbo finale
-            if (negazioneAttiva && verboKhaari) {
-                verboKhaari = " na" + verboKhaari;
-            } else if (verboKhaari) {
-                verboKhaari = " " + verboKhaari.trim();
+            // Costruzione sintassi SOV
+            let verboFinale = verboRilevato;
+            if (haNegazione && verboFinale) {
+                verboFinale = "na-" + verboFinale.toLowerCase(); // Prefisso di negazione al verbo
             }
 
-            // Ricomposizione della frase in ordine SOV (Soggetti/Oggetti + Verbo alla fine)
-            let fraseViva = soggettiEoggetti.join(" ") + verboKhaari;
-            
-            // Pulizia grafica finale
-            fraseViva = fraseViva.replace(/\s+/g, ' ').trim();
-            
-            outPrimary.innerText = fraseViva;
-            outSecondary.innerText = reverseString(fraseViva);
+            let fraseKhaariViva = elementiSintattici.join(" ") + (verboFinale ? " " + verboFinale : "");
+            fraseKhaariViva = fraseKhaariViva.trim();
 
+            outPrimary.innerText = fraseKhaariViva;
+            outSecondary.innerText = reverseString(fraseKhaariViva);
         } else {
-            // --- TRADUZIONE SEMPLICE KHAARI -> ITALIANO ---
-            let parole = input.split(/[\s\-]+/);
-            let traduzione = [];
-
+            // Traduzione inversa rudimentale
+            let parole = input.toLowerCase().split(/[\s\-]+/);
+            let risIt = [];
             parole.forEach(p => {
-                let pulita = p.replace(/^(na\-)/, "").replace(/-(un|em|oth|sha|vel|khaar)$/, "");
-                if (dizionarioKhToIt[pulita]) {
-                    traduzione.push(dizionarioKhToIt[pulita]);
-                } else {
-                    traduzione.push(p);
+                let pulito = p.replace(/^na-/, "");
+                let trovato = false;
+                for (let k in dizionarioLore) {
+                    if (dizionarioLore[k].toLowerCase() === pulito) {
+                        risIt.push((p.startsWith("na-") ? "non " : "") + k);
+                        trovato = true; break;
+                    }
                 }
+                if (!trovato) risIt.push("[" + p + "]");
             });
-
-            outPrimary.innerText = traduzione.join(" ");
+            outPrimary.innerText = risIt.join(" ");
         }
     }
 
+    function verbiSimili(p) { return p.length > 2; }
     function reverseString(str) { return str.split("").reverse().join(""); }
     function clearTranslator() {
         document.getElementById("output-primary").innerText = "-";

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dizionario e Traduttore di Lingua Khaari V2</title>
+    <title>Dizionario e Traduttore Avanzato di Lingua Khaari V3</title>
     <style>
         :root {
             --bg-color: #f4f1ea;
@@ -15,12 +15,7 @@
             --table-zebra: #fbfaf8;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Georgia', serif;
             background-color: var(--bg-color);
@@ -46,32 +41,11 @@
             margin-bottom: 30px;
         }
 
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-        }
+        h1 { color: var(--primary-color); font-size: 2.2rem; margin-bottom: 5px; }
+        .subtitle { font-style: italic; color: var(--accent-color); font-size: 1.1rem; }
+        h2 { color: var(--primary-color); border-left: 4px solid var(--accent-color); padding-left: 12px; margin: 30px 0 15px 0; font-size: 1.5rem; }
+        p { margin-bottom: 15px; text-align: justify; }
 
-        .subtitle {
-            font-style: italic;
-            color: var(--accent-color);
-            font-size: 1.1rem;
-        }
-
-        h2 {
-            color: var(--primary-color);
-            border-left: 4px solid var(--accent-color);
-            padding-left: 12px;
-            margin: 30px 0 15px 0;
-            font-size: 1.5rem;
-        }
-
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        /* Sezione Traduttore */
         .translator-box {
             background-color: #faf6f0;
             border: 1px solid var(--border-color);
@@ -80,183 +54,63 @@
             margin-bottom: 30px;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--primary-color); }
         select, input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 1rem;
-            background-color: #fff;
+            width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px;
+            font-family: inherit; font-size: 1rem; background-color: #fff;
         }
 
-        select:focus, input[type="text"]:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 5px rgba(139, 90, 43, 0.2);
-        }
+        .btn-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        button { padding: 10px 20px; border: none; border-radius: 4px; font-family: inherit; cursor: pointer; font-weight: bold; transition: background 0.2s; }
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-primary:hover { background-color: var(--accent-color); }
+        .btn-secondary { background-color: #e2dacd; color: var(--text-color); }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-family: inherit;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-color);
-        }
-
-        .btn-secondary {
-            background-color: #e2dacd;
-            color: var(--text-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--border-color);
-        }
-
-        .output-wrapper {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .output-wrapper {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
+        .output-wrapper { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        @media (min-width: 768px) { .output-wrapper { grid-template-columns: 1fr 1fr; } }
 
         .output-box {
-            background: #fff;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            min-height: 60px;
-            border-top: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            border-radius: 0 4px 4px 0;
+            background: #fff; border-left: 4px solid var(--primary-color); padding: 15px; min-height: 60px;
+            border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color); border-radius: 0 4px 4px 0;
         }
 
-        .output-title {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .output-text {
-            font-size: 1.15rem;
-            font-weight: 500;
-        }
-
-        .output-note {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 5px;
-            font-style: italic;
-        }
-
-        /* Tabelle */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0 25px 0;
-            font-size: 0.95rem;
-        }
-
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 10px 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: var(--table-zebra);
-        }
-
-        ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        li {
-            margin-bottom: 5px;
-        }
-
-        .math {
-            font-family: 'Times New Roman', serif;
-            font-style: italic;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        .badge {
-            background-color: #e2dacd;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.85rem;
-            font-weight: bold;
-        }
+        .output-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); font-weight: bold; margin-bottom: 5px; }
+        .output-text { font-size: 1.15rem; font-weight: 500; }
+        .output-note { font-size: 0.85rem; color: #666; margin-top: 5px; font-style: italic; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0 25px 0; font-size: 0.95rem; }
+        th, td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: left; }
+        th { background-color: var(--primary-color); color: white; }
+        tr:nth-child(even) { background-color: var(--table-zebra); }
+        ul { margin-left: 20px; margin-bottom: 15px; }
+        li { margin-bottom: 5px; }
+        .badge { background-color: #e2dacd; padding: 2px 6px; border-radius: 3px; font-size: 0.85rem; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Compendio e Traduttore della Lingua Khaari (V2)</h1>
-        <div class="subtitle">"Il Khaari suona come acqua su pietra antica — fluida nei vocaboli comuni, solenne e rallentata nella forma arcaica."</div>
+        <h1>Compendio e Traduttore Algoritmico Khaari (V3)</h1>
+        <div class="subtitle">"Il Khaari suona come acqua su pietra antica — ora con motore di scomposizione sintattica SOV."</div>
     </header>
 
-    <h2>Sistema di Traduzione Interattivo</h2>
-    <p>Seleziona la direzione della traduzione. Puoi tradurre singole parole del dizionario o intere formule rituali registrate nelle cronache.</p>
+    <h2>Sistema di Traduzione Dinamico</h2>
+    <p>Questa versione analizza la struttura della frase italiana, identifica i verbi per spostarli in fondo (struttura SOV), e applica i prefissi di negazione o i suffissi plurali automatici.</p>
     
     <div class="translator-box">
         <div class="form-group">
             <label for="translation-mode">Direzione Traduzione:</label>
             <select id="translation-mode" onchange="updatePlaceholders()">
-                <option value="it-to-kh">Italiano ➔ Khaari</option>
+                <option value="it-to-kh">Italiano ➔ Khaari (Sintattico)</option>
                 <option value="kh-to-it">Khaari ➔ Italiano</option>
             </select>
         </div>
 
         <div class="form-group">
             <label id="input-label" for="input-text">Testo da Tradurre:</label>
-            <input type="text" id="input-text" placeholder="Es. terra, spirito antico, guerra...">
+            <input type="text" id="input-text" placeholder="Es. La madre non vuole la guerra...">
         </div>
         
         <div class="btn-group">
@@ -264,8 +118,8 @@
             <button class="btn-secondary" onclick="clearTranslator()">Cancella</button>
         </div>
 
-        <div class="output-wrapper" id="outputs-container">
-            <div class="form-group" id="box-primary">
+        <div class="output-wrapper">
+            <div class="form-group">
                 <div class="output-title" id="title-primary">Risultato in Khaari Vivo:</div>
                 <div class="output-box">
                     <div class="output-text" id="output-primary">-</div>
@@ -273,119 +127,87 @@
             </div>
 
             <div class="form-group" id="box-secondary">
-                <div class="output-title" id="title-secondary">Risultato in Khaari Arcaico:</div>
-                <div class="output-box" id="wrapper-arcaico" style="direction: rtl; text-align: right;">
+                <div class="output-title">Risultato in Khaari Arcaico:</div>
+                <div class="output-box" style="direction: rtl; text-align: right;">
                     <div class="output-text" id="output-secondary">-</div>
                 </div>
-                <div class="output-note" id="note-secondary">Nota: Scrittura da destra a sinistra (➔) con accento sulla penultima sillaba.</div>
+                <div class="output-note">Nota rituale: Scrittura da destra a sinistra (➔).</div>
             </div>
         </div>
     </div>
 
-    <h2>Fonologia e Consonanti Caratteristiche</h2>
-    <p>Il Khaari possiede una musicalità severa. La distinzione fonetica è cruciale: l'omissione di un colpo di glottide può cambiare totalmente il senso di un'iscrizione.</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Simbolo</th>
-                <th>Pronuncia</th>
-                <th>Uso e Significato Mistico</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td><strong>kh</strong></td><td>Fricativa velare — "ch" tedesco in <em>Bach</em></td><td>Presente in quasi ogni parola sacra.</td></tr>
-            <tr><td><strong>sh</strong></td><td>Come "sc" in <em>scena</em></td><td>Legata a concetti di movimento e trasformazione.</td></tr>
-            <tr><td><strong>ss</strong></td><td>S doppia prolungata, quasi un soffio</td><td>Utilizzata in parole legate a segreti e magia nascosta.</td></tr>
-            <tr><td><strong>r</strong></td><td>Vibrante uvulare (arcaico) o alveolare (vivo)</td><td>Radice profonda di molti nomi geografici.</td></tr>
-            <tr><td><strong>'</strong></td><td>Colpo di glottide — pausa brevissima</td><td>Cambia il significato. Es: <span class="math">Kha</span> (terra) ≠ <span class="math">Kha'</span> (terra sacra).</td></tr>
-            <tr><td><strong>th</strong></td><td>Dentale sorda — come il "th" inglese in <em>thing</em></td><td>Esclusiva dell'arcaico; nel vivo si semplifica in T.</td></tr>
-        </tbody>
-    </table>
-
-    <h2>Grammatica Essenziale</h2>
+    <h2>Grammatica Essenziale Applicata</h2>
     <ul>
-        <li><strong>Ordine SOV:</strong> Soggetto + Oggetto + Verbo (l'azione chiude sempre il flusso logico).</li>
-        <li><strong>Negazione:</strong> Prefisso <span class="badge">na-</span>. Nell'Arcaico, <span class="badge">na-na-</span> significa "mai, in nessuna circostanza".</li>
-        <li><strong>Plurale:</strong> Cose inanimate: <span class="badge">-un</span>; esseri viventi e luoghi sacri: <span class="badge">-em</span> (la terra è considerata viva).</li>
-        <li><strong>Casi:</strong> Agente: <span class="badge">-aa</span> | Paziente: <span class="badge">-el</span> | Locativo/Possessivo: <span class="badge">-oth</span> o apostrofo.</li>
-        <li><strong>Genitivo:</strong> Separato da apostrofo; l'oggetto posseduto precede il possessore (<span class="math">Kha'Thaal</span> = la terra di Thaal).</li>
-        <li><strong>Tempi Verbali:</strong> Eterno/Profezie (<span class="badge">-khaar</span>); Presente/Futuro (<span class="badge">-sha</span>); Passato di perdita (<span class="badge">-vel</span>).</li>
+        <li><strong>Struttura SOV:</strong> Il traduttore sposta le azioni/verbi riconosciuti alla fine della frase.</li>
+        <li><strong>Negazione attiva:</strong> Inserendo "non", il verbo finale riceverà il prefisso <span class="badge">na-</span>.</li>
+        <li><strong>Plurali intelligenti:</strong> Riconosce i plurali italiani del dizionario applicando <span class="badge">-em</span> (viventi) o <span class="badge">-un</span> (inanimati).</li>
     </ul>
-
-    <h2>Dizionario dei Lemmi Fondamentali</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Khaari</th>
-                <th>Significato (Italiano)</th>
-                <th>Note</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td>Kha</td><td>terra, suolo, luogo</td><td>Base di quasi tutti i toponimi.</td></tr>
-            <tr><td>Ruun</td><td>respiro, vita, spirito</td><td>Anche: ciò che dura.</td></tr>
-            <tr><td>Vel</td><td>confine, soglia, passaggio</td><td>Fisico o metaforico.</td></tr>
-            <tr><td>Ris</td><td>pietra viva</td><td>Distinta da <em>Soth</em> (pietra morta).</td></tr>
-            <tr><td>Naakha</td><td>spirito antico, presenza</td><td>Non necessariamente ostile.</td></tr>
-            <tr><td>Soth</td><td>ombra, silenzio, assenza</td><td>Anche: morte lenta, dimenticanza.</td></tr>
-            <tr><td>Shaa</td><td>movimento, cambiamento</td><td>Radice dei verbi di trasformazione.</td></tr>
-            <tr><td>Kuura</td><td>tempo eterno, ciclo</td><td>Nel vivo si contrae in <em>kuur</em>.</td></tr>
-            <tr><td>Thal</td><td>acqua, baia, profondità</td><td>Nei nomi costieri.</td></tr>
-            <tr><td>Maa</td><td>madre, origine, principio</td><td>Prefisso onorifico per anziani.</td></tr>
-            <tr><td>Siira</td><td>memoria, sangue, discendenza</td><td>Ciò che si porta dentro.</td></tr>
-            <tr><td>Ssara</td><td>segreto, magia nascosta</td><td>Rara da udire ad alta voce.</td></tr>
-            <tr><td>Vel'nak</td><td>guerra</td><td>Letteralmente: "soglia spezzata".</td></tr>
-        </tbody>
-    </table>
 </div>
 
 <script>
-    // Database dei vocaboli speculare
-    const itToKh = {
-        "terra": "Kha", "terra sacra": "Kha'", "respiro": "Ruun", "vita": "Ruun", "spirito": "Ruun",
-        "confine": "Vel", "soglia": "Vel", "passaggio": "Vel", "pietra viva": "Ris", "spirito antico": "Naakha",
-        "presenza": "Naakha", "ombra": "Soth", "silenzio": "Soth", "assenza": "Soth", "movimento": "Shaa",
-        "cambiamento": "Shaa", "tempo eterno": "Kuura", "ciclo": "Kuura", "acqua": "Thal", "profondità": "Thal",
-        "madre": "Maa", "origine": "Maa", "memoria": "Siira", "sangue": "Siira", "segreto": "Ssara",
-        "magia": "Ssara", "guerra": "Vel'nak"
+    // Dizionario dei lemmi con classificazione per i plurali
+    const dizionarioItToKh = {
+        "terra": { k: "Kha", type: "vivo" },
+        "suolo": { k: "Kha", type: "inanimato" },
+        "luogo": { k: "Kha", type: "inanimato" },
+        "respiro": { k: "Ruun", type: "vivo" },
+        "vita": { k: "Ruun", type: "vivo" },
+        "spirito": { k: "Ruun", type: "vivo" },
+        "confine": { k: "Vel", type: "inanimato" },
+        "soglia": { k: "Vel", type: "inanimato" },
+        "passaggio": { k: "Vel", type: "inanimato" },
+        "pietra": { k: "Ris", type: "vivo" }, // pietra viva
+        "pietra morta": { k: "Soth", type: "inanimato" },
+        "spirito antico": { k: "Naakha", type: "vivo" },
+        "presenza": { k: "Naakha", type: "vivo" },
+        "ombra": { k: "Soth", type: "inanimato" },
+        "silenzio": { k: "Soth", type: "inanimato" },
+        "assenza": { k: "Soth", type: "inanimato" },
+        "movimento": { k: "Shaa", type: "inanimato" },
+        "cambiamento": { k: "Shaa", type: "inanimato" },
+        "tempo": { k: "Kuur", type: "inanimato" },
+        "acqua": { k: "Thal", type: "inanimato" },
+        "profondità": { k: "Thal", type: "inanimato" },
+        "madre": { k: "Maa", type: "vivo" },
+        "origine": { k: "Maa", type: "vivo" },
+        "memoria": { k: "Siira", type: "vivo" }, // il sangue/memoria è vivo
+        "sangue": { k: "Siira", type: "vivo" },
+        "segreto": { k: "Ssara", type: "inanimato" },
+        "magia": { k: "Ssara", type: "inanimato" },
+        "guerra": { k: "Vel'nak", type: "inanimato" }
     };
 
-    // Generazione inversa automatica per lemmi singoli
-    const khToIt = {};
-    for (let key in itToKh) {
-        khToIt[itToKh[key].toLowerCase()] = key;
-    }
+    // Mappatura plurali italiani comuni per aiutare l'algoritmo
+    const pluraliIt = {
+        "terre": "terra", "spiriti": "spirito", "confini": "confine", "soglie": "soglia",
+        "presenze": "presenza", "ombre": "ombra", "acque": "acqua", "madri": "madre",
+        "memorie": "memoria", "segreti": "segreto", "guerre": "guerra"
+    };
 
-    // Database frasi idiomatiche mappate
-    const frasiIdiomatiche = [
-        { it: "che la terra respiri", vivo: "Kha-ruun", arcaico: "nuuR-ahK", def: "Saluto generale (Kha-ruun)" },
-        { it: "addio", vivo: "Vel-soth", arcaico: "htos-leV", def: "Addio / Che il confine non ti oscuri" },
-        { it: "che il confine non ti oscuri", vivo: "Vel-soth", arcaico: "htos-leV", def: "Addio" },
-        { it: "grazie", vivo: "Siira-naa", arcaico: "aan-ariiS", def: "Grazie / Porterò memoria di questo" },
-        { it: "porterò memoria", vivo: "Siira-naa", arcaico: "aan-ariiS", def: "Grazie" },
-        { it: "giuramento", vivo: "Kha-siira", arcaico: "ariiS-ahK", def: "Sulla memoria della terra, è eterno" },
-        { it: "la guerra sta venendo", vivo: "Vel'nak-sha", arcaico: "ahS-kan'leV", def: "Avvertimento" },
-        { it: "senza radici", vivo: "Na-kha", arcaico: "ahk-aN", def: "Insulto grave" },
-        { it: "respiro d'ombra", vivo: "Soth'ruun", arcaico: "nuur'htoS", def: "Insulto lieve" },
-        { it: "stai passando", vivo: "Vel-sha", arcaico: "ahS-leV", def: "Domanda di passaggio" },
-        { it: "il segreto di questa terra sta ancora respirando", vivo: "Ssara kha'oth ruun-sha", arcaico: "ahS-nuur hto'ahk araSS", def: "Formula rituale" },
-        { it: "nyxoria respira per sempre", vivo: "Kha'Ruun ruun-khaar", arcaico: "raahk-nuur nuuR'ahK", def: "Iscrizione Monoliti" },
-        { it: "lo spirito-madre sta passando", vivo: "Maa'naakha vel-sha", arcaico: "ahS-leV ahkaahn'aaM", def: "Pattern del Grande Condotto" },
-        { it: "nyxoria non respirerà mai più", vivo: "Kha'Ruun na-na-ruun-sha", arcaico: "ahS-nuur-an-an nuuR'ahK", def: "Incisione tragica" }
+    // Lista di verbi italiani comuni che l'algoritmo deve intercettare e buttare in fondo (SOV)
+    const verbiIt = [
+        "parla", "parlano", "vede", "vedono", "cambia", "cambiano", "respira", "respirano",
+        "vuole", "vogliono", "porta", "portano", "rompe", "rompono", "viene", "vengono",
+        "cammina", "camminano", "è", "sono", "sta", "stanno"
     ];
+
+    // Dizionario inverso per traduzione da Khaari a Italiano
+    const dizionarioKhToIt = {};
+    for (let key in dizionarioItToKh) {
+        dizionarioKhToIt[dizionarioItToKh[key].toLowerCase()] = key;
+    }
 
     function updatePlaceholders() {
         const mode = document.getElementById("translation-mode").value;
         const input = document.getElementById("input-text");
         const boxSecondary = document.getElementById("box-secondary");
-
         if (mode === "it-to-kh") {
-            input.placeholder = "Es. terra, spirito antico, guerra o frasi idiomatiche...";
+            input.placeholder = "Es. La madre non vuole la guerra / Gli spiriti vedono le ombre";
             boxSecondary.style.display = "block";
             document.getElementById("title-primary").innerText = "Risultato in Khaari Vivo:";
         } else {
-            input.placeholder = "Es. Kha, Vel'nak, Kha-ruun, Vel-soth...";
-            boxSecondary.style.display = "none"; // Nascondiamo l'arcaico speculare nel verso inverso
+            input.placeholder = "Es. Maa Vel'nak na-vuole / Kha-ruun";
+            boxSecondary.style.display = "none";
             document.getElementById("title-primary").innerText = "Significato in Italiano:";
         }
         clearTranslator();
@@ -397,84 +219,95 @@
         const outPrimary = document.getElementById("output-primary");
         const outSecondary = document.getElementById("output-secondary");
 
-        if (input === "") {
-            outPrimary.innerText = "-";
-            outSecondary.innerText = "-";
-            return;
-        }
+        if (input === "") { clearTranslator(); return; }
 
         if (mode === "it-to-kh") {
-            // Traduzione ITALIANO -> KHAARI
-            for (let f of frasiIdiomatiche) {
-                if (input.includes(f.it)) {
-                    outPrimary.innerText = f.vivo;
-                    outSecondary.innerText = f.arcaico;
-                    return;
-                }
-            }
+            // --- MOTORE DI TRADUZIONE AVANZATO: ITALIANO -> KHAARI (SOV) ---
+            let parole = input.split(/[\s,.\'\"]+/);
+            
+            let soggettiEoggetti = [];
+            let verboRilevato = "";
+            let negazioneAttiva = false;
 
-            if (itToKh[input]) {
-                outPrimary.innerText = itToKh[input];
-                outSecondary.innerText = reverseString(itToKh[input]);
-            } else {
-                // Scomposizione rudimentale a parole
-                let parole = input.split(/[\s,.]+/);
-                let tVivo = [];
-                parole.forEach(p => {
-                    if (itToKh[p]) tVivo.push(itToKh[p]);
-                    else if (p.length > 2) tVivo.push("[" + p + "]");
-                });
-                if (tVivo.length > 0) {
-                    outPrimary.innerText = tVivo.join(" ");
-                    outSecondary.innerText = reverseString(tVivo.join(" "));
+            // Filtriamo e analizziamo la frase
+            for (let i = 0; i < parole.length; i++) {
+                let p = parole[i];
+                
+                // Salta articoli e preposizioni vuote che il Khaari non usa
+                if (["il", "lo", "la", "i", "gli", "le", "un", "una", "di", "a", "da", "in", "con", "su", "per", "tra", "fra"].includes(p)) {
+                    continue;
+                }
+
+                // Intercetta la negazione
+                if (p === "non") {
+                    negazioneAttiva = true;
+                    continue;
+                }
+
+                // Intercetta il verbo per isolarlo
+                if (verbiIt.includes(p)) {
+                    verboRilevato = p; // Salviamo il verbo italiano (o una radice inventata se non a dizionario)
+                    continue;
+                }
+
+                // Traduzione del nome (singolo o plurale)
+                let termineTradotto = "";
+                if (dizionarioItToKh[p]) {
+                    termineTradotto = dizionarioItToKh[p].k;
+                } else if (pluraliIt[p]) {
+                    let singolare = pluraliIt[p];
+                    let info = dizionarioItToKh[singolare];
+                    // Applica il suffisso del plurale corretto (-em viventi/luoghi, -un cose)
+                    termineTradotto = info.k + (info.type === "vivo" ? "-em" : "-un");
                 } else {
-                    outPrimary.innerText = "Nessuna corrispondenza trovata.";
-                    outSecondary.innerText = "-";
+                    termineTradotto = "[" + p + "]"; // Parola sconosciuta lasciata indicata
                 }
+
+                soggettiEoggetti.push(termineTradotto);
             }
+
+            // Se non ha trovato un verbo ma c'è un'azione implicita, inventiamo o usiamo una radice
+            let verboKhaari = verboRilevato ? "-" + verboRilevato : "";
+            
+            // Gestione del tempo/negazione sul verbo finale
+            if (negazioneAttiva && verboKhaari) {
+                verboKhaari = " na" + verboKhaari;
+            } else if (verboKhaari) {
+                verboKhaari = " " + verboKhaari.trim();
+            }
+
+            // Ricomposizione della frase in ordine SOV (Soggetti/Oggetti + Verbo alla fine)
+            let fraseViva = soggettiEoggetti.join(" ") + verboKhaari;
+            
+            // Pulizia grafica finale
+            fraseViva = fraseViva.replace(/\s+/g, ' ').trim();
+            
+            outPrimary.innerText = fraseViva;
+            outSecondary.innerText = reverseString(fraseViva);
+
         } else {
-            // Traduzione KHAARI -> ITALIANO
-            // Verifica nelle frasi fatte (sia versione Vivo che Arcaico inserita)
-            for (let f of frasiIdiomatiche) {
-                if (input === f.vivo.toLowerCase() || input === f.arcaico.toLowerCase()) {
-                    outPrimary.innerText = f.it.toUpperCase() + " (" + f.def + ")";
-                    return;
+            // --- TRADUZIONE SEMPLICE KHAARI -> ITALIANO ---
+            let parole = input.split(/[\s\-]+/);
+            let traduzione = [];
+
+            parole.forEach(p => {
+                let pulita = p.replace(/^(na\-)/, "").replace(/-(un|em|oth|sha|vel|khaar)$/, "");
+                if (dizionarioKhToIt[pulita]) {
+                    traduzione.push(dizionarioKhToIt[pulita]);
+                } else {
+                    traduzione.push(p);
                 }
-            }
+            });
 
-            // Pulisce suffissi comuni per trovare la radice pura (-oth, -el, -aa, -sha, -vel)
-            let radice = input.replace(/-(oth|el|aa|sha|vel|un|em|khaar)$/, "");
-            radice = radice.replace(/'(oth|el|aa)$/, ""); // pulizia varianti con apostrofo
-
-            if (khToIt[input]) {
-                outPrimary.innerText = khToIt[input];
-            } else if (khToIt[radice]) {
-                outPrimary.innerText = khToIt[radice] + " [Rilevata radice grammaticale]";
-            } else {
-                // Tentativo su frase libera Khaari composta
-                let parole = input.split(/[\s\-]+/);
-                let tIt = [];
-                parole.forEach(p => {
-                    let rP = p.replace(/^(na-)/, "").replace(/-(oth|el|aa|sha|vel|un|em)$/, "");
-                    if (khToIt[p]) tIt.push(khToIt[p]);
-                    else if (khToIt[rP]) tIt.push(khToIt[rP] + "*");
-                    else tIt.push("[" + p + "]");
-                });
-                outPrimary.innerText = tIt.join(" ");
-            }
+            outPrimary.innerText = traduzione.join(" ");
         }
     }
 
-    function reverseString(str) {
-        return str.split("").reverse().join("");
-    }
-
+    function reverseString(str) { return str.split("").reverse().join(""); }
     function clearTranslator() {
-        document.getElementById("input-text").value = "";
         document.getElementById("output-primary").innerText = "-";
         document.getElementById("output-secondary").innerText = "-";
     }
 </script>
-
 </body>
 </html>
